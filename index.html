@@ -1,0 +1,3189 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>每日旅遊英文對話</title>
+<style>
+:root{
+  --bg:#0f172a; --card:#1e293b; --accent:#38bdf8; --good:#22c55e; --bad:#ef4444; --warn:#f59e0b;
+  --text:#f1f5f9; --sub:#94a3b8; --border:#334155;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){ --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --sub:#64748b; --border:#e2e8f0; }
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg); color:var(--text); font-family:-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+  display:flex; flex-direction:column; align-items:center; padding:18px 14px 32px;}
+h1{font-size:19px; margin:4px 0}
+.sub{color:var(--sub); font-size:12px; margin-bottom:14px; text-align:center}
+.wrap{width:100%; max-width:460px}
+.tabs{display:flex; gap:8px; margin-bottom:14px}
+.tab{flex:1; text-align:center; padding:9px; border-radius:10px; border:1px solid var(--border);
+  background:var(--card); color:var(--sub); font-size:13px; cursor:pointer}
+.tab.active{border-color:var(--accent); color:var(--accent); background:rgba(56,189,248,.1)}
+.banner{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px; margin-bottom:14px}
+.banner .tag{color:var(--accent); font-size:11px; font-weight:700}
+.banner .t{font-size:16px; font-weight:700; margin-top:2px}
+.banner .zh{color:var(--sub); font-size:12px; margin-top:2px}
+.chat{display:flex; flex-direction:column; gap:10px; margin-bottom:14px; min-height:60px}
+.bubble{max-width:82%; padding:10px 12px; border-radius:14px; font-size:14px; line-height:1.4}
+.npc{align-self:flex-start; background:var(--card); border:1px solid var(--border); border-bottom-left-radius:4px}
+.me{align-self:flex-end; background:var(--accent); color:#04202c; border-bottom-right-radius:4px}
+.bubble .zh{font-size:11px; opacity:.7; margin-top:3px}
+.hint-box{background:rgba(245,158,11,.1); border:1px solid var(--warn); color:var(--warn); border-radius:10px; padding:10px 12px; font-size:13px; margin-bottom:10px}
+.row{display:flex; gap:8px; align-items:center}
+input[type=text]{flex:1; padding:11px 12px; border-radius:10px; border:1px solid var(--border); background:var(--card); color:var(--text); font-size:14px}
+.btn{border:none; border-radius:10px; padding:11px 14px; font-size:14px; cursor:pointer; font-weight:600}
+.btn-accent{background:var(--accent); color:#04202c}
+.btn-ghost{background:var(--card); border:1px solid var(--border); color:var(--text)}
+.btn-mic{background:var(--card); border:1px solid var(--border); color:var(--text); padding:11px 13px}
+.btn-mic.rec{border-color:var(--bad); color:var(--bad)}
+.btn:disabled{opacity:.35}
+.toolrow{display:flex; gap:8px; margin-top:10px}
+.toolrow .btn{flex:1; font-size:13px; padding:9px}
+.score-card{background:var(--card); border:1px solid var(--accent); border-radius:14px; padding:16px; margin-top:14px}
+.score-num{font-size:30px; font-weight:800; color:var(--accent)}
+.score-fb{font-size:13px; color:var(--text); white-space:pre-wrap; margin-top:8px; line-height:1.5}
+.loading{color:var(--sub); font-size:13px}
+.shadow-card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:18px; text-align:center}
+.connect{text-decoration:underline; text-decoration-style:dotted; text-decoration-color:var(--accent)}
+.step-card{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; margin-bottom:12px; text-align:left}
+.step-title{color:var(--accent); font-weight:700; font-size:13px; margin-bottom:8px}
+.marked-text{font-size:16px; line-height:2; text-align:left}
+.shadow-line{font-size:18px; font-weight:700; margin-bottom:4px}
+.shadow-zh{color:var(--sub); font-size:13px; margin-bottom:14px}
+.match{font-size:26px; font-weight:800; margin:8px 0}
+.match.good{color:var(--good)} .match.mid{color:var(--warn)} .match.bad{color:var(--bad)}
+.transcript{font-size:13px; color:var(--sub); margin-top:4px}
+audio{width:100%; margin-top:10px}
+.note{font-size:11px; color:var(--sub); text-align:center; margin-top:10px}
+.stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px}
+.stat-box{background:var(--card); border:1px solid var(--border); border-radius:14px; padding:16px; text-align:center}
+.stat-num{font-size:28px; font-weight:800; color:var(--accent)}
+.stat-label{font-size:12px; color:var(--sub); margin-top:2px}
+.hist-item{display:flex; justify-content:space-between; align-items:center; background:var(--card); border:1px solid var(--border);
+  border-radius:10px; padding:10px 12px; margin-bottom:8px; font-size:13px}
+.hist-date{color:var(--sub); font-size:11px}
+.hist-score{font-weight:700; color:var(--accent)}
+.empty-state{color:var(--sub); font-size:13px; text-align:center; padding:30px 10px}
+.word-overlay{position:fixed; top:0; left:0; right:0; bottom:0; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:flex-end; justify-content:center; z-index:50}
+.word-modal{background:var(--card); width:100%; max-width:460px; border-radius:20px 20px 0 0; padding:20px; padding-bottom:calc(20px + env(safe-area-inset-bottom,0px)); max-height:80vh; overflow-y:auto}
+.word-modal-row{display:flex; gap:8px; margin-bottom:12px}
+.word-modal input{flex:1; padding:11px 12px; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-size:15px}
+.word-result{background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:14px; margin-top:4px}
+.word-result .hw{font-size:20px; font-weight:700}
+.word-result .ph{color:var(--sub); font-size:13px; margin:2px 0 8px}
+.word-source{font-size:11px; color:var(--sub); margin-top:8px}
+.blur-wrap{cursor:pointer}
+.blur-text{filter:blur(7px); transition:filter .15s}
+.blur-hint{font-size:11px; color:var(--sub); margin-left:6px}
+.train-select{display:block;width:100%;max-width:100%;min-width:0;padding:11px 34px 11px 12px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:14px;line-height:1.35;white-space:normal;overflow:hidden;text-overflow:ellipsis}
+.train-select option{white-space:normal;max-width:100%}
+@media(max-width:360px){.train-select{font-size:13px;padding:10px 28px 10px 10px}.step-card{padding:13px}.toolrow{gap:6px}.toolrow .btn{padding:9px 6px;font-size:12px}}
+</style>
+</head>
+<body>
+<h1>🗣️ 每日旅遊英文對話</h1>
+<div class="sub">每日旅遊情境・對話練習・英文跟讀・口說測驗</div>
+
+<div class="wrap">
+  <div class="tabs">
+    <div class="tab active" data-mode="chat">每日對話</div>
+    <div class="tab" data-mode="shadow">跟讀測驗</div>
+    <div class="tab" data-mode="train">跟讀訓練</div>
+    <div class="tab" data-mode="stats">紀錄</div>
+  </div>
+
+  <div class="banner">
+    <div class="tag">今日情境（可切換）</div>
+    <div class="t" id="scTitle"></div>
+    <div class="zh" id="scZh"></div>
+    <div class="toolrow" id="scenarioPicker"></div>
+    <div class="note" id="aiToggle" style="margin-top:8px"></div>
+    <div class="note" id="hideTextToggle" style="margin-top:6px"></div>
+  </div>
+
+  <div id="chatPane"></div>
+  <div id="shadowPane" style="display:none"></div>
+  <div id="trainPane" style="display:none"></div>
+  <div id="statsPane" style="display:none"></div>
+</div>
+
+<script>
+const RESTAURANT_DATA = {
+  aiOpening: "Welcome to Bella Italia! Ready to order, or do you need a few more minutes?",
+  userHints: [
+    {text:"Could I have a look at the menu, please?", translation:"我可以看一下菜單嗎？"},
+    {text:"What do you recommend here?", translation:"你們這裡推薦什麼？"},
+    {text:"I'm ready. I'd like to order a steak, please.", translation:"我準備好了，我想點一份牛排。"},
+  ],
+  followUpReplies: [
+    {keywords:["menu","recommend"], reply:"Sure! Our homemade lasagna is the most popular. Would you like to try that, or perhaps a pizza?"},
+    {keywords:["steak","beef"], reply:"Excellent choice. How would you like your steak cooked? Rare, medium, or well-done?"},
+    {keywords:["default"], reply:"Got it! And what would you like to drink with your meal?"},
+  ]
+};
+
+/* ---------- 餐廳情境：分支式資料驅動狀態機 ----------
+   關卡與跳轉完全由本地邏輯（identifyRestaurantIntent + resolveRestaurantTransition）決定；
+   AI 只負責依「該次跳轉的語境」生成實際的英文句子，AI 不可用或失敗時才使用寫死的 fallback。
+   WELCOME 可依使用者說的內容直接跳到 MAIN_COURSE／COOKING／DRINK，不強制每次都照同一條直線走。 */
+const RESTAURANT_SCRIPT = {
+  WELCOME: {
+    aiPromptContext: "Ask whether the guest wants to see the menu or is ready to order.",
+    fallback: [
+      {en:"Welcome to Bella Italia! Ready to order, or would you like to see the menu?", zh:"歡迎光臨 Bella Italia！準備好點餐了嗎？還是想先看看菜單？"},
+      {en:"Hi there! Table for one? Would you like to start with the menu?", zh:"嗨！一位嗎？要先看菜單嗎？"},
+      {en:"Good evening! Have you had a chance to look at our menu yet?", zh:"晚安！您看過我們的菜單了嗎？"},
+      {en:"Welcome in! Take your time, or let me know if you're ready to order.", zh:"歡迎光臨！慢慢看，準備好隨時跟我說。"}
+    ]
+  },
+  MAIN_COURSE: {
+    aiPromptContext: "Help the guest choose a main course. Do not ask about drinks yet.",
+    fallback: [
+      {en:"Our homemade lasagna is very popular! What would you like for your main course?", zh:"我們的手工千層麵很受歡迎！你主餐想吃什麼呢？"},
+      {en:"We've got pizza, pasta, lasagna, and steak tonight. What sounds good to you?", zh:"今晚有披薩、義大利麵、千層麵和牛排，你想吃哪一種？"},
+      {en:"What can I get started for your main course?", zh:"你的主餐想點什麼呢？"},
+      {en:"Any main dish in mind, or would you like a recommendation?", zh:"主餐有想法了嗎，還是想要我推薦？"}
+    ]
+  },
+  COOKING: {
+    aiPromptContext: "Ask how the guest would like their steak cooked. Do not ask about drinks yet.",
+    fallback: [
+      {en:"Excellent choice! How would you like your steak cooked: rare, medium, or well-done?", zh:"好選擇！你的牛排想要幾分熟？一分熟、五分熟還是全熟？"},
+      {en:"Great pick! Rare, medium, or well-done for the steak?", zh:"很棒的選擇！牛排要一分熟、五分熟還是全熟？"},
+      {en:"And how would you like that cooked?", zh:"那牛排要幾分熟呢？"}
+    ]
+  },
+  DRINK: {
+    aiPromptContext: "Ask what the guest would like to drink. Accept a drink or no drink.",
+    fallback: [
+      {en:"What would you like to drink with your meal? We have water, tea, coffee, juice, and soft drinks.", zh:"你想搭配餐點喝什麼呢？我們有水、茶、咖啡、果汁和汽水。"},
+      {en:"And something to drink? Water, tea, coffee, or juice?", zh:"要喝點什麼嗎？水、茶、咖啡還是果汁？"},
+      {en:"Can I get you a drink with that?", zh:"要幫你配一杯飲料嗎？"}
+    ]
+  },
+  DONE: {
+    aiPromptContext: "Thank the guest and close the restaurant ordering conversation.",
+    fallback: [
+      {en:"Perfect! Thank you for your order. Enjoy your meal!", zh:"好的！謝謝你的點餐，祝你用餐愉快！"},
+      {en:"All set! Your order will be right out. Enjoy!", zh:"都好了！餐點馬上送上，請慢用！"},
+      {en:"Great, that's everything. Thanks, and enjoy your meal!", zh:"好的，就這些了。謝謝，祝用餐愉快！"}
+    ]
+  }
+};
+
+// 餐廳各關卡專屬的提示句（原本四關都共用同一組，現在依目前關卡顯示對應的提示）
+const RESTAURANT_HINTS_BY_STAGE = {
+  WELCOME: [
+    {text:"Could I have a look at the menu, please?", translation:"我可以看一下菜單嗎？"},
+    {text:"What do you recommend here?", translation:"你們這裡推薦什麼？"},
+    {text:"I'm ready. I'd like to order a steak, please.", translation:"我準備好了，我想點一份牛排。"}
+  ],
+  MAIN_COURSE: [
+    {text:"I'd like the lasagna, please.", translation:"我想要千層麵。"},
+    {text:"I'll have the steak, please.", translation:"我要點牛排。"},
+    {text:"What's your most popular dish?", translation:"你們最受歡迎的餐點是什麼？"}
+  ],
+  COOKING: [
+    {text:"Medium, please.", translation:"五分熟，謝謝。"},
+    {text:"Well-done, please.", translation:"全熟，謝謝。"},
+    {text:"Rare, please.", translation:"一分熟，謝謝。"}
+  ],
+  DRINK: [
+    {text:"Water, please.", translation:"請給我水。"},
+    {text:"Just a coffee, please.", translation:"一杯咖啡就好，謝謝。"},
+    {text:"No drink for me, thanks.", translation:"我不需要飲料，謝謝。"}
+  ]
+};
+
+function identifyRestaurantIntent(text){
+  const t = normalizeText(text);
+  if(/\b(menu|recommend|recommendation|suggestion|suggest)\b/.test(t) || /\b(see|look at|have a look at) (the )?menu\b/.test(t)) return {intent: /\b(recommend|suggest)\b/.test(t) ? "RECOMMEND" : "MENU"};
+  if(/\b(not yet|more time|few more minutes|still looking)\b/.test(t)) return {intent:"NEED_TIME"};
+  if(/\brare\b/.test(t)) return {intent:"COOK_RARE"};
+  if(/\bmedium\b/.test(t)) return {intent:"COOK_MEDIUM"};
+  if(/\bwell[\s-]?done\b/.test(t)) return {intent:"COOK_WELL"};
+  if(/\b(well|cooked through)\b/.test(t)) return {intent:"COOK_WELL"};
+  if(/\b(no drink|nothing to drink|nothing|no thanks)\b/.test(t)) return {intent:"NO_DRINK"};
+  if(/\b(water|beer|coffee|tea|juice|wine|soda|cola|lemonade|milk)\b/.test(t)) return {intent:"DRINK_ORDER"};
+  if(/\b(steak|beef)\b/.test(t)) return {intent:"MAIN_ORDER", item:"steak"};
+  if(/\b(pizza|lasagna|pasta|chicken|fish|salad|burger)\b/.test(t)) return {intent:"MAIN_ORDER", item:t};
+  if(/\b(ready|let s order|start ordering)\b/.test(t)) return {intent:"READY"};
+  if(/\b(yes|yeah|yep|sure|okay|ok)\b/.test(t)) return {intent:"YES"};
+  if(/\b(no|nope)\b/.test(t)) return {intent:"NO"};
+  if(/\b(thank you|thanks)\b/.test(t)) return {intent:"THANKS"};
+  return {intent:"UNKNOWN"};
+}
+
+// source: "hint"＝點擊App內建提示句（一律放行，不受完整句子限制）｜"voice"＝語音辨識結果｜"text"＝手動輸入（預設）
+// 依「目前關卡」決定驗證規則：主餐單字（pizza/steak）手動輸入時必須是完整句子；飲料單字本身就是完整回答，不限字數
+function validateRestaurantInput(raw, stageIdNow, source){
+  source = source || "text";
+  const t = normalizeText(raw);
+  if(!t) return {valid:false};
+  if(source === "hint") return {valid:true};
+
+  if(/^(asdf|fdsa|qwer|rewq|zxcv|vcxz|qwerty|asdfgh|zxcvbn)+$/.test(t) || /^(.)\1{3,}$/.test(t)) return {valid:false};
+  if(!/[a-z]/i.test(t)) return {valid:false};
+
+  const {intent} = identifyRestaurantIntent(t);
+  const wordCount = t.split(" ").filter(Boolean).length;
+  const isShortReply = (intent === "YES" || intent === "NO");
+
+  if(stageIdNow === "WELCOME"){
+    if(["MENU","RECOMMEND","NEED_TIME","READY"].includes(intent)) return {valid:true};
+    if(isShortReply) return {valid:true};
+    if(t.replace(/\s/g,"").length < 3) return {valid:false};
+    if(intent === "MAIN_ORDER") return {valid:false}; // 單純講菜名（如單字"pizza"）在WELCOME不算完整句子
+    if(intent === "UNKNOWN" && wordCount < 2) return {valid:false};
+    return {valid:true};
+  }
+  if(stageIdNow === "MAIN_COURSE"){
+    if(["MENU","RECOMMEND","NEED_TIME"].includes(intent)) return {valid:true};
+    if(intent === "MAIN_ORDER") return (source === "voice" || wordCount >= 2) ? {valid:true} : {valid:false};
+    if(wordCount < 2 && !isShortReply) return {valid:false};
+    return {valid:true};
+  }
+  if(stageIdNow === "COOKING"){
+    if(["COOK_RARE","COOK_MEDIUM","COOK_WELL"].includes(intent)) return {valid:true};
+    if(wordCount < 2) return {valid:false};
+    return {valid:true};
+  }
+  if(stageIdNow === "DRINK"){
+    if(intent === "DRINK_ORDER" || intent === "NO_DRINK") return {valid:true}; // 飲料單字本身就是完整回答
+    if(wordCount < 2) return {valid:false};
+    return {valid:true};
+  }
+  return {valid:false};
+}
+
+// 純本地決定下一關＋給AI的語境提示＋AI失敗時的降級句；完全不依賴AI判斷關卡
+const RESTAURANT_BRANCH_REPLIES = {
+  menuAtWelcome: [
+    {en:"Of course! Our homemade lasagna is very popular. We also have pizza, pasta, and steak. What would you like for your main course?", zh:"當然可以！我們的手工千層麵很受歡迎，也有披薩、義大利麵和牛排。你主餐想吃什麼呢？"},
+    {en:"Sure thing! Tonight's specials are the lasagna and the grilled steak. What sounds good?", zh:"沒問題！今晚的招牌是千層麵跟烤牛排，你想吃哪個？"},
+    {en:"Happy to help! We've got pasta, pizza, steak, and lasagna. Anything catch your eye?", zh:"樂意幫忙！我們有義大利麵、披薩、牛排跟千層麵，有喜歡的嗎？"}
+  ],
+  needTime: [
+    {en:"Of course. Take your time. Let me know when you're ready.", zh:"當然沒問題，慢慢看。準備好時再告訴我。"},
+    {en:"No rush at all! I'll check back in a bit.", zh:"完全不急！我待會再過來。"},
+    {en:"Take all the time you need, just wave me over when you're set.", zh:"慢慢來，準備好招手叫我就好。"}
+  ],
+  mainChosenAckAtWelcome: [
+    {en:"Great choice! What would you like to drink with your meal?", zh:"好選擇！你想搭配餐點喝什麼呢？"},
+    {en:"Excellent pick! And to drink?", zh:"很棒的選擇！那飲料呢？"},
+    {en:"Nice choice! Anything to drink with that?", zh:"不錯的選擇！要搭配什麼飲料嗎？"}
+  ],
+  drinkTooEarlyAtMain: [
+    {en:"Let's choose your main course first. Would you like pizza, pasta, lasagna, or steak?", zh:"我們先選主餐吧！你想吃披薩、義大利麵、千層麵還是牛排呢？"},
+    {en:"We'll get to drinks in a moment — what would you like for your main course?", zh:"飲料等一下再說，你主餐想吃什麼呢？"},
+    {en:"Hold that thought! Main course first — any of our pasta, pizza, or steak sound good?", zh:"先別急，主餐先決定吧！義大利麵、披薩或牛排有喜歡的嗎？"}
+  ],
+  mainChosenAck: [
+    {en:"Sounds delicious! What would you like to drink with your meal?", zh:"聽起來很美味！你想搭配餐點喝什麼呢？"},
+    {en:"Great pick! Anything to drink with that?", zh:"很棒的選擇！要搭配飲料嗎？"},
+    {en:"Good choice! And what would you like to drink?", zh:"好選擇！那你想喝什麼呢？"}
+  ],
+  cookingInvalid: [
+    {en:"How would you like your steak cooked: rare, medium, or well-done?", zh:"你的牛排想要幾分熟？一分熟、五分熟還是全熟？"},
+    {en:"Sorry, just to confirm — rare, medium, or well-done?", zh:"不好意思，再確認一下——一分熟、五分熟還是全熟？"}
+  ],
+  foodTooEarlyAtDrink: [
+    {en:"We're choosing your drink now. Would you like water, tea, coffee, juice, or a soft drink?", zh:"我們現在正在選飲料喔！你想喝水、茶、咖啡、果汁還是汽水呢？"},
+    {en:"Let's sort out the drink first — water, tea, coffee, or juice?", zh:"先決定飲料吧——水、茶、咖啡還是果汁？"}
+  ]
+};
+
+function resolveRestaurantTransition(stageIdNow, text){
+  const {intent, item} = identifyRestaurantIntent(text);
+  switch(stageIdNow){
+    case "WELCOME":
+      if(intent === "MENU" || intent === "RECOMMEND") return {nextStage:"MAIN_COURSE", aiContext:"The guest asked about the menu or a recommendation. Mention a couple of popular dishes (lasagna, pizza, pasta, steak) and ask what they'd like for their main course.", fallback: RESTAURANT_BRANCH_REPLIES.menuAtWelcome};
+      if(intent === "NEED_TIME") return {nextStage:"WELCOME", aiContext:"The guest needs more time to look at the menu. Reassure them warmly and let them take their time.", fallback: RESTAURANT_BRANCH_REPLIES.needTime};
+      if(intent === "MAIN_ORDER") return item === "steak"
+        ? {nextStage:"COOKING", aiContext:RESTAURANT_SCRIPT.COOKING.aiPromptContext, fallback:RESTAURANT_SCRIPT.COOKING.fallback}
+        : {nextStage:"DRINK", aiContext:"The guest already chose their main course. Acknowledge it briefly and ask what they'd like to drink.", fallback: RESTAURANT_BRANCH_REPLIES.mainChosenAckAtWelcome};
+      return {nextStage:"MAIN_COURSE", aiContext:RESTAURANT_SCRIPT.MAIN_COURSE.aiPromptContext, fallback:RESTAURANT_SCRIPT.MAIN_COURSE.fallback};
+
+    case "MAIN_COURSE":
+      if(intent === "DRINK_ORDER" || intent === "NO_DRINK") return {nextStage:"MAIN_COURSE", aiContext:"The guest mentioned a drink too early. Gently redirect: we need to choose the main course first (pizza, pasta, lasagna, or steak).", fallback: RESTAURANT_BRANCH_REPLIES.drinkTooEarlyAtMain};
+      if(intent === "MAIN_ORDER") return item === "steak"
+        ? {nextStage:"COOKING", aiContext:RESTAURANT_SCRIPT.COOKING.aiPromptContext, fallback:RESTAURANT_SCRIPT.COOKING.fallback}
+        : {nextStage:"DRINK", aiContext:"The guest chose their main course. Acknowledge it and ask what they'd like to drink.", fallback: RESTAURANT_BRANCH_REPLIES.mainChosenAck};
+      return {nextStage:"MAIN_COURSE", aiContext:RESTAURANT_SCRIPT.MAIN_COURSE.aiPromptContext, fallback:RESTAURANT_SCRIPT.MAIN_COURSE.fallback};
+
+    case "COOKING":
+      if(["COOK_RARE","COOK_MEDIUM","COOK_WELL"].includes(intent)) return {nextStage:"DRINK", aiContext:RESTAURANT_SCRIPT.DRINK.aiPromptContext, fallback:RESTAURANT_SCRIPT.DRINK.fallback};
+      return {nextStage:"COOKING", aiContext:RESTAURANT_SCRIPT.COOKING.aiPromptContext, fallback: RESTAURANT_BRANCH_REPLIES.cookingInvalid};
+
+    case "DRINK":
+      if(intent === "DRINK_ORDER" || intent === "NO_DRINK") return {nextStage:"DONE", aiContext:RESTAURANT_SCRIPT.DONE.aiPromptContext, fallback:RESTAURANT_SCRIPT.DONE.fallback};
+      if(intent === "MAIN_ORDER") return {nextStage:"DRINK", aiContext:"The guest mentioned food again, but we're choosing drinks now. Gently redirect to drink choices (water, tea, coffee, juice, soft drink).", fallback: RESTAURANT_BRANCH_REPLIES.foodTooEarlyAtDrink};
+      return {nextStage:"DRINK", aiContext:RESTAURANT_SCRIPT.DRINK.aiPromptContext, fallback:RESTAURANT_SCRIPT.DRINK.fallback};
+
+    default:
+      return {nextStage: stageIdNow, aiContext:"Continue the conversation naturally.", fallback:[{en:"Let's continue with your order.", zh:"我們繼續完成點餐吧。"}]};
+  }
+}
+
+/* ---------- 機場情境：關卡式引擎（比照餐廳架構） ----------
+   海關問答本質上是固定順序的流程（查證件→問目的→問住宿→問天數→問申報→結束），
+   不像餐廳有「先點牛排還是先看菜單」的彈性，所以這裡用簡單的線性關卡順序，
+   但一樣具備：本地驗證、多樣化回覆（不會每次都講同一句）、逐關提示、真正的生命週期終點。 */
+const AIRPORT_SCRIPT = {
+  PASSPORT: {
+    aiPromptContext: "You are a customs officer. Ask to see the traveler's passport and declaration form.",
+    fallback: [
+      {en:"Hello! Welcome to customs. May I see your passport and declaration form, please?", zh:"哈囉！歡迎來到海關。可以看一下您的護照和申報表嗎？"},
+      {en:"Good day. Passport and declaration form, please.", zh:"您好，麻煩護照和申報表。"},
+      {en:"Welcome. Could I see your travel documents, please?", zh:"歡迎。可以看一下您的旅行證件嗎？"}
+    ]
+  },
+  PURPOSE: {
+    aiPromptContext: "Ask the purpose of the traveler's visit (business or pleasure).",
+    fallback: [
+      {en:"Thank you. What is the purpose of your visit? Business or pleasure?", zh:"謝謝。請問您此行目的是？商務還是觀光？"},
+      {en:"Got it. And what brings you here — work or vacation?", zh:"了解。那您這次是為了工作還是度假呢？"},
+      {en:"Thanks. Is this trip for business or leisure?", zh:"謝謝。這趟旅程是商務還是休閒呢？"}
+    ]
+  },
+  STAY: {
+    aiPromptContext: "Ask where the traveler will be staying during their trip.",
+    fallback: [
+      {en:"Great! And where will you be staying during your trip here?", zh:"很好！那您這趟旅程會住在哪裡呢？"},
+      {en:"Thanks. Do you have an address for where you'll be staying?", zh:"謝謝。請問有住宿地址嗎？"},
+      {en:"Understood. Where are you staying while you're here?", zh:"了解。您這段時間會住在哪？"}
+    ]
+  },
+  DURATION: {
+    aiPromptContext: "Ask how long the traveler will be staying and whether they have a return ticket.",
+    fallback: [
+      {en:"Thank you. How long will you be staying, and do you have a return ticket?", zh:"謝謝。請問會停留多久？有回程機票嗎？"},
+      {en:"Got it. How many days are you planning to stay, and is your return flight booked?", zh:"了解。預計停留幾天？回程班機訂好了嗎？"}
+    ]
+  },
+  DECLARATION: {
+    aiPromptContext: "Ask whether the traveler is carrying any food, plants, animal products, or anything to declare.",
+    fallback: [
+      {en:"All right. Are you carrying any food, plants, animal products, or anything you need to declare?", zh:"好的。請問有攜帶食物、植物、動物產品或任何需要申報的東西嗎？"},
+      {en:"One last thing — anything to declare, like food, plants, or large amounts of cash?", zh:"最後一項——有任何需要申報的東西嗎？像是食物、植物或大額現金？"}
+    ]
+  },
+  DONE: {
+    aiPromptContext: "Thank the traveler and direct them to the baggage claim area, closing the customs conversation.",
+    fallback: [
+      {en:"Thank you for the information. Please follow the signs to the baggage claim area. If you need any assistance, please ask an airport staff member.", zh:"謝謝您提供的資訊。請依照指標前往行李提領處，如需協助可詢問機場工作人員。"},
+      {en:"All set! Head to baggage claim following the signs. Welcome and enjoy your trip!", zh:"都好了！跟著指標去行李提領處就可以了。歡迎光臨，祝旅途愉快！"},
+      {en:"Perfect, you're all clear. Baggage claim is just ahead. Have a great trip!", zh:"好的，您可以通關了。行李提領處就在前面，祝旅途愉快！"}
+    ]
+  }
+};
+
+const AIRPORT_ORDER = ["PASSPORT","PURPOSE","STAY","DURATION","DECLARATION","DONE"];
+
+function identifyAirportIntent(text){
+  const t = normalizeText(text);
+  if(/\b(passport|travel document|document|documents|declaration form|form|paper|show|hand|present)\b/.test(t)) return {intent:"PASSPORT"};
+  if(/\b(vacation|holiday|sightseeing|tourism|traveling for leisure|business trip|visiting family|travel|business|work|visit|tourist|leisure|honeymoon|wedding)\b/.test(t)) return {intent:"PURPOSE"};
+  if(/\b(hotel|resort|airbnb|apartment|staying with friends|staying with family|address|staying|stay|accommodation|booking|reservation)\b/.test(t)) return {intent:"STAY"};
+  if(/\b(round-trip ticket|return ticket|round trip|flight home|return flight|day|days|week|weeks|month|months|going back|leaving|departure)\b/.test(t)) return {intent:"DURATION"};
+  if(/\b(nothing to declare|no food|food|meat|fruit|vegetable|plant|animal|medicine|medication|declare|declaration|customs|luggage|baggage|nothing|cigarettes|alcohol|cash)\b/.test(t)) return {intent:"DECLARE"};
+  if(/\b(yes|yeah|yep|sure|okay|ok)\b/.test(t)) return {intent:"YES"};
+  if(/\b(no|nope)\b/.test(t)) return {intent:"NO"};
+  if(/\b(thank you|thanks)\b/.test(t)) return {intent:"THANKS"};
+  return {intent:"UNKNOWN"};
+}
+
+// 依目前關卡決定驗證規則：hint/voice一律放行；手動文字需為辨識得出意圖的短答或至少兩個字的句子
+function validateAirportInput(raw, stageIdNow, source){
+  source = source || "text";
+  const t = normalizeText(raw);
+  if(!t) return {valid:false};
+  if(source === "hint" || source === "voice") return {valid:true};
+  if(/^(asdf|fdsa|qwer|rewq|zxcv|vcxz|qwerty|asdfgh|zxcvbn)+$/.test(t) || /^(.)\1{3,}$/.test(t)) return {valid:false};
+  if(!/[a-z]/i.test(t)) return {valid:false};
+
+  const {intent} = identifyAirportIntent(t);
+  const wordCount = t.split(" ").filter(Boolean).length;
+  const isShortReply = (intent === "YES" || intent === "NO" || intent === "THANKS");
+  const expectedByStage = {PASSPORT:"PASSPORT", PURPOSE:"PURPOSE", STAY:"STAY", DURATION:"DURATION", DECLARATION:"DECLARE"};
+  const expected = expectedByStage[stageIdNow];
+
+  if(expected && intent === expected) return {valid:true};
+  if(isShortReply) return {valid:true}; // 「no」「nothing」在申報關卡很常見且合理
+  if(wordCount < 2) return {valid:false};
+  return {valid:true};
+}
+
+// 純本地決定下一關＋給AI的語境提示＋AI失敗時的降級句；海關流程本質固定順序，不需要像餐廳那樣的跳關分支
+function resolveAirportTransition(stageIdNow, text){
+  const idx = AIRPORT_ORDER.indexOf(stageIdNow);
+  const nextStage = AIRPORT_ORDER[idx + 1] || "DONE";
+  const nextScript = AIRPORT_SCRIPT[nextStage];
+  return {nextStage, aiContext: nextScript.aiPromptContext, fallback: nextScript.fallback};
+}
+
+const AIRPORT_HINTS_BY_STAGE = {
+  PASSPORT: [
+    {text:"Here is my passport and form.", translation:"這是我的護照和申報表。"},
+    {text:"Here you go.", translation:"給您。"},
+    {text:"Here is my travel document.", translation:"這是我的旅行證件。"}
+  ],
+  PURPOSE: [
+    {text:"I am here for vacation.", translation:"我是來度假的。"},
+    {text:"I'm here on business.", translation:"我是來出差的。"},
+    {text:"I'm visiting family.", translation:"我是來探親的。"}
+  ],
+  STAY: [
+    {text:"I'll be staying at a hotel in the city.", translation:"我會住在市區的一間飯店。"},
+    {text:"I'm staying with friends.", translation:"我會住朋友家。"},
+    {text:"I have a hotel reservation downtown.", translation:"我在市中心訂了一間飯店。"}
+  ],
+  DURATION: [
+    {text:"I am staying for five days.", translation:"我要停留五天。"},
+    {text:"I'll be here for one week, and I have a return ticket.", translation:"我會待一個星期，有回程機票。"},
+    {text:"About ten days, and yes, I have a return flight booked.", translation:"大約十天，回程班機也訂好了。"}
+  ],
+  DECLARATION: [
+    {text:"I have nothing to declare.", translation:"我沒有東西要申報。"},
+    {text:"Just some snacks for personal use.", translation:"只有一些自己要吃的零食。"},
+    {text:"No, nothing to declare.", translation:"沒有，沒有要申報的東西。"}
+  ]
+};
+
+/* ---------- 飯店情境：關卡式引擎（比照機場架構，線性流程） ---------- */
+const HOTEL_SCRIPT = {
+  CHECKIN: {
+    aiPromptContext: "You are a hotel front desk receptionist. Greet the guest and ask if they have a reservation, or ask for their name to check in.",
+    fallback: [
+      {en:"Good afternoon! Welcome to the Grand Plaza Hotel. How can I help you today?", zh:"午安！歡迎來到君悅廣場飯店，今天有什麼我可以幫您的嗎？"},
+      {en:"Hello! Welcome in. Do you have a reservation with us?", zh:"您好！歡迎光臨。請問有在我們這裡訂房嗎？"},
+      {en:"Good evening! Checking in today? May I have your name, please?", zh:"晚安！今天要入住嗎？可以給我您的大名嗎？"}
+    ]
+  },
+  FACILITY: {
+    aiPromptContext: "Confirm the guest's check-in and mention hotel facilities like Wi-Fi and breakfast, then hand over the room key.",
+    fallback: [
+      {en:"Perfect! May I have your name and an ID, please? I'll look up your booking right away.", zh:"好的！可以給我您的姓名跟證件嗎？我馬上幫您查詢訂房。"},
+      {en:"Great, thank you! Wi-Fi is free throughout the hotel, and breakfast is served from 7 to 10 AM. Here's your room key.", zh:"好的，謝謝！飯店全區免費Wi-Fi，早餐供應時間是早上7點到10點。這是您的房卡。"},
+      {en:"All set! I'll get you checked in. Is there anything you'd like to know about our facilities?", zh:"都好了！我幫您辦理入住。想了解我們的飯店設施嗎？"}
+    ]
+  },
+  ROOM_REQUEST: {
+    aiPromptContext: "Ask if the guest has any special requests for their room (view, floor, extra bed, etc.).",
+    fallback: [
+      {en:"Is there anything special you'd like for your room, such as a view or a higher floor?", zh:"您對房間有什麼特別需求嗎？像是景觀或樓層方面？"},
+      {en:"Would you like to request anything for your room — extra pillows, a quiet room, anything like that?", zh:"房間方面有什麼想要求的嗎——多的枕頭、安靜的房型之類的？"},
+      {en:"Any preferences for your room before I finalize everything?", zh:"在我幫您確認之前，房間方面有什麼偏好嗎？"}
+    ]
+  },
+  CHECKOUT: {
+    aiPromptContext: "Ask what time the guest would like to check out, or mention checkout policy.",
+    fallback: [
+      {en:"Noted! And one more thing — what time would you like to check out?", zh:"收到！還有一件事——您想幾點退房呢？"},
+      {en:"Got it. Standard check-out is at 11 AM — would that work for you?", zh:"了解。標準退房時間是早上11點——這樣可以嗎？"},
+      {en:"Understood. Just to confirm, is there anything else before I finish checking you in?", zh:"了解。確認一下，辦理入住前還有其他需要嗎？"}
+    ]
+  },
+  DONE: {
+    aiPromptContext: "Thank the guest, confirm check-in is complete, and wish them a pleasant stay.",
+    fallback: [
+      {en:"You're all set! Enjoy your stay with us.", zh:"都辦好了！祝您住宿愉快。"},
+      {en:"Perfect, you're checked in. Have a wonderful stay!", zh:"好的，入住辦好了。祝您有個美好的住宿體驗！"},
+      {en:"All done! If you need anything, just give the front desk a call. Enjoy your stay!", zh:"都完成了！有任何需要歡迎打給櫃檯。祝您住宿愉快！"}
+    ]
+  }
+};
+
+const HOTEL_ORDER = ["CHECKIN","FACILITY","ROOM_REQUEST","CHECKOUT","DONE"];
+
+function identifyHotelIntent(text){
+  const t = normalizeText(text);
+  if(/\b(check in|check-in|checking in|under my name|confirmation number|reservation|booking|book|reserved|confirmation|arrived|accommodation|registration)\b/.test(t)) return {intent:"CHECKIN"};
+  if(/\b(room service|key card|wi-fi|breakfast|wifi|internet|gym|fitness|pool|swimming|amenities|facilities|restaurant|laundry|elevator|lift|lobby|parking|spa|included|free|available)\b/.test(t)) return {intent:"FACILITY"};
+  if(/\b(quiet room|high floor|low floor|sea view|ocean view|city view|extra bed|extra pillow|extra towel|towel|non-smoking|king bed|twin beds|double bed|connecting room|late checkout|late check-out|early check-in|room upgrade|air conditioning|air conditioner|balcony|housekeeping|not working|doesn't work|no hot water|wrong room|noisy|dirty|broken)\b/.test(t)) return {intent:"ROOM_REQUEST"};
+  if(/\b(check out|check-out|checkout|checking out|luggage storage|store my bags|leave my luggage|bill|invoice|receipt|payment|pay|credit card|deposit|departure|leaving today)\b/.test(t)) return {intent:"CHECKOUT"};
+  if(/\b(yes|yeah|yep|sure|okay|ok)\b/.test(t)) return {intent:"YES"};
+  if(/\b(no|nope)\b/.test(t)) return {intent:"NO"};
+  if(/\b(thank you|thanks)\b/.test(t)) return {intent:"THANKS"};
+  return {intent:"UNKNOWN"};
+}
+
+function validateHotelInput(raw, stageIdNow, source){
+  source = source || "text";
+  const t = normalizeText(raw);
+  if(!t) return {valid:false};
+  if(source === "hint" || source === "voice") return {valid:true};
+  if(/^(asdf|fdsa|qwer|rewq|zxcv|vcxz|qwerty|asdfgh|zxcvbn)+$/.test(t) || /^(.)\1{3,}$/.test(t)) return {valid:false};
+  if(!/[a-z]/i.test(t)) return {valid:false};
+
+  const {intent} = identifyHotelIntent(t);
+  const wordCount = t.split(" ").filter(Boolean).length;
+  const isShortReply = (intent === "YES" || intent === "NO" || intent === "THANKS");
+  const expectedByStage = {CHECKIN:"CHECKIN", FACILITY:"FACILITY", ROOM_REQUEST:"ROOM_REQUEST", CHECKOUT:"CHECKOUT"};
+  const expected = expectedByStage[stageIdNow];
+
+  if(expected && intent === expected) return {valid:true};
+  if(isShortReply) return {valid:true};
+  if(wordCount < 2) return {valid:false};
+  return {valid:true};
+}
+
+// 飯店服務流程本質上也是固定順序（入住→設施→房間需求→退房→完成），比照機場採線性推進
+function resolveHotelTransition(stageIdNow, text){
+  const idx = HOTEL_ORDER.indexOf(stageIdNow);
+  const nextStage = HOTEL_ORDER[idx + 1] || "DONE";
+  const nextScript = HOTEL_SCRIPT[nextStage];
+  return {nextStage, aiContext: nextScript.aiPromptContext, fallback: nextScript.fallback};
+}
+
+const HOTEL_HINTS_BY_STAGE = {
+  CHECKIN: [
+    {text:"I'd like to check in, please.", translation:"我想辦理入住。"},
+    {text:"I have a reservation under my name.", translation:"我有用我的名字預約。"},
+    {text:"My name is Chen, checking in today.", translation:"我姓陳，今天要入住。"}
+  ],
+  FACILITY: [
+    {text:"Is breakfast included in my room?", translation:"我的房間有包含早餐嗎？"},
+    {text:"Is there free Wi-Fi in the hotel?", translation:"飯店裡有免費Wi-Fi嗎？"},
+    {text:"What time does the pool open?", translation:"游泳池幾點開放？"}
+  ],
+  ROOM_REQUEST: [
+    {text:"Could I have a room with a sea view, please?", translation:"可以給我海景房嗎？"},
+    {text:"Could I get an extra pillow, please?", translation:"可以多給我一個枕頭嗎？"},
+    {text:"No special requests, thank you.", translation:"沒有特別需求，謝謝。"}
+  ],
+  CHECKOUT: [
+    {text:"I'd like to check out around 11 AM.", translation:"我想大約早上11點退房。"},
+    {text:"Could I get a late check-out?", translation:"可以延後退房嗎？"},
+    {text:"That works for me, thank you.", translation:"這樣對我來說可以，謝謝。"}
+  ]
+};
+
+/* ---------- 商店購物情境：關卡式引擎 ---------- */
+const SHOPPING_SCRIPT = {
+  GREETING: {
+    aiPromptContext: "You are a friendly shop assistant. Ask the customer what they're looking for today.",
+    fallback: [
+      {en:"Hi! Let me know if you need any help finding something.", zh:"您好！需要找什麼都可以跟我說。"},
+      {en:"Welcome in! Looking for anything in particular today?", zh:"歡迎光臨！今天想找什麼呢？"},
+      {en:"Hello! Feel free to browse, or let me know if I can help with anything.", zh:"您好！可以隨意逛逛，有需要都可以叫我。"}
+    ]
+  },
+  SIZE_FIT: {
+    aiPromptContext: "Ask the customer about their size, or mention the fitting room.",
+    fallback: [
+      {en:"Great choice! Do you know your size, or would you like to try it on?", zh:"很棒的選擇！您知道自己的尺寸嗎，還是想試穿看看？"},
+      {en:"Sure! What size are you looking for?", zh:"好的！您想找什麼尺寸呢？"},
+      {en:"Of course! The fitting room is right over there if you'd like to try it on.", zh:"當然！試衣間就在那邊，可以試穿看看。"}
+    ]
+  },
+  PRICE: {
+    aiPromptContext: "Mention the price or a discount/sale on the item.",
+    fallback: [
+      {en:"It looks great on you! This one is actually on sale today — 20% off.", zh:"您穿起來很好看！這件今天剛好特價打八折。"},
+      {en:"Good news, that item is 20% off right now.", zh:"好消息，那件現在打八折。"},
+      {en:"That's a great pick! Let me check — yes, it's on sale today.", zh:"很棒的選擇！我確認一下——對，今天有特價。"}
+    ]
+  },
+  PURCHASE: {
+    aiPromptContext: "Ask if the customer would like to purchase the item, and how they'd like to pay.",
+    fallback: [
+      {en:"Would you like to take it? We accept cash or card.", zh:"要帶走這件嗎？我們收現金或刷卡都可以。"},
+      {en:"Shall I ring this up for you?", zh:"要幫您結帳了嗎？"},
+      {en:"Great! Would you like to go ahead and purchase it?", zh:"太好了！要直接結帳嗎？"}
+    ]
+  },
+  DONE: {
+    aiPromptContext: "Thank the customer and close the purchase conversation.",
+    fallback: [
+      {en:"Perfect, here's your receipt. Thank you for shopping with us!", zh:"好的，這是您的收據。謝謝您的惠顧！"},
+      {en:"All done! Enjoy your new item, and thanks for stopping by!", zh:"都完成了！希望您會喜歡，謝謝光臨！"},
+      {en:"Great, you're all set! Have a wonderful day!", zh:"好了，都辦好了！祝您有美好的一天！"}
+    ]
+  }
+};
+const SHOPPING_ORDER = ["GREETING","SIZE_FIT","PRICE","PURCHASE","DONE"];
+
+function identifyShoppingIntent(text){
+  const t = normalizeText(text);
+  if(/\b(looking for|browsing|just looking|help finding|jacket|shirt|shoes|dress|pants|sweater|coat)\b/.test(t)) return {intent:"GREETING"};
+  if(/\b(size|medium|large|small|extra large|try it on|try on|fitting room)\b/.test(t)) return {intent:"SIZE_FIT"};
+  if(/\b(discount|sale|price|how much|cost|expensive|cheap|on sale)\b/.test(t)) return {intent:"PRICE"};
+  if(/\b(buy|take it|purchase|pay|cash|card|i'll take|ill take)\b/.test(t)) return {intent:"PURCHASE"};
+  if(/\b(yes|yeah|yep|sure|okay|ok)\b/.test(t)) return {intent:"YES"};
+  if(/\b(no|nope)\b/.test(t)) return {intent:"NO"};
+  if(/\b(thank you|thanks)\b/.test(t)) return {intent:"THANKS"};
+  return {intent:"UNKNOWN"};
+}
+
+function validateShoppingInput(raw, stageIdNow, source){
+  source = source || "text";
+  const t = normalizeText(raw);
+  if(!t) return {valid:false};
+  if(source === "hint" || source === "voice") return {valid:true};
+  if(/^(asdf|fdsa|qwer|rewq|zxcv|vcxz|qwerty|asdfgh|zxcvbn)+$/.test(t) || /^(.)\1{3,}$/.test(t)) return {valid:false};
+  if(!/[a-z]/i.test(t)) return {valid:false};
+  const {intent} = identifyShoppingIntent(t);
+  const wordCount = t.split(" ").filter(Boolean).length;
+  const isShortReply = (intent === "YES" || intent === "NO" || intent === "THANKS");
+  const expectedByStage = {GREETING:"GREETING", SIZE_FIT:"SIZE_FIT", PRICE:"PRICE", PURCHASE:"PURCHASE"};
+  const expected = expectedByStage[stageIdNow];
+  if(expected && intent === expected) return {valid:true};
+  if(isShortReply) return {valid:true};
+  if(wordCount < 2) return {valid:false};
+  return {valid:true};
+}
+
+function resolveShoppingTransition(stageIdNow, text){
+  const idx = SHOPPING_ORDER.indexOf(stageIdNow);
+  const nextStage = SHOPPING_ORDER[idx + 1] || "DONE";
+  const nextScript = SHOPPING_SCRIPT[nextStage];
+  return {nextStage, aiContext: nextScript.aiPromptContext, fallback: nextScript.fallback};
+}
+
+const SHOPPING_HINTS_BY_STAGE = {
+  GREETING: [
+    {text:"Thanks, I'm looking for a jacket.", translation:"謝謝，我在找一件外套。"},
+    {text:"I'm just browsing, thanks.", translation:"我只是隨便看看，謝謝。"},
+    {text:"Could you help me find some shoes?", translation:"可以幫我找鞋子嗎？"}
+  ],
+  SIZE_FIT: [
+    {text:"I think medium, but may I try it on?", translation:"我想是中號，但可以試穿看看嗎？"},
+    {text:"Where is the fitting room?", translation:"試衣間在哪裡？"},
+    {text:"Do you have this in a large?", translation:"這件有大號的嗎？"}
+  ],
+  PRICE: [
+    {text:"Is this jacket on sale?", translation:"這件外套有特價嗎？"},
+    {text:"How much does this cost?", translation:"這個多少錢？"},
+    {text:"Is there any discount right now?", translation:"現在有任何折扣嗎？"}
+  ],
+  PURCHASE: [
+    {text:"Great, I'll take it.", translation:"太好了，我要買這件。"},
+    {text:"Could I pay by card?", translation:"可以刷卡嗎？"},
+    {text:"Actually, I'll think about it, thanks.", translation:"其實我再考慮一下，謝謝。"}
+  ]
+};
+
+/* ---------- 路上問路情境：關卡式引擎 ---------- */
+const DIRECTIONS_SCRIPT = {
+  ASK: {
+    aiPromptContext: "You are a friendly local stranger on the street. Ask the traveler if they need help or where they're trying to go.",
+    fallback: [
+      {en:"Hi there! You look a little lost. Can I help you with something?", zh:"嗨！你看起來有點迷路，需要幫忙嗎？"},
+      {en:"Excuse me, do you need any help finding your way?", zh:"不好意思，需要幫忙找路嗎？"},
+      {en:"Hello! You seem to be looking for something — can I help?", zh:"你好！你好像在找什麼，我可以幫忙嗎？"}
+    ]
+  },
+  ROUTE_DETAIL: {
+    aiPromptContext: "Give simple directions (e.g. go straight, turn left/right at the light) to wherever the traveler wants to go.",
+    fallback: [
+      {en:"Sure! Go straight for two blocks, then turn left at the light.", zh:"沒問題！直走兩個街區，然後在紅綠燈左轉。"},
+      {en:"No problem! Head straight ahead, then turn right at the next corner.", zh:"沒問題！直走，然後在下一個轉角右轉。"},
+      {en:"Of course! It's just a few blocks away — go straight and you'll see it on your left.", zh:"當然！只有幾個街區遠——直走就會看到它在你左手邊。"}
+    ]
+  },
+  TIME_CHECK: {
+    aiPromptContext: "Answer how long it takes to walk there, or confirm the distance.",
+    fallback: [
+      {en:"About ten minutes on foot. You'll see the sign right away.", zh:"走路大約十分鐘，你會馬上看到標誌。"},
+      {en:"It should only take about five minutes walking.", zh:"走路應該只要五分鐘左右。"},
+      {en:"Not far at all — maybe a ten-minute walk.", zh:"不會很遠——大概走十分鐘。"}
+    ]
+  },
+  DONE: {
+    aiPromptContext: "Wish the traveler well and end the conversation.",
+    fallback: [
+      {en:"No problem, have a safe trip!", zh:"不客氣，祝你旅途平安！"},
+      {en:"You're welcome! Enjoy the rest of your day.", zh:"不客氣！祝你今天愉快。"},
+      {en:"Glad to help! Safe travels!", zh:"很高興能幫上忙！一路平安！"}
+    ]
+  }
+};
+const DIRECTIONS_ORDER = ["ASK","ROUTE_DETAIL","TIME_CHECK","DONE"];
+
+function identifyDirectionsIntent(text){
+  const t = normalizeText(text);
+  if(/\b(where|looking for|lost|help|directions|get to|train station|bus stop|station|how do i|could you tell me)\b/.test(t)) return {intent:"ASK"};
+  if(/\b(how long|how far|minutes|walking|on foot|which way|left or right|turn)\b/.test(t)) return {intent:"CLARIFY"};
+  if(/\b(thank you|thanks|great|got it|appreciate)\b/.test(t)) return {intent:"THANKS"};
+  if(/\b(yes|yeah|yep|sure|okay|ok)\b/.test(t)) return {intent:"YES"};
+  if(/\b(no|nope)\b/.test(t)) return {intent:"NO"};
+  return {intent:"UNKNOWN"};
+}
+
+function validateDirectionsInput(raw, stageIdNow, source){
+  source = source || "text";
+  const t = normalizeText(raw);
+  if(!t) return {valid:false};
+  if(source === "hint" || source === "voice") return {valid:true};
+  if(/^(asdf|fdsa|qwer|rewq|zxcv|vcxz|qwerty|asdfgh|zxcvbn)+$/.test(t) || /^(.)\1{3,}$/.test(t)) return {valid:false};
+  if(!/[a-z]/i.test(t)) return {valid:false};
+  const {intent} = identifyDirectionsIntent(t);
+  const wordCount = t.split(" ").filter(Boolean).length;
+  const isShortReply = (intent === "YES" || intent === "NO" || intent === "THANKS");
+  const expectedByStage = {ASK:"ASK", ROUTE_DETAIL:"CLARIFY", TIME_CHECK:"THANKS"};
+  const expected = expectedByStage[stageIdNow];
+  if(expected && intent === expected) return {valid:true};
+  if(isShortReply) return {valid:true};
+  if(wordCount < 2) return {valid:false};
+  return {valid:true};
+}
+
+function resolveDirectionsTransition(stageIdNow, text){
+  const idx = DIRECTIONS_ORDER.indexOf(stageIdNow);
+  const nextStage = DIRECTIONS_ORDER[idx + 1] || "DONE";
+  const nextScript = DIRECTIONS_SCRIPT[nextStage];
+  return {nextStage, aiContext: nextScript.aiPromptContext, fallback: nextScript.fallback};
+}
+
+const DIRECTIONS_HINTS_BY_STAGE = {
+  ASK: [
+    {text:"Yes, could you tell me how to get to the train station?", translation:"是的，可以告訴我怎麼去火車站嗎？"},
+    {text:"I'm trying to find a pharmacy nearby.", translation:"我在找附近的藥局。"},
+    {text:"Could you point me toward the nearest bus stop?", translation:"可以指引我最近的公車站嗎？"}
+  ],
+  ROUTE_DETAIL: [
+    {text:"How long does it take on foot?", translation:"走路要多久？"},
+    {text:"Should I turn left or right at the light?", translation:"在紅綠燈要左轉還是右轉？"},
+    {text:"Is it within walking distance?", translation:"用走的到得了嗎？"}
+  ],
+  TIME_CHECK: [
+    {text:"Great, thank you so much for your help!", translation:"太好了，非常謝謝你的幫忙！"},
+    {text:"That's not too far, thanks!", translation:"那不會太遠，謝謝！"},
+    {text:"Got it, I really appreciate it.", translation:"了解了，真的很感謝。"}
+  ]
+};
+
+const AIRPORT_AND_HOTEL_DATA = {
+  airport: {
+    aiOpening: "Hello! Welcome to customs. May I see your passport and declaration form, please?",
+    userHints: [
+      {en:"Here is my passport and form.", zh:"這是我的護照和申報表。"},
+      {en:"I am here for vacation.", zh:"我是來度假的。"},
+      {en:"I am staying for five days.", zh:"我要停留五天。"},
+    ],
+    followUpReplies: {
+      passportKeywords: {keys:["passport","travel document","here is my passport","here you go","give","form","paper","document","documents","declaration","show","hand","present"],
+        reply:"Thank you. What is the purpose of your visit to our country? Business or pleasure?"},
+      purposeKeywords: {keys:["vacation","holiday","sightseeing","tourism","traveling for leisure","business trip","visiting family","travel","business","work","visit","tourist","family","friend","relatives","meeting","conference","leisure","honeymoon","wedding"],
+        reply:"Great! And where will you be staying during your trip here?"},
+      stayKeywords: {keys:["hotel","resort","airbnb","apartment","staying with friends","staying with family","address","staying","stay","five days","three days","one week","two weeks","night","nights","friend's house","family's house","accommodation","booking","reservation"],
+        reply:"Thank you. How long will you be staying, and do you have a return ticket?"},
+      durationKeywords: {keys:["round-trip ticket","return ticket","round trip","flight home","return flight","day","days","week","weeks","month","months","going back","leaving","departure","until"],
+        reply:"All right. Are you carrying any food, plants, animal products, or anything you need to declare?"},
+      declarationKeywords: {keys:["nothing to declare","no food","food","meat","fruit","vegetable","plant","animal","medicine","medication","declare","declaration","customs","luggage","baggage","nothing","no","yes","cigarettes","alcohol","cash"],
+        reply:"Thank you for the information. Please follow the signs to the baggage claim area. If you need any assistance, please ask an airport staff member."},
+      fallback: "I see. Please step forward, look at the camera, and place your right index finger on the scanner."
+    }
+  },
+  hotel: {
+    aiOpening: "Good afternoon! Welcome to the Grand Plaza Hotel. How can I help you today?",
+    aiOpeningZh: "午安！歡迎來到君悅廣場飯店，今天有什麼我可以幫您的嗎？",
+    userHints: [
+      {en:"I'd like to check in, please.", zh:"我想辦理入住。"},
+      {en:"I have a reservation under my name.", zh:"我有用我的名字預約。"},
+      {en:"Is breakfast included in my room?", zh:"我的房間有包含早餐嗎？"},
+    ],
+    followUpReplies: {
+      checkInKeywords: {keys:["check in","check-in","checking in","under my name","confirmation number","reservation","booking","book","reserved","confirmation","arrived","accommodation","registration","room"],
+        reply:"Perfect! May I have your name and an ID, please? I'll look up your booking right away."},
+      facilityKeywords: {keys:["room service","key card","wi-fi","breakfast","wifi","internet","gym","fitness","pool","swimming","key","amenities","facilities","restaurant","laundry","elevator","lift","lobby","parking","spa","included","free","available"],
+        reply:"Yes, absolutely! Wi-Fi is free everywhere, and breakfast is served from 7 to 10 AM in the lobby. Here is your room key!"},
+      roomRequestKeywords: {keys:["quiet room","high floor","low floor","sea view","ocean view","city view","extra bed","extra pillow","extra towel","non-smoking","king bed","twin beds","double bed","connecting room","late checkout","late check-out","early check-in","room upgrade","air conditioning","air conditioner","balcony","smoking","housekeeping"],
+        reply:"Of course! I'll check whether we can arrange that for you. Is there anything else you would like to request for your room?"},
+      directionsKeywords: {keys:["how do i get","how can i get","how to get","airport shuttle","shuttle bus","bus stop","train station","directions","location","which floor","what floor","nearby","near here","transportation","taxi","where"],
+        reply:"I'd be happy to help! The front desk is always available if you need directions or transportation assistance. Where would you like to go?"},
+      checkoutKeywords: {keys:["check out","check-out","checkout","checking out","luggage storage","store my bags","leave my luggage","bill","invoice","receipt","payment","pay","credit card","deposit","departure","leaving today"],
+        reply:"Certainly! What time would you like to check out? I can also explain our luggage storage options if you need them."},
+      problemKeywords: {keys:["not working","doesn't work","no hot water","wifi not working","wrong room","can't sleep","cannot sleep","noisy","noise","dirty","not clean","broken","cold water","no towels","missing","complaint","uncomfortable","smell","leaking"],
+        reply:"I'm sorry about that. We'd be happy to help resolve the issue. Could you tell me your room number and a little more about the problem?"},
+      fallback: "Got it. Let me confirm that for you. Is there anything else I can assist you with right now?"
+    }
+  }
+};
+
+const CORRECTION_TEMPLATE = {
+  shopping: [
+    {detect:["i want try","want try this"], original:"I want try this.", corrected:"I'd like to try this on.", natural:"Could I try this on, please?", grammar:"'want' 後面接動詞時要加 'to'（want to + 動詞原形）。試穿時用 'Could I try this on?' 更禮貌自然。"},
+    {detect:["how much this","how much is"], original:"How much this?", corrected:"How much is this?", natural:"How much does this cost?", grammar:"詢問價錢的疑問句需要 be 動詞，'How much is this?' 或 'How much does this cost?' 才是完整句子。"},
+    {detect:["give me discount","give discount"], original:"Give me discount.", corrected:"Could I get a discount, please?", natural:"Is there any discount available?", grammar:"要求折扣時，'Could I get...?' 或 'Is there...?' 比直接說 'Give me' 更有禮貌；discount 是可數名詞，前面要加冠詞。"},
+    {detect:["i take this","i will take"], original:"I take this.", corrected:"I'll take this, please.", natural:"I'll take this one, please.", grammar:"表達要購買的意願時，用 'I'll take...' (= I will take) 比現在簡單式 'I take' 更自然，'I take' 聽起來像描述習慣性動作。"},
+    {detect:["where is fitting room","where fitting room"], original:"Where is fitting room?", corrected:"Where is the fitting room?", natural:"Could you show me where the fitting room is?", grammar:"fitting room 是特定地點，前面需要加定冠詞 'the'。"},
+    {detect:["this size small for me","too small size"], original:"This size small for me.", corrected:"This size is too small for me.", natural:"Do you have a bigger size?", grammar:"句子缺少 be 動詞，應該是 'This size is too small for me.'，'too + 形容詞' 表示程度過度。"}
+  ],
+  directions: [
+    {detect:["where is station","where station"], original:"Where is station?", corrected:"Where is the station?", natural:"Could you tell me where the train station is?", grammar:"station 是特定地點，前面需要加定冠詞 'the'。問路時用 'Could you tell me where...is?' 更禮貌委婉。"},
+    {detect:["how i get there","how i can get"], original:"How I get there?", corrected:"How do I get there?", natural:"Could you tell me how to get there?", grammar:"一般問句需要助動詞 'do'，正確語序是 'How do I get there?'，不能省略 do。"},
+    {detect:["how long take","how long it take"], original:"How long take?", corrected:"How long does it take?", natural:"How long does it take to walk there?", grammar:"疑問句需要主詞 it 跟助動詞 does，完整句子是 'How long does it take?'。"},
+    {detect:["turn where","where turn"], original:"Turn where?", corrected:"Where should I turn?", natural:"Which way should I turn?", grammar:"疑問詞 where 通常放在句首，且需要主詞與助動詞，'Where should I turn?' 才是完整問句。"},
+    {detect:["i no understand","not understand direction"], original:"I no understand.", corrected:"I don't understand.", natural:"Sorry, could you explain that again?", grammar:"否定句要用 'don't + 動詞原形'，不能直接在動詞前加 'no'。"}
+  ],
+  restaurant: [
+    {detect:["i want","give me a"], original:"I want a pizza.", corrected:"I would like a pizza, please.", natural:"Could I get a pizza, please?", grammar:"點餐時用 'I would like...' 或 'Could I have...' 比直接說 'I want' 更有禮貌，也更符合餐廳情境的用語習慣。"},
+    {detect:["give me the menu","want the menu"], original:"Give me the menu.", corrected:"Could I have the menu, please?", natural:"Could I have a look at the menu, please?", grammar:"向服務生要東西時，'Could I have...' 比 'Give me' 更禮貌，'Give me' 聽起來較直接、較不禮貌。"},
+    {detect:["i no want","no want drink"], original:"I no want drink.", corrected:"I don't want a drink.", natural:"No drink for me, thanks.", grammar:"否定句要用 'don't/doesn't + 動詞原形'，不能直接在動詞前加 'no'。'I no want' 不是正確的文法結構。"},
+    {detect:["i like steak","i like the steak"], original:"I like steak.", corrected:"I'd like the steak, please.", natural:"I'll have the steak, please.", grammar:"'I like' 是表達長期偏好，點餐時要用 'I'd like' 或 'I'll have' 表達『這次想點』，否則聽起來像在說個人喜好，而不是下單。"},
+    {detect:["cook well","very well cook"], original:"Cook well.", corrected:"Well-done, please.", natural:"I'd like it well-done, please.", grammar:"描述牛排熟度時，直接用形容詞 'well-done'（全熟）、'medium'（五分熟）、'rare'（一分熟）即可，不需要加動詞 'cook'。"},
+    {detect:["give me water","water give me"], original:"Give me water.", corrected:"Could I have some water, please?", natural:"Water, please.", grammar:"要飲料時，'Could I have...' 比 'Give me' 更有禮貌；water 是不可數名詞，前面可以加 'some'。"},
+    {detect:["how much money"], original:"How much money?", corrected:"How much is it?", natural:"Could I get the bill, please?", grammar:"詢問金額用 'How much is it?' 或 'How much does it cost?'，直接問 'How much money' 語意不清楚。"}
+  ],
+  airport: [
+    {detect:["give you","here is passport","here passport","my passport is here"], original:"Here is passport.", corrected:"Here is my passport.", natural:"Here you go.", grammar:"名詞前面通常需要加上所有格（my）或冠詞（a/the）。交出物品時，使用 'Here you go.' 更自然。"},
+    {detect:["for travel","vacation","for holiday","come travel"], original:"I am here for travel.", corrected:"I am here for traveling.", natural:"I'm here on vacation.", grammar:"表達度假目的時，'I'm here on vacation.' 或 'I'm here for a vacation.' 比 'I'm here for travel.' 更自然。"},
+    {detect:["five day","stay five days","five days stay"], original:"I will stay five day.", corrected:"I will stay for five days.", natural:"I'm staying for five days.", grammar:"表示持續時間時，可以在時間前加上 'for'。可數名詞 day 在數字大於一時通常要使用複數 days。"},
+    {detect:["i come from taiwan","i am come from","come to from taiwan"], original:"I am come from Taiwan.", corrected:"I come from Taiwan.", natural:"I'm from Taiwan.", grammar:"'come' 是一般動詞，不能直接與 'am' 連用。介紹自己的國籍或來自哪裡時，可以說 'I'm from Taiwan.'。"},
+    {detect:["where i can get","where get baggage","where is baggage claim"], original:"Where I can get my baggage?", corrected:"Where can I get my baggage?", natural:"Where is the baggage claim area?", grammar:"直接問句中，疑問詞後面通常要使用助動詞加主詞的語序，例如 'Where can I...?'。詢問行李提領處時，'Where is the baggage claim area?' 更自然。"},
+    {detect:["i have nothing to declare","nothing declare","no need declare"], original:"I have nothing declare.", corrected:"I have nothing to declare.", natural:"I have nothing to declare.", grammar:"在 'nothing' 後面用不定詞表達要做的事時，通常使用 'nothing to + 動詞原形'，例如 'nothing to declare'。"},
+    {detect:["how long time","how many days stay","how long i stay"], original:"How long time will I stay?", corrected:"How long will I stay?", natural:"How long are you staying?", grammar:"詢問持續時間時，使用 'How long...?' 即可，不需要再加上 'time'。若詢問旅客停留多久，海關常說 'How long are you staying?'。"},
+    {detect:["i have a luggage","many luggages","two luggages"], original:"I have two luggages.", corrected:"I have two pieces of luggage.", natural:"I have two bags.", grammar:"'luggage' 通常是不可數名詞，不直接加上 -s，也不使用 'a luggage'。計算件數時可說 'two pieces of luggage'，日常對話中說 'two bags' 更簡單自然。"}
+  ],
+  hotel: [
+    {detect:["want check in","checking","want to check in room","check in please"], original:"I want check in room.", corrected:"I want to check in.", natural:"I'd like to check in, please.", grammar:"動詞 want 後面連接另一個動詞時，必須加上 'to'（want to + 動詞原形）。在飯店櫃檯提出需求時，'I'd like to...' 比 'I want...' 更有禮貌。"},
+    {detect:["have free wifi","wifi price","is have wifi","have wifi"], original:"Is have free Wi-Fi?", corrected:"Is there free Wi-Fi?", natural:"Do you provide free Wi-Fi?", grammar:"詢問某處是否提供某項服務，可以使用 'Is there...?' 或 'Do you provide...?'。不要直接將中文的『有沒有』翻譯成 'Is have...'。"},
+    {detect:["i have reservation","have booking","under my name","i booked a room"], original:"I have reservation.", corrected:"I have a reservation.", natural:"I have a reservation under my name.", grammar:"'reservation' 是可數名詞單數，前面通常需要加上冠詞 'a'。使用 'under my name' 可以表示預訂是登記在自己的名字之下。"},
+    {detect:["breakfast include","breakfast is include","include breakfast","my room include"], original:"Is breakfast include?", corrected:"Is breakfast included?", natural:"Is breakfast included in my room rate?", grammar:"詢問早餐是否包含在房價內時，使用被動語態 'be included'。'included' 是過去分詞，不應使用原形 'include'。"},
+    {detect:["give me room","i want room","can give me a room","i need room"], original:"Can you give me room?", corrected:"Could you give me a room?", natural:"Could I have a room, please?", grammar:"提出禮貌請求時，可以使用 'Could I have...?' 或 'Could you...?'。若已經預訂房間，辦理入住時說 'I'd like to check in, please.' 更符合情境。"},
+    {detect:["what time breakfast","when breakfast start","breakfast until what time"], original:"What time breakfast starts?", corrected:"What time does breakfast start?", natural:"What time is breakfast served?", grammar:"使用一般動詞 start 的現在簡單式疑問句時，要加上助動詞 'does'，並將主要動詞改回原形 'start'。"},
+    {detect:["i want change room","change my room","room is noisy","my room too noisy"], original:"I want change my room because noisy.", corrected:"I'd like to change my room because it's noisy.", natural:"Would it be possible to change to a quieter room?", grammar:"'want' 後面要接 'to + 動詞原形'。描述房間很吵時，需要使用主詞與 be 動詞，例如 'it's noisy'。提出換房請求時，'Would it be possible...?' 更有禮貌。"},
+    {detect:["i need more towel","give me towel","more towels please","need towel"], original:"I need more towel.", corrected:"I need more towels.", natural:"Could I have some extra towels, please?", grammar:"當 towel 表示可數的毛巾時，複數通常要加上 -s。向飯店人員提出請求時，'Could I have...?' 比直接說 'I need...' 更有禮貌。"},
+    {detect:["i want checkout","check out now","i want to check out room"], original:"I want checkout now.", corrected:"I want to check out now.", natural:"I'd like to check out, please.", grammar:"當 check out 作為動詞片語時，使用 'want to check out'。在櫃檯辦理退房時，'I'd like to check out, please.' 更自然且有禮貌。"},
+    {detect:["my key not work","key card not working","i cannot open door","room key broken"], original:"My room key don't work.", corrected:"My room key doesn't work.", natural:"Excuse me, my key card doesn't seem to be working. Could you help me?", grammar:"主詞為第三人稱單數（my room key）時，現在簡單式否定句要使用 'doesn't'，後面的動詞使用原形 'work'。使用 'doesn't seem to be working' 可以更委婉地描述問題。"}
+  ]
+};
+
+/* ---------- 查單字：離線字典（第一層，保證可用）＋ 外部免費API（第二、三層，在claude.ai發布頁面上通常會被CSP擋下） ---------- */
+const LOCAL_DICTIONARY = {
+  menu:{phonetic:"/ˈmɛnjuː/", meaning:"菜單", example:"Could I have a look at the menu, please?"},
+  reservation:{phonetic:"/ˌrɛzɚˈveɪʃən/", meaning:"預約；訂位", example:"I have a reservation under my name."},
+  recommend:{phonetic:"/ˌrɛkəˈmɛnd/", meaning:"推薦", example:"What do you recommend here?"},
+  appetizer:{phonetic:"/ˈæpɪˌtaɪzɚ/", meaning:"開胃菜", example:"We'd like to start with an appetizer."},
+  "main course":{phonetic:"/meɪn kɔːrs/", meaning:"主餐", example:"What would you like for your main course?"},
+  medium:{phonetic:"/ˈmiːdiəm/", meaning:"（牛排）五分熟", example:"Medium, please."},
+  "well-done":{phonetic:"/wɛl dʌn/", meaning:"（牛排）全熟", example:"I'd like it well-done, please."},
+  rare:{phonetic:"/rɛr/", meaning:"（牛排）一分熟", example:"Rare, please."},
+  bill:{phonetic:"/bɪl/", meaning:"帳單", example:"Could we get the bill, please?"},
+  tip:{phonetic:"/tɪp/", meaning:"小費", example:"Is the tip included?"},
+  receipt:{phonetic:"/rɪˈsiːt/", meaning:"收據", example:"Could I have a receipt, please?"},
+  passport:{phonetic:"/ˈpæspɔːrt/", meaning:"護照", example:"Here is my passport."},
+  declare:{phonetic:"/dɪˈklɛr/", meaning:"申報（海關）", example:"I have nothing to declare."},
+  customs:{phonetic:"/ˈkʌstəmz/", meaning:"海關", example:"Please go through customs this way."},
+  "baggage claim":{phonetic:"/ˈbæɡɪdʒ kleɪm/", meaning:"行李提領處", example:"Where is the baggage claim area?"},
+  "boarding pass":{phonetic:"/ˈbɔːrdɪŋ pæs/", meaning:"登機證", example:"Here is my boarding pass."},
+  departure:{phonetic:"/dɪˈpɑːrtʃɚ/", meaning:"出境；離境", example:"What's the departure time?"},
+  gate:{phonetic:"/ɡeɪt/", meaning:"登機門", example:"Which gate is my flight at?"},
+  luggage:{phonetic:"/ˈlʌɡɪdʒ/", meaning:"行李", example:"I have two pieces of luggage."},
+  visa:{phonetic:"/ˈviːzə/", meaning:"簽證", example:"Do I need a visa for this trip?"},
+  "check-in":{phonetic:"/tʃɛk ɪn/", meaning:"報到；（飯店）入住", example:"I'd like to check in, please."},
+  "check-out":{phonetic:"/tʃɛk aʊt/", meaning:"（飯店）退房", example:"What time is check-out?"},
+  lobby:{phonetic:"/ˈlɑːbi/", meaning:"（飯店）大廳", example:"Breakfast is served in the lobby."},
+  amenities:{phonetic:"/əˈmiːnətiz/", meaning:"（飯店）設施", example:"What amenities does the hotel have?"},
+  breakfast:{phonetic:"/ˈbrɛkfəst/", meaning:"早餐", example:"Is breakfast included in my room rate?"},
+  "wi-fi":{phonetic:"/ˈwaɪfaɪ/", meaning:"無線網路", example:"Is Wi-Fi free in the hotel?"},
+  deposit:{phonetic:"/dɪˈpɑːzɪt/", meaning:"押金", example:"Is a deposit required?"},
+  refund:{phonetic:"/ˈriːfʌnd/", meaning:"退款", example:"Can I get a refund for this?"},
+  discount:{phonetic:"/ˈdɪskaʊnt/", meaning:"折扣", example:"Is there a discount for students?"},
+  "fitting room":{phonetic:"/ˈfɪtɪŋ ruːm/", meaning:"試衣間", example:"Where is the fitting room?"},
+  directions:{phonetic:"/dəˈrɛkʃənz/", meaning:"方向；路線指引", example:"Could you give me directions to the station?"},
+  shuttle:{phonetic:"/ˈʃʌtəl/", meaning:"接駁車", example:"Does the hotel have a shuttle service?"},
+  fare:{phonetic:"/fɛr/", meaning:"車資；票價", example:"What's the fare to the airport?"},
+  itinerary:{phonetic:"/aɪˈtɪnəˌrɛri/", meaning:"行程表", example:"Here is our travel itinerary."},
+  meal:{phonetic:"/miːl/", meaning:"一餐；餐點", example:"Enjoy your meal!"},
+  order:{phonetic:"/ˈɔːrdɚ/", meaning:"點餐；訂單", example:"Are you ready to order?"},
+  dish:{phonetic:"/dɪʃ/", meaning:"（一道）菜", example:"What's the most popular dish here?"},
+  waiter:{phonetic:"/ˈweɪtɚ/", meaning:"（男）服務生", example:"The waiter brought our food quickly."},
+  waitress:{phonetic:"/ˈweɪtrəs/", meaning:"（女）服務生", example:"The waitress recommended the lasagna."},
+  spicy:{phonetic:"/ˈspaɪsi/", meaning:"辣的", example:"Is this dish spicy?"},
+  allergic:{phonetic:"/əˈlɜːrdʒɪk/", meaning:"過敏的", example:"I'm allergic to peanuts."},
+  vegetarian:{phonetic:"/ˌvɛdʒəˈtɛriən/", meaning:"素食者；素食的", example:"Do you have a vegetarian option?"},
+  takeout:{phonetic:"/ˈteɪkaʊt/", meaning:"外帶", example:"Can I get this as takeout?"},
+  portion:{phonetic:"/ˈpɔːrʃən/", meaning:"份量", example:"The portion size is quite large."},
+  flight:{phonetic:"/flaɪt/", meaning:"班機；航班", example:"My flight departs at 10 AM."},
+  layover:{phonetic:"/ˈleɪˌoʊvɚ/", meaning:"轉機；中途停留", example:"I have a two-hour layover in Tokyo."},
+  security:{phonetic:"/sɪˈkjʊrəti/", meaning:"安檢", example:"Please go through security before your gate."},
+  terminal:{phonetic:"/ˈtɜːrmɪnəl/", meaning:"航廈", example:"Which terminal is my flight in?"},
+  elevator:{phonetic:"/ˈɛləˌveɪtɚ/", meaning:"電梯", example:"The elevator is next to the lobby."},
+  towel:{phonetic:"/ˈtaʊəl/", meaning:"毛巾", example:"Could I have an extra towel, please?"},
+  housekeeping:{phonetic:"/ˈhaʊsˌkiːpɪŋ/", meaning:"（飯店）客房清潔服務", example:"I'd like to request housekeeping."},
+  upgrade:{phonetic:"/ˈʌpˌɡreɪd/", meaning:"升等", example:"Is a room upgrade available?"},
+  cash:{phonetic:"/kæʃ/", meaning:"現金", example:"Do you accept cash?"},
+  change:{phonetic:"/tʃeɪndʒ/", meaning:"零錢；找零", example:"Keep the change, please."},
+
+  /* 餐廳延伸 */
+  napkin:{phonetic:"/ˈnæpkɪn/", meaning:"餐巾紙", example:"Could I have a napkin, please?"},
+  utensil:{phonetic:"/juːˈtɛnsəl/", meaning:"餐具", example:"Could I have an extra utensil?"},
+  chopsticks:{phonetic:"/ˈtʃɑːpstɪks/", meaning:"筷子", example:"Could I have a pair of chopsticks?"},
+  dessert:{phonetic:"/dɪˈzɜːrt/", meaning:"甜點", example:"What desserts do you have?"},
+  beverage:{phonetic:"/ˈbɛvərɪdʒ/", meaning:"飲料（較正式用詞）", example:"Would you like a beverage with that?"},
+  "sparkling water":{phonetic:"/ˈspɑːrklɪŋ ˈwɔːtɚ/", meaning:"氣泡水", example:"Could I have sparkling water, please?"},
+  "still water":{phonetic:"/stɪl ˈwɔːtɚ/", meaning:"無氣泡水", example:"Still water is fine for me."},
+  allergy:{phonetic:"/ˈælɚdʒi/", meaning:"過敏（名詞）", example:"I have a seafood allergy."},
+  gluten:{phonetic:"/ˈɡluːtən/", meaning:"麩質", example:"Do you have a gluten-free option?"},
+  reserve:{phonetic:"/rɪˈzɜːrv/", meaning:"預訂（動詞）", example:"I'd like to reserve a table for two."},
+  "to go":{phonetic:"/tuː ɡoʊ/", meaning:"外帶", example:"Could I get this to go?"},
+  split:{phonetic:"/splɪt/", meaning:"分攤（帳單）", example:"Could we split the bill?"},
+  "sold out":{phonetic:"/soʊld aʊt/", meaning:"賣完了", example:"Sorry, the lasagna is sold out tonight."},
+
+  /* 機場延伸 */
+  arrival:{phonetic:"/əˈraɪvəl/", meaning:"入境；抵達", example:"What time is the arrival?"},
+  transit:{phonetic:"/ˈtrænzɪt/", meaning:"轉機；過境", example:"I'm in transit to Paris."},
+  overweight:{phonetic:"/ˈoʊvɚˌweɪt/", meaning:"（行李）超重", example:"My luggage is overweight."},
+  "carry-on":{phonetic:"/ˈkæri ɑːn/", meaning:"手提行李", example:"This is my carry-on bag."},
+  immigration:{phonetic:"/ˌɪməˈɡreɪʃən/", meaning:"入境審查", example:"Please proceed to immigration."},
+  "duty-free":{phonetic:"/ˈdjuːti friː/", meaning:"免稅（店）", example:"Is there a duty-free shop nearby?"},
+  delay:{phonetic:"/dɪˈleɪ/", meaning:"延誤", example:"My flight has been delayed."},
+  "connecting flight":{phonetic:"/kəˈnɛktɪŋ flaɪt/", meaning:"轉接班機", example:"I'll miss my connecting flight."},
+  cancel:{phonetic:"/ˈkænsəl/", meaning:"取消", example:"My flight was canceled."},
+
+  /* 飯店延伸 */
+  "front desk":{phonetic:"/frʌnt dɛsk/", meaning:"櫃檯", example:"Please contact the front desk."},
+  "room service":{phonetic:"/ruːm ˈsɜːrvɪs/", meaning:"客房服務", example:"I'd like to order room service."},
+  "wake-up call":{phonetic:"/weɪk ʌp kɔːl/", meaning:"喚醒服務", example:"Could I get a wake-up call at 7?"},
+  laundry:{phonetic:"/ˈlɔːndri/", meaning:"洗衣服務", example:"Does the hotel offer laundry service?"},
+  "do not disturb":{phonetic:"/duː nɑːt dɪˈstɜːrb/", meaning:"請勿打擾", example:"I put up the do not disturb sign."},
+  "key card":{phonetic:"/kiː kɑːrd/", meaning:"房卡", example:"My key card isn't working."},
+  complimentary:{phonetic:"/ˌkɑːmplɪˈmɛntəri/", meaning:"免費附贈的", example:"Breakfast is complimentary."},
+  "late checkout":{phonetic:"/leɪt ˈtʃɛkaʊt/", meaning:"延遲退房", example:"Could I get a late checkout?"},
+
+  /* 購物延伸 */
+  "price tag":{phonetic:"/praɪs tæɡ/", meaning:"價格標籤", example:"The price tag is missing."},
+  exchange:{phonetic:"/ɪksˈtʃeɪndʒ/", meaning:"換貨；兌換", example:"Can I exchange this for a different size?"},
+  "on sale":{phonetic:"/ɑːn seɪl/", meaning:"特價中", example:"Is this item on sale?"},
+  warranty:{phonetic:"/ˈwɔːrənti/", meaning:"保固", example:"Does this come with a warranty?"},
+  cashier:{phonetic:"/kæˈʃɪr/", meaning:"收銀員", example:"Please pay at the cashier."},
+
+  /* 問路延伸 */
+  intersection:{phonetic:"/ˌɪntɚˈsɛkʃən/", meaning:"十字路口", example:"Turn left at the next intersection."},
+  crosswalk:{phonetic:"/ˈkrɔːswɔːk/", meaning:"斑馬線", example:"Use the crosswalk to cross the street."},
+  roundabout:{phonetic:"/ˈraʊndəˌbaʊt/", meaning:"圓環", example:"Go straight through the roundabout."},
+  "one-way":{phonetic:"/wʌn weɪ/", meaning:"單行道", example:"This is a one-way street."},
+  landmark:{phonetic:"/ˈlændˌmɑːrk/", meaning:"地標", example:"The clock tower is a famous landmark here."},
+
+  /* 旅途應急延伸：交通延誤、水土不服、費用確認 */
+  traffic:{phonetic:"/ˈtræfɪk/", meaning:"交通；車流", example:"There is heavy traffic on the way to Seminyak."},
+  charge:{phonetic:"/tʃɑːrdʒ/", meaning:"費用；收費", example:"Is the toll charge included in our rental price?"},
+  confirm:{phonetic:"/kənˈfɜːrm/", meaning:"確認", example:"I would like to confirm my table reservation for tonight."},
+  stomachache:{phonetic:"/ˈstʌməkˌeɪk/", meaning:"胃痛；肚子痛", example:"I have a slight stomachache, do you have any medicine?"},
+  "mineral water":{phonetic:"/ˈmɪnərəl ˈwɔːtɚ/", meaning:"瓶裝礦泉水（出國避免生水建議用）", example:"Please make sure to use bottled mineral water."},
+  "ice cubes":{phonetic:"/aɪs kjuːbz/", meaning:"冰塊", example:"Could you please hold the ice cubes in my drink?"},
+  "tap water":{phonetic:"/tæp ˈwɔːtɚ/", meaning:"自來水（部分地區不可生飲）", example:"Is it safe to brush my teeth with tap water?"},
+  "traffic jam":{phonetic:"/ˈtræfɪk dʒæm/", meaning:"塞車", example:"We might be late due to the heavy traffic jam."},
+  detour:{phonetic:"/ˈdiːtʊr/", meaning:"改道；繞路", example:"Can we take a detour to avoid this traffic?"},
+  "luggage storage":{phonetic:"/ˈlʌɡɪdʒ ˈstɔːrɪdʒ/", meaning:"行李寄存", example:"Can we leave our luggage at storage after check-out?"}
+};
+
+function lookupLocalDictionary(word){
+  const key = word.trim().toLowerCase();
+  return LOCAL_DICTIONARY[key] || null;
+}
+
+// 外部 fetch 共用：加上逾時中止，避免被 CSP 擋下或網路異常時請求一直掛著不回應，導致查詢畫面卡死
+function fetchWithTimeout(url, ms){
+  const controller = new AbortController();
+  const timer = setTimeout(()=>controller.abort(), ms);
+  return fetch(url, {signal: controller.signal}).finally(()=>clearTimeout(timer));
+}
+
+// 通用逾時保護：包住任何 Promise，如果它遲遲不 resolve 也不 reject（例如 AI 呼叫卡住沒有回應），
+// 逾時後強制視為失敗，讓後續的 catch/本地備援邏輯能正常接手，不會讓畫面永遠停在「請稍候...」
+function withTimeout(promise, ms){
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(()=> reject(new Error("timeout")), ms))
+  ]);
+}
+
+// 第二層：Free Dictionary API（在 claude.ai 發布頁面上通常會被 CSP 擋下，fetch 會直接失敗，由 catch 接住）
+async function lookupFreeDictionaryApi(word){
+  const res = await fetchWithTimeout(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`, 4000);
+  if(!res.ok) throw new Error("not found");
+  const data = await res.json();
+  const entry = data[0];
+  const meaningObj = entry.meanings && entry.meanings[0];
+  const def = meaningObj && meaningObj.definitions && meaningObj.definitions[0];
+  if(!def) throw new Error("no definition");
+  return {
+    phonetic: entry.phonetic || (entry.phonetics && entry.phonetics.find(p=>p.text)?.text) || "",
+    meaning: def.definition,
+    example: def.example || "",
+    source: "Free Dictionary API"
+  };
+}
+
+// 第三層：Datamuse（只給拼字／相似字建議，不是真正的字義；在 claude.ai 發布頁面上同樣通常會被 CSP 擋下）
+async function lookupDatamuseSuggestions(word){
+  const res = await fetchWithTimeout(`https://api.datamuse.com/words?sp=${encodeURIComponent(word)}&max=5`, 4000);
+  if(!res.ok) throw new Error("request failed");
+  const data = await res.json();
+  if(!data.length) throw new Error("no suggestions");
+  return data.map(d=>d.word);
+}
+
+async function lookupWord(word){
+  const local = lookupLocalDictionary(word);
+  if(local) return {tier:1, ...local};
+
+  try{
+    const r = await lookupFreeDictionaryApi(word);
+    return {tier:2, ...r};
+  }catch(e){ /* CSP 或查無此字，往下一層 */ }
+
+  try{
+    const suggestions = await lookupDatamuseSuggestions(word);
+    return {tier:3, suggestions};
+  }catch(e){ /* CSP 或查無建議 */ }
+
+  return {tier:0};
+}
+
+function openWordModal(){
+  const overlay = document.createElement("div");
+  overlay.className = "word-overlay";
+  overlay.id = "wordOverlay";
+  overlay.innerHTML = `
+    <div class="word-modal">
+      <div class="word-modal-row">
+        <input type="text" id="wordInput" placeholder="輸入想查詢的英文單字...">
+        <button class="btn btn-accent" id="wordSearchBtn">查詢</button>
+      </div>
+      <div id="wordResultArea"></div>
+      <button class="btn btn-ghost" id="wordCloseBtn" style="margin-top:12px;width:100%">關閉</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener("click", (e)=>{ if(e.target === overlay) closeWordModal(); });
+  document.getElementById("wordCloseBtn").onclick = closeWordModal;
+  document.getElementById("wordSearchBtn").onclick = doWordSearch;
+  document.getElementById("wordInput").addEventListener("keydown", e=>{ if(e.key==="Enter") doWordSearch(); });
+  document.getElementById("wordInput").focus();
+}
+let wordSearchToken = 0; // 每次開始新查詢就遞增，讓關閉視窗後／連續查詢時，過期的結果自動被放棄
+function closeWordModal(){
+  wordSearchToken++; // 視窗關閉時讓任何還在進行中的查詢失效
+  const overlay = document.getElementById("wordOverlay");
+  if(overlay) overlay.remove();
+}
+async function doWordSearch(){
+  const input = document.getElementById("wordInput");
+  const word = input.value.trim();
+  if(!word) return;
+  const myToken = ++wordSearchToken; // 新查詢開始：讓同一個視窗內更早發起、還沒回來的查詢自動作廢
+  const area = document.getElementById("wordResultArea");
+  area.innerHTML = `<div class="word-result">查詢中...</div>`;
+  const result = await lookupWord(word);
+  if(myToken !== wordSearchToken || !document.getElementById("wordOverlay")) return; // 已經是過期查詢，或視窗已關閉，直接放棄
+  if(result.tier === 1 || result.tier === 2){
+    area.innerHTML = `
+      <div class="word-result">
+        <div class="hw">${word} <button class="btn-ghost btn" style="padding:4px 8px;font-size:11px" id="wordSpkBtn">🔊</button></div>
+        ${result.phonetic ? `<div class="ph">${result.phonetic}</div>` : ""}
+        <div>${result.meaning}</div>
+        ${result.example ? `<div style="color:var(--sub);margin-top:6px">例句：${result.example}</div>` : ""}
+        <div class="word-source">${result.tier === 1 ? "離線字典（本地資料）" : "線上來源：" + result.source}</div>
+      </div>`;
+    document.getElementById("wordSpkBtn").onclick = ()=>speak(word);
+  } else if(result.tier === 3){
+    area.innerHTML = `
+      <div class="word-result">
+        查無完整字義，你是不是要找：<br>
+        ${result.suggestions.map(s=>`<span class="btn-ghost btn" style="display:inline-block;margin:4px 4px 0 0;padding:4px 10px;font-size:12px;cursor:pointer" data-sugg="${s}">${s}</span>`).join("")}
+      </div>`;
+    area.querySelectorAll("[data-sugg]").forEach(el=>{
+      el.onclick = ()=>{ document.getElementById("wordInput").value = el.dataset.sugg; doWordSearch(); };
+    });
+  } else {
+    area.innerHTML = `<div class="word-result">查無此單字，可參考下方情境提示句，或換個拼法再試一次。</div>`;
+  }
+}
+
+/* ---------- 旅途應急萬用短句（適用塞車延誤、額外費用確認、聽不懂時放慢速度、尋求協助等突發狀況） ---------- */
+const EMERGENCY_PHRASES = [
+  {en:"How long do you think it will take?", zh:"你覺得大概需要多久時間？（適用於車程、活動等待）"},
+  {en:"Is there an extra charge?", zh:"請問這有包含額外費用嗎？（適用於包車、加購項目）"},
+  {en:"Could you speak a little more slowly, please?", zh:"請可以說慢一點嗎？（適用於聽不懂當地人英文時）"},
+  {en:"Could you help us, please?", zh:"可以請幫幫我們嗎？（適用於尋求協助或突發狀況）"},
+  {en:"Could you confirm that for me?", zh:"可以幫我確認一下這個嗎？（適用於出示預約信、手機畫面、地址）"}
+];
+
+function openEmergencyModal(){
+  const overlay = document.createElement("div");
+  overlay.className = "word-overlay";
+  overlay.id = "emergencyOverlay";
+  overlay.innerHTML = `
+    <div class="word-modal">
+      <div class="hw" style="margin-bottom:12px">🆘 旅途應急萬用短句</div>
+      ${EMERGENCY_PHRASES.map((p,i) => `
+        <div class="word-result" style="margin-bottom:10px">
+          <div style="font-size:16px;font-weight:600">${p.en} <button class="btn-ghost btn" style="padding:4px 8px;font-size:11px" data-emspeak="${i}">🔊</button></div>
+          <div style="color:var(--sub);margin-top:4px">${p.zh}</div>
+        </div>`).join("")}
+      <button class="btn btn-ghost" id="emergencyCloseBtn" style="margin-top:4px;width:100%">關閉</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener("click", (e)=>{ if(e.target === overlay) closeEmergencyModal(); });
+  document.getElementById("emergencyCloseBtn").onclick = closeEmergencyModal;
+  overlay.querySelectorAll("[data-emspeak]").forEach(btn=>{
+    btn.onclick = ()=> speak(EMERGENCY_PHRASES[parseInt(btn.dataset.emspeak)].en);
+  });
+}
+function closeEmergencyModal(){
+  const overlay = document.getElementById("emergencyOverlay");
+  if(overlay) overlay.remove();
+}
+
+const SCENARIOS = [
+  {title:"機場報到 Check-in at the Airport", zh:"你抵達機場櫃檯準備報到", dynamic:{
+    aiOpening: AIRPORT_SCRIPT.PASSPORT.fallback[0].en,
+    correctionKey: "airport",
+    stagedEngine: true,
+    startStage: "PASSPORT",
+    script: AIRPORT_SCRIPT,
+    resolveTransition: resolveAirportTransition,
+    validateInput: validateAirportInput,
+    identifyIntent: identifyAirportIntent,
+    hintsByStage: AIRPORT_HINTS_BY_STAGE,
+    completionNote: "完成整個入境報到流程後會自動結束並產生學習報告"
+  }, turns:[
+    {npc:"Good morning! Can I see your passport and boarding pass, please?", zh:"早安！可以看一下您的護照和登機證嗎？", hint:"Sure, here you go."},
+    {npc:"Do you have any bags to check in today?", zh:"今天有行李要托運嗎？", hint:"Yes, just this one suitcase."},
+    {npc:"Would you like a window seat or an aisle seat?", zh:"您想要靠窗還是靠走道的位置？", hint:"A window seat, please."},
+    {npc:"Great, here's your boarding pass. Have a nice flight!", zh:"好的，這是您的登機證。祝您旅途愉快！", hint:"Thank you very much!"},
+  ]},
+  {title:"飯店入住 Hotel Check-in", zh:"你到飯店櫃檯辦理入住", dynamic:{
+    aiOpening: HOTEL_SCRIPT.CHECKIN.fallback[0].en,
+    correctionKey: "hotel",
+    stagedEngine: true,
+    startStage: "CHECKIN",
+    script: HOTEL_SCRIPT,
+    resolveTransition: resolveHotelTransition,
+    validateInput: validateHotelInput,
+    identifyIntent: identifyHotelIntent,
+    hintsByStage: HOTEL_HINTS_BY_STAGE,
+    completionNote: "完成整個入住流程後會自動結束並產生學習報告"
+  }, turns:[
+    {npc:"Welcome! Do you have a reservation with us?", zh:"歡迎光臨！請問有預約嗎？", hint:"Yes, under the name Chen."},
+    {npc:"Would you prefer a city view or a sea view room?", zh:"您想要市景房還是海景房？", hint:"Sea view, please, if it's available."},
+    {npc:"Breakfast is served from 7 to 10 in the lobby. Anything else I can help with?", zh:"早餐供應時間是早上7點到10點，在大廳。還有其他需要嗎？", hint:"Could I get a late check-out tomorrow?"},
+    {npc:"Of course, 1 p.m. works. Enjoy your stay!", zh:"沒問題，下午1點可以。祝您住宿愉快！", hint:"Thank you so much!"},
+  ]},
+  {title:"餐廳點餐 Ordering at a Restaurant", zh:"你坐在餐廳準備點餐", dynamic:{
+    aiOpening: RESTAURANT_SCRIPT.WELCOME.fallback[0].en,
+    userHints: RESTAURANT_DATA.userHints,
+    correctionKey: "restaurant",
+    stagedEngine: true,
+    startStage: "WELCOME",
+    script: RESTAURANT_SCRIPT,
+    resolveTransition: resolveRestaurantTransition,
+    validateInput: validateRestaurantInput,
+    identifyIntent: identifyRestaurantIntent,
+    hintsByStage: RESTAURANT_HINTS_BY_STAGE,
+    completionNote: "完成整個點餐流程後會自動結束並產生學習報告"
+  }, turns:[
+    {npc:"Hi there! Are you ready to order, or do you need more time?", zh:"您好！準備好點餐了嗎，還是需要多一點時間？", hint:"I'm ready. I'd like the grilled salmon, please."},
+    {npc:"Great choice! How would you like that cooked, and any sides?", zh:"很好的選擇！請問要幾分熟？要加點配菜嗎？", hint:"Medium, please, with a side salad."},
+    {npc:"Anything to drink with that?", zh:"要搭配什麼飲料嗎？", hint:"Just water, please."},
+    {npc:"Perfect, I'll have that right out for you.", zh:"好的，餐點馬上為您準備。", hint:"Thank you!"},
+  ]},
+  {title:"路上問路 Asking for Directions", zh:"你在路上想找火車站", dynamic:{
+    aiOpening: DIRECTIONS_SCRIPT.ASK.fallback[0].en,
+    correctionKey: "directions",
+    stagedEngine: true,
+    startStage: "ASK",
+    script: DIRECTIONS_SCRIPT,
+    resolveTransition: resolveDirectionsTransition,
+    validateInput: validateDirectionsInput,
+    identifyIntent: identifyDirectionsIntent,
+    hintsByStage: DIRECTIONS_HINTS_BY_STAGE,
+    completionNote: "完成整個問路流程後會自動結束並產生學習報告"
+  }, turns:[
+    {npc:"Hi, you look a little lost. Can I help you with something?", zh:"嗨，你看起來有點迷路，需要幫忙嗎？", hint:"Yes, could you tell me how to get to the train station?"},
+    {npc:"Sure! Go straight for two blocks, then turn left at the light.", zh:"沒問題！直走兩個街區，然後在紅綠燈左轉。", hint:"How long does it take on foot?"},
+    {npc:"About ten minutes. You'll see the station sign right away.", zh:"大約十分鐘，你會馬上看到車站的標誌。", hint:"Great, thank you so much for your help!"},
+    {npc:"No problem, have a safe trip!", zh:"不客氣，祝你旅途平安！", hint:"Thanks, you too!"},
+  ]},
+  {title:"商店購物 Shopping", zh:"你在服飾店想買一件外套", dynamic:{
+    aiOpening: SHOPPING_SCRIPT.GREETING.fallback[0].en,
+    correctionKey: "shopping",
+    stagedEngine: true,
+    startStage: "GREETING",
+    script: SHOPPING_SCRIPT,
+    resolveTransition: resolveShoppingTransition,
+    validateInput: validateShoppingInput,
+    identifyIntent: identifyShoppingIntent,
+    hintsByStage: SHOPPING_HINTS_BY_STAGE,
+    completionNote: "完成整個購物流程後會自動結束並產生學習報告"
+  }, turns:[
+    {npc:"Hi! Let me know if you need any help finding something.", zh:"您好！需要找什麼都可以跟我說。", hint:"Thanks, I'm looking for a jacket."},
+    {npc:"We have a few styles over here. Do you know your size?", zh:"我們這邊有幾款，您知道自己的尺寸嗎？", hint:"I think medium, but may I try it on?"},
+    {npc:"Of course, the fitting room is right over there.", zh:"當然，試衣間就在那邊。", hint:"Is this jacket on sale?"},
+    {npc:"Yes, it's 20% off today.", zh:"有的，今天打八折。", hint:"Great, I'll take it."},
+  ]},
+];
+
+function dayIndex(n){
+  const d = new Date();
+  const start = new Date(d.getFullYear(),0,0);
+  const diff = d - start;
+  const doy = Math.floor(diff / 86400000);
+  return doy % n;
+}
+let activeIdx = dayIndex(SCENARIOS.length);
+let today = SCENARIOS[activeIdx];
+
+// 每次切換情境或重新開始練習都會遞增，讓切換前尚未完成的非同步回覆（AI生成、評分…）
+// 可以在拿到結果時自行比對，發現已經過期就直接放棄寫入畫面，不會覆蓋到新情境的狀態
+let sessionToken = 0;
+
+// AI 開關：關閉時完全不呼叫 claude.use("sample")，全程走本地規則＋本地文法範本，不消耗任何額度
+let aiEnabled = true;
+try{ const saved = localStorage.getItem("travel_ai_enabled"); if(saved !== null) aiEnabled = saved === "1"; }catch(e){}
+function setAiEnabled(v){
+  aiEnabled = v;
+  try{ localStorage.setItem("travel_ai_enabled", v ? "1" : "0"); }catch(e){}
+  renderAiToggle();
+}
+function renderAiToggle(){
+  const el = document.getElementById("aiToggle");
+  if(!el) return;
+  el.innerHTML = aiEnabled
+    ? `🤖 AI 模式（會消耗額度）<button class="btn btn-ghost" id="aiToggleBtn" style="margin-left:8px;padding:4px 10px;font-size:12px">切換成本地練習</button>`
+    : `📴 本地練習模式（完全免費，不呼叫 AI）<button class="btn btn-ghost" id="aiToggleBtn" style="margin-left:8px;padding:4px 10px;font-size:12px">切換成 AI 模式</button>`;
+  document.getElementById("aiToggleBtn").onclick = ()=> setAiEnabled(!aiEnabled);
+}
+
+// 聽力練習模式：隱藏對話框裡 AI 台詞的文字（模糊處理），逼自己先靠🔊聽懂再回答，更貼近真實情境；點一下該句可單獨看文字
+let hideTextMode = false;
+try{ const savedHide = localStorage.getItem("travel_hide_text"); if(savedHide !== null) hideTextMode = savedHide === "1"; }catch(e){}
+let revealedSet = new Set(); // 記錄這一輪對話裡，使用者已經點開看過文字的訊息索引
+function setHideTextMode(v){
+  hideTextMode = v;
+  try{ localStorage.setItem("travel_hide_text", v ? "1" : "0"); }catch(e){}
+  renderHideToggle();
+  renderDynamicChat();
+}
+function renderHideToggle(){
+  const el = document.getElementById("hideTextToggle");
+  if(!el) return;
+  el.innerHTML = hideTextMode
+    ? `🙈 聽力練習模式（文字已隱藏）<button class="btn btn-ghost" id="hideTextBtn" style="margin-left:8px;padding:4px 10px;font-size:12px">顯示文字</button>`
+    : `👁️ 文字顯示中<button class="btn btn-ghost" id="hideTextBtn" style="margin-left:8px;padding:4px 10px;font-size:12px">切換成聽力練習</button>`;
+  document.getElementById("hideTextBtn").onclick = ()=> setHideTextMode(!hideTextMode);
+}
+// 依目前是否為聽力模式、該句是否已被點開過，回傳要渲染的文字 HTML
+function renderBubbleText(idx, text){
+  if(!hideTextMode || revealedSet.has(idx)) return text;
+  return `<span class="blur-wrap" data-reveal="${idx}"><span class="blur-text">${text}</span><span class="blur-hint">👁 點一下看文字</span></span>`;
+}
+function bindRevealHandlers(container){
+  if(!hideTextMode) return;
+  container.querySelectorAll("[data-reveal]").forEach(el=>{
+    el.onclick = ()=>{ revealedSet.add(parseInt(el.dataset.reveal)); renderDynamicChat(); };
+  });
+}
+
+// 熔斷機制：AI連續失敗（逾時、額度用盡、網路斷線…）達到門檻時，自動切回本地模式並明確告知，
+// 不讓整個App卡在「每句都要先等AI失敗才降級」的狀態。只要有一次成功就會重置計數。
+let aiFailureStreak = 0;
+const AI_CIRCUIT_BREAKER_THRESHOLD = 3;
+function reportAiSuccess(){ aiFailureStreak = 0; }
+function reportAiFailure(){
+  if(!aiEnabled) return; // 本地模式下本來就不會呼叫AI，不用計入
+  aiFailureStreak++;
+  if(aiFailureStreak >= AI_CIRCUIT_BREAKER_THRESHOLD){
+    aiFailureStreak = 0;
+    setAiEnabled(false);
+    const area = document.getElementById("endReminder") || document.getElementById("hintArea");
+    if(area) area.innerHTML = `<div class="hint-box" style="border-color:var(--bad);color:var(--bad)">⚠️ AI 連續多次無法使用（可能逾時、額度用盡或網路問題），已自動切換成本地練習模式，對話可以繼續進行。你可以隨時在上方切回 AI 模式再試一次。</div>` + (area.innerHTML||"");
+  }
+}
+
+function updateBanner(){
+  document.getElementById("scTitle").textContent = today.title;
+  document.getElementById("scZh").textContent = today.zh;
+}
+function renderPicker(){
+  document.getElementById("scenarioPicker").innerHTML = SCENARIOS.map((s,i) =>
+    `<button class="btn ${i===activeIdx?'btn-accent':'btn-ghost'}" style="flex:1;font-size:11px;padding:7px 4px" data-i="${i}">${s.title.split(" ")[0]}</button>`
+  ).join("");
+  document.querySelectorAll("#scenarioPicker [data-i]").forEach(b=>{
+    b.onclick = ()=>{
+      stopMicSafely();
+      sessionToken++; // 切換情境：讓任何舊情境尚在進行中的非同步呼叫自動失效
+      activeIdx = parseInt(b.dataset.i);
+      today = SCENARIOS[activeIdx];
+      shadowIdx = 0; // 重設跟讀測驗目標，避免殘留上一情境的進度
+      updateBanner(); renderPicker(); showStartGate();
+    };
+  });
+}
+function showStartGate(){
+  chatPane.innerHTML = `<div class="shadow-card">
+    <div class="shadow-line" style="font-size:15px">準備好練習「${today.title}」了嗎？</div>
+    <div class="shadow-zh">${today.zh}</div>
+    <button class="btn btn-accent" id="startBtn" style="width:100%;margin-top:10px">▶ 開始今日練習</button>
+  </div>`;
+  document.getElementById("startBtn").onclick = startPractice;
+}
+function primeSpeech(){
+  // 在使用者點擊的當下、同步地發一個幾乎無聲的語音請求，先「解鎖」語音合成權限，
+  // 避免之後真正要念出開場白時，因為中間經過了打字動效的延遲，被瀏覽器判定不是使用者直接觸發而靜音失敗
+  try{
+    if(!window.speechSynthesis) return;
+    const u = new SpeechSynthesisUtterance(" ");
+    u.volume = 0;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+function startPractice(){
+  stopMicSafely();
+  primeSpeech();
+  sessionToken++; // 重新開始：同樣讓舊的非同步呼叫失效
+  step = 0; log = [];
+  if(today.dynamic){ initDynamic(); } else { renderChat(); }
+}
+updateBanner();
+renderAiToggle();
+renderHideToggle();
+
+/* ---------- 學習紀錄 ---------- */
+const REC_KEY = "travel_conv_record_v1";
+function todayStr(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function loadRecord(){
+  try{
+    const raw = localStorage.getItem(REC_KEY);
+    return raw ? JSON.parse(raw) : {streak:0, lastDate:null, totalDays:0, history:[]};
+  }catch(e){ return {streak:0, lastDate:null, totalDays:0, history:[]}; }
+}
+function saveRecord(r){ try{ localStorage.setItem(REC_KEY, JSON.stringify(r)); }catch(e){} }
+function recordPractice(score, scenarioTitle){
+  const r = loadRecord();
+  const t = todayStr();
+  if(r.lastDate !== t){
+    const yest = new Date(); yest.setDate(yest.getDate()-1);
+    const yestStr = yest.getFullYear()+"-"+String(yest.getMonth()+1).padStart(2,"0")+"-"+String(yest.getDate()).padStart(2,"0");
+    r.streak = (r.lastDate === yestStr) ? r.streak + 1 : 1;
+    r.totalDays = r.totalDays + 1;
+    r.lastDate = t;
+  }
+  r.history.unshift({date:t, score, title:scenarioTitle});
+  r.history = r.history.slice(0, 30);
+  saveRecord(r);
+}
+function renderStats(){
+  const r = loadRecord();
+  const pane = document.getElementById("statsPane");
+  const avg = r.history.length ? Math.round(r.history.reduce((a,h)=>a+(parseInt(h.score)||0),0)/r.history.length) : 0;
+  let html = `<div class="stat-grid">
+    <div class="stat-box"><div class="stat-num">🔥 ${r.streak}</div><div class="stat-label">連續天數</div></div>
+    <div class="stat-box"><div class="stat-num">${r.totalDays}</div><div class="stat-label">累積練習天數</div></div>
+    <div class="stat-box"><div class="stat-num">${avg||"-"}</div><div class="stat-label">平均分數（近30次）</div></div>
+    <div class="stat-box"><div class="stat-num">${r.history.length}</div><div class="stat-label">總對話評分次數</div></div>
+  </div>`;
+  if(r.history.length === 0){
+    html += `<div class="empty-state">還沒有紀錄，完成一輪「每日對話」並取得 AI 評分後，這裡就會開始累積 📈</div>`;
+  } else {
+    html += r.history.map(h => `<div class="hist-item"><div>${h.title}<div class="hist-date">${h.date}</div></div><div class="hist-score">${h.score}/100</div></div>`).join("");
+  }
+  pane.innerHTML = html;
+}
+
+/* ---------- 對話模式 ---------- */
+let step = 0;
+let log = []; // {npc, zh, userAnswer}
+const chatPane = document.getElementById("chatPane");
+
+let preferredSpeechRate = 1;
+let preferredEnglishVoice = null;
+// 跟讀測驗可切換的英語播放口音。實際可用聲音取決於手機／瀏覽器已安裝的語音。
+let selectedShadowAccent = "en-US";
+const SHADOW_ACCENTS = {
+  "en-US": {label:"美式英語", short:"美式", flag:"🇺🇸"},
+  "en-GB": {label:"英式英語", short:"英式", flag:"🇬🇧"},
+  "en-AU": {label:"澳洲英語", short:"澳式", flag:"🇦🇺"}
+};
+function getSpeechVoices(){
+  if(!window.speechSynthesis) return [];
+  return window.speechSynthesis.getVoices() || [];
+}
+function findEnglishVoice(locale){
+  const voices = getSpeechVoices();
+  return voices.find(v => String(v.lang).toLowerCase() === locale.toLowerCase()) || null;
+}
+function refreshSpeechVoices(){
+  const voices = getSpeechVoices();
+  preferredEnglishVoice = voices.find(v => /^en-US$/i.test(v.lang)) ||
+    voices.find(v => /^en-/i.test(v.lang)) || null;
+  document.querySelectorAll("[data-shadow-accent-status]").forEach(el=>{
+    const locale = selectedShadowAccent;
+    const exact = findEnglishVoice(locale);
+    el.textContent = exact
+      ? `目前可用：${SHADOW_ACCENTS[locale].label}（${exact.name}）`
+      : `裝置未列出專用${SHADOW_ACCENTS[locale].label}聲音；播放效果可能由瀏覽器決定。可到手機的文字轉語音設定安裝語音。`;
+  });
+}
+if(window.speechSynthesis){
+  refreshSpeechVoices();
+  window.speechSynthesis.addEventListener?.("voiceschanged", refreshSpeechVoices);
+}
+function renderShadowAccentControl(){
+  return `<div class="step-card" style="margin-bottom:12px">
+    <div class="step-title">🎧 聽力口音</div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <label for="shadowAccentSelect" style="font-size:13px">播放口音</label>
+      <select id="shadowAccentSelect" style="flex:1;min-width:150px;padding:9px;border-radius:9px;border:1px solid var(--border);background:var(--bg);color:var(--text)">
+        ${Object.entries(SHADOW_ACCENTS).map(([locale,a])=>`<option value="${locale}" ${locale===selectedShadowAccent?"selected":""}>${a.flag} ${a.label}</option>`).join("")}
+      </select>
+      <button class="btn btn-ghost" id="shadowAccentTest" style="padding:8px 10px">▶ 試聽</button>
+    </div>
+    <div class="note" data-shadow-accent-status>正在檢查裝置可用語音…</div>
+    <div class="note">這是瀏覽器文字轉語音，不是三段真人錄音；不同手機可選的口音可能不同。</div>
+  </div>`;
+}
+function bindShadowAccentControl(){
+  const select = document.getElementById("shadowAccentSelect");
+  const test = document.getElementById("shadowAccentTest");
+  if(select) select.onchange = ()=>{ selectedShadowAccent=select.value; refreshSpeechVoices(); };
+  if(test) test.onclick = ()=>speak("Hello! Could I see your passport, please?", 0.88, selectedShadowAccent);
+  refreshSpeechVoices();
+}
+function speak(text, rate, lang){
+  try{
+    if(!window.speechSynthesis || !window.SpeechSynthesisUtterance){
+      setVoiceStatus("此瀏覽器不支援語音播放，仍可閱讀英文文字。", true);
+      return false;
+    }
+    const cleanText = String(text || "").trim();
+    if(!cleanText) return false;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(cleanText);
+    u.lang = lang || "en-US";
+    u.rate = Math.max(0.7, Math.min(1.2, Number(rate) || preferredSpeechRate || 1));
+    if(/^en/i.test(u.lang)){
+      const localeVoice = findEnglishVoice(u.lang);
+      if(localeVoice) u.voice = localeVoice;
+      else if(!lang && preferredEnglishVoice) u.voice = preferredEnglishVoice;
+    }
+    u.onerror = (event)=>{
+      if(event && event.error !== "canceled" && event.error !== "interrupted")
+        setVoiceStatus("語音播放失敗，請再按一次播放。", true);
+    };
+    window.speechSynthesis.speak(u);
+    return true;
+  }catch(e){
+    setVoiceStatus("目前無法播放語音，請重新載入頁面後再試。", true);
+    return false;
+  }
+}
+
+function speakRepeated(text, rate, count){
+  try{
+    if(!window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+    window.speechSynthesis.cancel();
+    let remaining = Math.max(1, count || 3);
+    const playNext = ()=>{
+      if(remaining <= 0) return;
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "en-US"; u.rate = rate || 0.85;
+      if(preferredEnglishVoice) u.voice = preferredEnglishVoice;
+      u.onend = ()=>{ remaining -= 1; if(remaining > 0) playNext(); };
+      u.onerror = ()=>{ remaining = 0; };
+      window.speechSynthesis.speak(u);
+    };
+    playNext();
+  }catch(e){}
+}
+
+function renderChat(){
+  let html = `<div class="chat" id="chatLog">`;
+  log.forEach(l=>{
+    html += `<div class="bubble npc">${l.npc}<div class="zh">${l.zh}</div></div>`;
+    if(l.userAnswer) html += `<div class="bubble me">${l.userAnswer}</div>`;
+  });
+  html += `</div>`;
+
+  if(step < today.turns.length){
+    const t = today.turns[step];
+    html += `<div class="bubble npc" style="margin-bottom:10px">${t.npc} <button class="btn-ghost btn" style="padding:4px 8px;font-size:11px" id="spkBtn">🔊</button><div class="zh">${t.zh}</div></div>`;
+    html += `<div id="hintArea"></div>`;
+    html += `<div class="row">
+      <input type="text" id="ansInput" placeholder="輸入或錄音你的回答...">
+      <button class="btn btn-mic" id="micBtn">🎤</button>
+      <button class="btn btn-accent" id="sendBtn">送出</button>
+    </div>
+    <div id="voiceStatus" class="note" role="status" aria-live="polite" style="min-height:14px;text-align:left"></div>
+    <button class="btn btn-ghost" id="analyzeAnswerBtn" style="width:100%;margin-top:6px">🧠 免費分析我的回答</button>
+    <div id="answerAnalysis" aria-live="polite"></div>
+    <div class="toolrow">
+      <button class="btn btn-ghost" id="hintBtn">💡 提示句</button>
+      <button class="btn btn-ghost" id="wordLookupBtn" style="flex:0 0 auto">📖 查單字</button>
+      <button class="btn btn-ghost" id="emergencyBtn" style="flex:0 0 auto">🆘 應急短句</button>
+    </div>`;
+  } else {
+    html += `<div class="score-card" id="scoreCard">
+      <div class="loading">完成本輪對話！點下方取得 AI 評分</div>
+      <button class="btn btn-accent" id="scoreBtn" style="margin-top:10px; width:100%">🤖 取得 AI 評分</button>
+    </div>
+    <div class="toolrow"><button class="btn btn-ghost" id="restartBtn" style="width:100%">🔄 重新開始本輪</button></div>`;
+  }
+
+  chatPane.innerHTML = html;
+  const logEl = document.getElementById("chatLog");
+  if(logEl) logEl.scrollTop = logEl.scrollHeight;
+
+  if(step < today.turns.length){
+    document.getElementById("spkBtn").onclick = ()=>speak(today.turns[step].npc);
+    document.getElementById("hintBtn").onclick = ()=>{
+      document.getElementById("hintArea").innerHTML = `<div class="hint-box">💡 試試看： ${today.turns[step].hint}</div>`;
+    };
+    document.getElementById("sendBtn").onclick = submitAnswer;
+    document.getElementById("ansInput").addEventListener("keydown", e=>{ if(e.key==="Enter") submitAnswer(); });
+    document.getElementById("micBtn").onclick = toggleMic;
+    document.getElementById("analyzeAnswerBtn").onclick = ()=>analyzeLocalAnswer("ansInput", "answerAnalysis");
+    document.getElementById("wordLookupBtn").onclick = openWordModal;
+    document.getElementById("emergencyBtn").onclick = openEmergencyModal;
+  } else {
+    document.getElementById("scoreBtn").onclick = getAiScore;
+    document.getElementById("restartBtn").onclick = ()=>{ step=0; log=[]; renderChat(); };
+  }
+}
+
+function submitAnswer(){
+  const input = document.getElementById("ansInput");
+  const val = input.value.trim();
+  if(!val) return;
+  const t = today.turns[step];
+  log.push({npc:t.npc, zh:t.zh, userAnswer:val});
+  step++;
+  renderChat();
+}
+
+/* ---------- 動態劇本（機場／飯店／餐廳：持續多輪對話＋使用者主動結束評分） ---------- */
+let dynHistory = []; // {from:'ai'|'user', text}
+let dynTurns = 0;      // 已完成的「有效」使用者回合數（送出訊息且成功取得AI/本地回覆才算一回合）
+let dynPhase = 'chat'; // 'chat' = 對話進行中｜'scoring' = 正在顯示/產生學習報告
+let reportRecorded = false; // 避免重新評分時重複寫入學習紀錄
+const MIN_TURNS = 6;   // 至少完成幾回合才允許開始評分（純自由對話情境適用）
+const TARGET_TURNS = 8; // 建議目標回合數（僅用於AI對話提示語氣，非強制上限）
+function curMaxTurns(){ return (today.dynamic && today.dynamic.maxTurns) || TARGET_TURNS; }
+
+// 關卡式情境（目前為餐廳）專用狀態：關卡進度完全由本地狀態機決定，AI只負責產生「符合該次跳轉語境」的回覆內容
+let stageId = null;
+let stagedCompleted = false; // 關卡式流程是否已完整走到 DONE
+let lastInputSource = "text"; // "hint"｜"voice"｜"text"：記錄這次要送出的內容從哪裡來
+let isEnding = false; // 與 isSending（防止同一回合重複送出）區分：這個是防止「結束並評分」被重複觸發
+let stagedCompletionStarted = false; // 防止關卡式情境抵達DONE的完成流程被重複處理（獨立於 reportRecorded，是更早一層的冪等保護）
+
+function initDynamic(){
+  sessionToken++;
+  dynHistory = []; dynTurns = 0; log = []; dynPhase = 'chat'; reportRecorded = false;
+  stageId = today.dynamic.stagedEngine ? today.dynamic.startStage : null;
+  stagedCompleted = false;
+  lastInputSource = "text";
+  isEnding = false;
+  stagedCompletionStarted = false;
+  fallbackStreak = 0;
+  recentAiLines = [];
+  revealedSet = new Set();
+  renderDynamicChat();
+  const openingObj = today.dynamic.stagedEngine
+    ? pickReplyVariant(today.dynamic.script[today.dynamic.startStage].fallback)
+    : {en: today.dynamic.aiOpening, zh: today.dynamic.aiOpeningZh || ""};
+  pushAiTyping({reply: openingObj.en, hint: openingObj.zh || ""});
+}
+
+// 關卡式情境抵達 DONE 的唯一完成入口（餐廳／機場共用）：具備冪等性，不論被呼叫幾次，評分流程只會真的執行一次
+async function completeStagedSession(){
+  if(stagedCompletionStarted) return;
+  stagedCompletionStarted = true;
+
+  dynPhase = 'scoring';
+  renderDynamicChat(); // 先切到評分畫面的容器（輸入框從DOM整個移除）
+
+  await runScoring(); // runScoring 內部自己負責把結果寫進 #scoreCard，這裡不需要再render一次，否則會蓋掉評分結果
+}
+
+function renderDynamicChat(){
+  let html = `<div class="chat" id="chatLog">`;
+  dynHistory.forEach((m,idx)=>{
+    html += m.from==='ai'
+      ? `<div class="bubble npc">${renderBubbleText(idx, m.text)}${m.hint && (!hideTextMode || revealedSet.has(idx)) ? `<div class="zh">💡 ${m.hint}</div>` : ""}</div>`
+      : `<div class="bubble me">${m.text}</div>`;
+  });
+  html += `</div>`;
+
+  if(dynPhase === 'chat'){
+    html += `<div id="hintArea"></div>
+    <div class="row">
+      <input type="text" id="ansInput" placeholder="輸入或錄音你的回答...">
+      <button class="btn btn-mic" id="micBtn">🎤</button>
+      <button class="btn btn-accent" id="sendBtn">送出</button>
+    </div>
+    <div id="voiceStatus" class="note" role="status" aria-live="polite" style="min-height:14px;text-align:left"></div>
+    <button class="btn btn-ghost" id="analyzeAnswerBtn" style="width:100%;margin-top:6px">🧠 免費分析我的回答</button>
+    <div id="answerAnalysis" aria-live="polite"></div>
+    <div class="toolrow">
+      <button class="btn btn-ghost" id="hintBtn">💡 提示我</button>
+      <button class="btn btn-ghost" id="wordLookupBtn" style="flex:0 0 auto">📖 查單字</button>
+      <button class="btn btn-ghost" id="emergencyBtn" style="flex:0 0 auto">🆘 應急短句</button>
+    </div>`;
+    if(today.dynamic.stagedEngine){
+      // 關卡式情境：生命週期由狀態機管理，走完整個流程才會自動結束並評分，不提供中途手動結束
+      html += `<div class="note">${today.dynamic.completionNote || "完成整個流程後會自動結束並產生學習報告"}</div>`;
+    } else {
+      html += `<div id="endReminder"></div>`;
+      if(dynTurns >= MIN_TURNS){
+        html += `<div class="hint-box" style="background:rgba(34,197,94,.12);border-color:var(--good);color:var(--good)">🎉 你已完成基礎練習！可以隨時點擊下方按鈕查看評分報告，或繼續練習。</div>`;
+      }
+      html += `<div class="toolrow">
+        <button class="btn btn-ghost" id="endScoreBtn" style="width:100%">🏁 結束對話並評分（${dynTurns}/${MIN_TURNS}）</button>
+      </div>`;
+    }
+  } else {
+    html += `<div class="score-card" id="scoreCard">
+      <div class="loading">AI 正在產生學習報告，請稍候...</div>
+    </div>`;
+  }
+
+  chatPane.innerHTML = html;
+  const logEl = document.getElementById("chatLog");
+  if(logEl) logEl.scrollTop = logEl.scrollHeight;
+  bindRevealHandlers(chatPane);
+
+  if(dynPhase === 'chat'){
+    document.getElementById("hintBtn").onclick = showDynHints;
+    document.getElementById("sendBtn").onclick = sendDynamicAnswer;
+    document.getElementById("ansInput").addEventListener("keydown", e=>{ if(e.key==="Enter") sendDynamicAnswer(); });
+    document.getElementById("ansInput").addEventListener("input", ()=>{ lastInputSource = "text"; setVoiceStatus(""); });
+    document.getElementById("micBtn").onclick = toggleMic;
+    document.getElementById("analyzeAnswerBtn").onclick = ()=>analyzeLocalAnswer("ansInput", "answerAnalysis");
+    document.getElementById("wordLookupBtn").onclick = openWordModal;
+    document.getElementById("emergencyBtn").onclick = openEmergencyModal;
+    const endBtn = document.getElementById("endScoreBtn");
+    if(endBtn) endBtn.onclick = requestEndAndScore;
+  }
+}
+
+function requestEndAndScore(){
+  if(isEnding) return; // 防止重複點擊重複觸發評分
+  const bypassMinTurns = stagedCompleted; // 結構化流程（如餐廳）已完整走完四關，視為一次完整對話，不受最低回合數限制
+  if(!bypassMinTurns && dynTurns < MIN_TURNS){
+    document.getElementById("endReminder").innerHTML =
+      `<div class="hint-box">再練習幾輪就可以查看學習報告囉！目前已完成 ${dynTurns}/${MIN_TURNS} 個有效回合。</div>`;
+    return;
+  }
+  // 同一個同步事件處理流程中立即鎖定：先設旗標，再切換畫面（畫面切換會讓輸入框/結束按鈕整個從DOM移除）
+  isEnding = true;
+  dynPhase = 'scoring';
+  renderDynamicChat();
+  runScoring();
+}
+
+function showDynHints(){
+  const hints = (today.dynamic.stagedEngine && today.dynamic.hintsByStage && today.dynamic.hintsByStage[stageId])
+    ? today.dynamic.hintsByStage[stageId]
+    : today.dynamic.userHints;
+  document.getElementById("hintArea").innerHTML =
+    `<div class="hint-box">💡 可以試試看這些句子（點一下自動填入輸入框）：</div>` +
+    hints.map((h,i) => `<div class="hint-box" style="cursor:pointer;margin-top:6px" data-hint="${i}">${h.text}<div style="opacity:.8">${h.translation}</div></div>`).join("");
+  document.querySelectorAll("[data-hint]").forEach(el=>{
+    el.onclick = ()=>{
+      document.getElementById("ansInput").value = hints[parseInt(el.dataset.hint)].text;
+      lastInputSource = "hint"; // 標記這是點擊App內建提示句填入的，送出時可跳過「完整句子」檢查
+    };
+  });
+}
+
+/* ---------- 文字正規化與關鍵字比對（修復版） ---------- */
+function normalizeText(s){
+  return (s || "").toLowerCase().trim().replace(/[.,!?;:'"()]/g, "").replace(/\s+/g, " ");
+}
+
+// 片語（含空白／連字號）用字串包含比對；單一字詞用「詞界」比對，避免 "here" 誤判到 "adhere" 這類狀況
+function matchesPhrase(norm, phrase){
+  const p = phrase.toLowerCase().trim();
+  if(p.includes(" ") || p.includes("-")){
+    return norm.includes(p) || norm.includes(p.replace(/-/g, " "));
+  }
+  const esc = p.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+  return new RegExp("\\b" + esc + "\\b").test(norm);
+}
+
+// 判斷是否為無意義輸入（單一字母、重複字母、純數字、無母音的亂碼字）
+function looksLikeGibberish(raw){
+  const norm = normalizeText(raw);
+  const words = norm.split(" ").filter(Boolean);
+  if(words.length === 0) return true;
+  if(words.length === 1){
+    const w = words[0];
+    if(w.length <= 1) return true;
+    if(/^[0-9]+$/.test(w)) return true;
+    if(/^(ii|xx|zz|qq|aa)$/.test(w)) return true;
+    if(w.length >= 3 && !/[aeiou]/.test(w)) return true;
+    if(/^(asdf|qwer|qwerty|zxcv|jkl|hjkl|asdfgh|zxcvbn)/.test(w)) return true;
+  }
+  return false;
+}
+
+// 跨所有關鍵字組比對，取「最具體（最長）」的那個匹配片語獲勝，
+// 避免像 "room"、"here"、"stay" 這類會出現在多個語境的字詞誤判意圖
+function bestIntentMatch(rules, text){
+  const norm = normalizeText(text);
+  let best = null; // {len, reply}
+  Object.keys(rules).forEach(name => {
+    if(name === "fallback") return;
+    const group = rules[name];
+    if(!group || !group.keys) return;
+    group.keys.forEach(k => {
+      if(matchesPhrase(norm, k) && (!best || k.length > best.len)){
+        best = {len: k.length, reply: group.reply};
+      }
+    });
+  });
+  return best ? best.reply : null;
+}
+
+function pickFollowUp(text){
+  const rules = today.dynamic.followUpReplies;
+  if(Array.isArray(rules)){
+    // 餐廳格式：[{keywords:[...], reply}]
+    const low = text.toLowerCase();
+    const match = rules.find(f => !f.keywords.includes("default") && f.keywords.some(k => low.includes(k)));
+    if(match) return match.reply;
+    const defaults = rules.filter(f => f.keywords.includes("default"));
+    return defaults.length ? defaults[Math.floor(Math.random()*defaults.length)].reply : "I see, got it!";
+  } else {
+    // 機場／飯店格式：{groupName:{keys:[...], reply}, ..., fallback:"..."}
+    return bestIntentMatch(rules, text) || rules.fallback || "I see, got it!";
+  }
+}
+
+// 機場／飯店在連續無法辨識意圖時使用的替代回覆與自然收尾句（避免一直重複同一句 fallback）
+const SCENARIO_FALLBACK_VARIANTS = {
+  airport: [
+    "I see. Please step forward, look at the camera, and place your right index finger on the scanner.",
+    "No problem — let's continue. Could you tell me a bit more about that?",
+    "I understand. Let's move on to the next step of your arrival."
+  ],
+  hotel: [
+    "Got it. Let me note that down for you. Is there anything else I can help you with?",
+    "Understood — let's continue. What else would you like to know?",
+    "Sure thing, I'll take care of that. Anything else?"
+  ]
+};
+const SCENARIO_NATURAL_CLOSINGS = {
+  airport: [
+    "Everything is set! Welcome and enjoy your trip!",
+    "You're all set. Have a wonderful stay!",
+    "Thank you. Enjoy your time here!"
+  ],
+  hotel: [
+    "You're all set! Enjoy your stay with us.",
+    "Is there anything else I can help you with before I let you go?",
+    "Thank you, and have a wonderful stay!"
+  ]
+};
+let fallbackStreak = 0;   // 連續沒有命中任何關鍵字意圖的次數（命中一次就重置）
+let recentAiLines = [];   // 最近講過的幾句，避免挑到一模一樣的句子
+
+function pickNonRepeating(options){
+  const pool = options.filter(o => !recentAiLines.includes(o));
+  const list = pool.length ? pool : options;
+  const picked = list[Math.floor(Math.random() * list.length)];
+  recentAiLines.push(picked);
+  if(recentAiLines.length > 4) recentAiLines.shift();
+  return picked;
+}
+
+// 餐廳關卡用：從 {en,zh} 陣列挑一句，避免跟最近講過的重複；若傳入的是單一物件（舊格式）直接原樣回傳，向下相容
+function pickReplyVariant(fallback){
+  if(!Array.isArray(fallback)) return fallback;
+  const pool = fallback.filter(f => !recentAiLines.includes(f.en));
+  const list = pool.length ? pool : fallback;
+  const picked = list[Math.floor(Math.random() * list.length)];
+  recentAiLines.push(picked.en);
+  if(recentAiLines.length > 4) recentAiLines.shift();
+  return picked;
+}
+
+// AI 不可用或呼叫失敗時的本地備援：優先用關鍵字比對給切題回覆；
+// 真的沒有命中任何意圖時，不要每次都講同一句 fallback——先換句話說，連續多次都沒命中才自然收尾（仍不代表對話結束、不會觸發評分）
+function localFallbackReply(text){
+  const rules = today.dynamic.followUpReplies;
+  if(!rules || Array.isArray(rules)){
+    return {reply: (rules ? pickFollowUp(text) : "I see, got it! Let's continue."), hint: ""};
+  }
+  const matched = bestIntentMatch(rules, text);
+  if(matched){
+    fallbackStreak = 0; // 這次真的對上關鍵字了，重置連續 fallback 計數
+    return {reply: matched, hint: ""};
+  }
+
+  fallbackStreak++;
+  const key = today.dynamic.correctionKey; // "airport" | "hotel"
+  const closings = key && SCENARIO_NATURAL_CLOSINGS[key];
+  const variants = key && SCENARIO_FALLBACK_VARIANTS[key];
+
+  let reply;
+  if(fallbackStreak >= 3 && closings){
+    reply = pickNonRepeating(closings);
+  } else if(variants){
+    reply = pickNonRepeating(variants);
+  } else {
+    reply = rules.fallback || "I see, got it! Let's continue.";
+  }
+  return {reply, hint: ""};
+}
+
+const GIBBERISH_REPLY = {
+  reply: "Sorry, I didn't quite understand that. Could you try answering in a complete sentence?",
+  hint: "我不太確定你的意思，試著用完整的英文句子回答看看吧！"
+};
+
+let isSending = false;
+
+function sendDynamicAnswer(){
+  if(isSending) return;
+  const input = document.getElementById("ansInput");
+  const val = input.value.trim();
+  if(!val) return;
+  input.value = "";
+
+  // 統一在這裡讀取這次送出的來源（提示句按鈕／語音辨識／手動輸入都共用同一個 lastInputSource），
+  // 讀完立刻重置，避免下一則手動輸入被誤判成同一個來源
+  const source = lastInputSource;
+  lastInputSource = "text";
+
+  // 關卡式情境（目前為餐廳／機場）：關卡推進完全交給本地狀態機，不走下方的自由對話邏輯
+  if(today.dynamic.stagedEngine){
+    handleStagedAnswer(val, source);
+    return;
+  }
+
+  const lastAi = [...dynHistory].reverse().find(m=>m.from==='ai');
+  dynHistory.push({from:'user', text:val});
+  renderDynamicChat(); // 先讓使用者的話立即顯示在對話中
+
+  // 無意義輸入檢查：只套用在手動文字（text）；提示句／語音辨識已經是明確內容，略過此檢查
+  if(source === "text" && looksLikeGibberish(val)){
+    if(lastAi && lastAi.text === GIBBERISH_REPLY.reply) return; // 連續無效輸入時不重複堆疊同一句引導訊息
+    isSending = true;
+    pushAiTyping(GIBBERISH_REPLY).then(()=>{ isSending = false; });
+    return;
+  }
+
+  // 提示句（hint）一樣會正常對話、正常取得 AI 回覆，但不計入有效回合數、也不寫入評分用的 log，
+  // 避免「使用者點提示句」被誤當成「使用者自己的英文能力」拿去評分
+  if(source !== "hint"){
+    log.push({npc: lastAi ? lastAi.text : today.dynamic.aiOpening, zh:"", userAnswer:val});
+  }
+  isSending = true;
+  const finishTurn = ()=>{
+    if(source !== "hint") dynTurns++;
+    isSending = false;
+    renderDynamicChat();
+  };
+
+  if(today.dynamic.aiDriven){
+    pushAiTyping(() => generateAiReply(val)).then(finishTurn);
+  } else {
+    pushAiTyping(pickFollowUp(val)).then(finishTurn);
+  }
+}
+
+// contentOrFn：字串＝固定台詞；{reply,hint}物件＝直接顯示；函式＝呼叫 AI 即時生成（回傳字串或 {reply,hint}）
+async function pushAiTyping(contentOrFn){
+  const myToken = sessionToken; // 記住發起當下的情境版本
+  const logEl = document.getElementById("chatLog");
+  if(!logEl) return;
+  const typingDiv = document.createElement("div");
+  typingDiv.className = "bubble npc";
+  typingDiv.style.opacity = "0.6";
+  typingDiv.textContent = "家教正在打字中...";
+  logEl.appendChild(typingDiv);
+  logEl.scrollTop = logEl.scrollHeight;
+
+  let text, hint = "";
+  if(typeof contentOrFn === "function"){
+    const result = await contentOrFn();
+    if(myToken !== sessionToken) return; // 情境已切換／重新開始，這則回覆已過期，直接捨棄
+    if(result && typeof result === "object"){ text = result.reply; hint = result.hint || ""; }
+    else { text = result; }
+  } else if(contentOrFn && typeof contentOrFn === "object"){
+    await new Promise(r => setTimeout(r, 500));
+    if(myToken !== sessionToken) return;
+    text = contentOrFn.reply; hint = contentOrFn.hint || "";
+  } else {
+    await new Promise(r => setTimeout(r, 1000));
+    if(myToken !== sessionToken) return;
+    text = contentOrFn;
+  }
+  dynHistory.push({from:'ai', text, hint});
+  renderDynamicChat();
+  speak(text);
+}
+
+// 真正的 AI 即時生成下一句對話：具備三層模糊容錯。AI 不可用或呼叫失敗時，
+// 改用可靠的本地關鍵字比對（localFallbackReply）產生合理回覆，絕不中斷對話、絕不出現罐頭式「聽不懂」回應
+async function generateAiReply(userText){
+  if(!aiEnabled) return localFallbackReply(userText); // 本地練習模式：完全不呼叫 AI，不消耗額度
+  try{
+    const sample = await withTimeout(claude.use("sample"), 8000);
+    if(!sample){ reportAiFailure(); return localFallbackReply(userText); }
+    const history = dynHistory.map(m => (m.from==='ai' ? "教練" : "學生") + "：" + m.text).join("\n");
+    const topics = (today.dynamic.topics || []).join("、");
+    const prompt = `你是一位有耐心、溫暖、絕不讓學生卡住的英文口說教練，正在角色扮演「${today.title}」情境中的角色（海關人員或飯店櫃檯人員），用英文和一位英文學習者做口說對話練習。
+
+目前對話紀錄：
+${history}
+
+這段對話全程大約 ${curMaxTurns()} 輪，過程中要自然地（不要死板、不要機械式逐項詢問）帶到這些主題：${topics}。
+
+請依照下面三層原則回應學生剛剛說的那句話（你自己判斷屬於哪一層，不用寫出判斷過程，也不用在回覆中說明）：
+1. 回答切題且文法大致正確 → 直接自然延伸對話，帶出下一個相關問題。
+2. 回答看得出意圖，但文法有誤或用字不太道地 → 先用一句簡短英文給予肯定（如 "Got it!" "I see what you mean!"），接著依然自然地問下一個問題，絕對不要指出這是錯的、不要說 "I don't understand" 或 "Could you say that again" 之類的話。
+3. 回答完全離題 → 用幽默、順著話接一句（例如對方提到披薩，你可以說 "Haha, pizza sounds great, but first, do you have your boarding pass?"），再優雅地把話題拉回情境主題，絕對不可以說聽不懂或要求重講。
+
+無論學生說了什麼，你都必須自然地推進對話，絕對不能卡住、絕對不能使用任何道歉或要求重說的罐頭句。
+
+只回傳一個 JSON 物件，不要加其他文字、不要用 markdown code block，格式為：
+{"reply":"你的英文回應（延伸對話＋拋出下一個問題）","hint":"若第2或第3層情況，這裡給一句簡短的繁體中文提示，教學生更道地的講法；若第1層（回答已經很好）則留空字串"}`;
+    const res = await withTimeout(sample(prompt, {modelTier:"quick"}), 20000);
+    const raw = (res.text || "").trim().replace(/^```json\s*|```$/g, "");
+    try{
+      const parsed = JSON.parse(raw);
+      if(parsed && parsed.reply){ reportAiSuccess(); return {reply: parsed.reply, hint: parsed.hint || ""}; }
+    }catch(e){ /* 解析失敗則往下走本地備援 */ }
+    if(raw){ reportAiSuccess(); return {reply: raw.replace(/^["']|["']$/g, ""), hint: ""}; }
+    reportAiFailure();
+    return localFallbackReply(userText);
+  }catch(e){
+    reportAiFailure();
+    return localFallbackReply(userText);
+  }
+}
+
+// 關卡式流程專用：依指定關卡的 aiPromptContext 生成回覆；AI 不可用或失敗時使用該關卡自己的本地降級回覆
+async function getStageAiReply(stage, userText){
+  if(!aiEnabled) return pickReplyVariant(stage.fallbackResponse); // 本地練習模式：不呼叫 AI，從多個備援句中挑一句
+  try{
+    const sample = await withTimeout(claude.use("sample"), 8000);
+    if(!sample){ reportAiFailure(); return pickReplyVariant(stage.fallbackResponse); }
+    const history = dynHistory.map(m => (m.from==='ai' ? "教練" : "學生") + "：" + m.text).join("\n");
+    const prompt = `${stage.aiPromptContext}\n\n目前對話紀錄：\n${history}\n\n學生剛剛說："${userText}"\n\n只回傳一個 JSON 物件，不要加其他文字、不要用 markdown code block，格式為：\n{"en":"你的英文回應","zh":"對應的繁體中文翻譯"}`;
+    const res = await withTimeout(sample(prompt, {modelTier:"quick"}), 20000);
+    const raw = (res.text || "").trim().replace(/^```json\s*|```$/g, "");
+    const fallbackVariant = pickReplyVariant(stage.fallbackResponse);
+    try{
+      const parsed = JSON.parse(raw);
+      if(parsed && parsed.en){ reportAiSuccess(); return {en: parsed.en, zh: parsed.zh || fallbackVariant.zh}; }
+    }catch(e){ /* 解析失敗則往下走本地備援 */ }
+    if(raw){ reportAiSuccess(); return {en: raw.replace(/^["']|["']$/g, ""), zh: fallbackVariant.zh}; }
+    reportAiFailure();
+    return fallbackVariant;
+  }catch(e){
+    reportAiFailure();
+    return pickReplyVariant(stage.fallbackResponse);
+  }
+}
+
+// 關卡式流程的送出處理：是否推進、推進到哪一關，完全由 validateRestaurantInput()／
+// resolveRestaurantTransition() 這兩個純本地函式決定；AI 只負責依跳轉語境生成實際句子，
+// 絕不會被拿來判斷使用者是否「過關」。顯示（打字動效／語音播放／過期捨棄）統一交給 pushAiTyping。
+function handleStagedAnswer(val, source){
+  const myToken = sessionToken;
+
+  // 終點狀態防護：DONE 之後（含正在評分／已評分）一律拒絕新輸入，不回到點餐流程
+  if(stageId === "DONE" || dynPhase !== 'chat'){
+    return;
+  }
+
+  dynHistory.push({from:'user', text: val});
+  renderDynamicChat();
+
+  const validation = today.dynamic.validateInput(val, stageId, source);
+  if(!validation.valid){
+    // 驗證未通過：不計入回合、不推進關卡
+    isSending = true;
+    pushAiTyping({reply:"Sorry, I didn't quite understand that. Could you try answering in a complete sentence?", hint:"抱歉，我不太理解你的意思。請試著用完整的英文句子回答。"})
+      .then(()=>{ isSending = false; });
+    return;
+  }
+
+  // 驗證通過。提示句（hint）一樣會正常對話、正常推進關卡，但不寫入評分用的 log、也不計入 dynTurns——
+  // 避免「使用者點提示句」被當成「使用者自己的英文能力」拿去評分
+  if(source !== "hint"){
+    const lastAi = [...dynHistory].reverse().find(m=>m.from==='ai');
+    log.push({npc: lastAi ? lastAi.text : today.dynamic.aiOpening, zh:"", userAnswer: val});
+  }
+
+  // 本地決定下一關＋給AI的語境提示＋AI失敗時的降級句（純本地，不經過AI）；狀態轉移不受來源影響，一律正常推進
+  const transition = today.dynamic.resolveTransition(stageId, val);
+  const willBeDone = transition.nextStage === "DONE";
+
+  // 這段關卡推進邏輯獨立成一個函式，並同時掛在 .then() 與 .catch()：
+  // 不管 pushAiTyping／AI 呼叫過程中發生什麼（成功、AI失敗降級、或任何未預期的例外），
+  // 只要 session 還是同一個，關卡狀態都一定會被正確套用，不會卡在對話頁出不去
+  function applyStagedTransition(){
+    isSending = false;
+    if(myToken !== sessionToken) return; // 情境已切換／重置期間完成，不要再動關卡狀態
+    stageId = transition.nextStage;
+    if(source !== "hint") dynTurns++;
+    if(willBeDone){
+      // 抵達真正的終點：交給唯一的完成入口處理（鎖定輸入＋切到評分畫面＋觸發一次評分），
+      // 之後不論使用者再輸入什麼，都不會回到原本的點餐流程，除非按「重新開始本輪」
+      stagedCompleted = true;
+      completeStagedSession();
+    } else {
+      renderDynamicChat();
+    }
+  }
+
+  isSending = true;
+  pushAiTyping(async () => {
+    try{
+      const reply = await getStageAiReply({aiPromptContext: transition.aiContext, fallbackResponse: transition.fallback}, val);
+      return {reply: reply.en, hint: reply.zh || ""};
+    }catch(e){
+      // getStageAiReply 理論上不會丟出例外，這裡再加一層保險，確保一定回傳可顯示的內容
+      const fb = pickReplyVariant(transition.fallback);
+      return {reply: fb.en, hint: fb.zh || ""};
+    }
+  }).then(applyStagedTransition).catch(applyStagedTransition);
+}
+
+let recognition = null, recognizing = false, recognitionStarting = false;
+let micSessionToken = 0;
+function setVoiceStatus(message, isError){
+  const el = document.getElementById("voiceStatus");
+  if(!el) return;
+  el.textContent = message || "";
+  el.style.color = isError ? "var(--bad)" : "var(--sub)";
+}
+function resetMicButton(){
+  recognizing = false;
+  recognitionStarting = false;
+  const btn = document.getElementById("micBtn");
+  if(btn){ btn.classList.remove("rec"); btn.textContent = "🎤"; btn.disabled = false; }
+}
+function micErrorMessage(error){
+  const name = error && error.error ? error.error : (error && error.name ? error.name : "");
+  if(name === "not-allowed" || name === "service-not-allowed" || name === "NotAllowedError" || name === "PermissionDeniedError")
+    return "麥克風／語音辨識權限遭拒。請在 Android 設定允許 Chrome 使用麥克風，並在 Chrome 網站設定中允許此網站，再重新載入。";
+  if(name === "no-speech") return "沒有辨識到語音。請靠近麥克風、降低背景噪音後再試。";
+  if(name === "audio-capture" || name === "NotFoundError") return "找不到可用的麥克風。請確認裝置麥克風正常，並關閉可能占用麥克風的 App。";
+  if(name === "network") return "瀏覽器語音辨識服務或網路連線失敗。請確認網路正常後再試；此功能不保證離線可用。";
+  if(name === "aborted") return "錄音已取消。你可以再次點擊麥克風。";
+  if(name === "SecurityError" || !window.isSecureContext) return "請透過 Netlify 的 HTTPS 網址使用麥克風，不要從下載資料夾直接開啟 HTML。";
+  return getMicrophoneHelp({name: name || "UnknownError"});
+}
+function stopMicSafely(){
+  micSessionToken++;
+  const old = recognition;
+  recognition = null;
+  resetMicButton();
+  if(old){
+    try{ old.onresult = null; old.onerror = null; old.onend = null; old.stop(); }catch(e){
+      try{ old.abort(); }catch(_){}
+    }
+  }
+}
+function toggleMic(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const micBtn = document.getElementById("micBtn");
+  const input = document.getElementById("ansInput");
+  if(!micBtn || !input) return;
+  if(recognizing || recognitionStarting){
+    setVoiceStatus("正在停止錄音…");
+    try{ if(recognition) recognition.stop(); }catch(e){ resetMicButton(); }
+    return;
+  }
+  if(!window.isSecureContext){
+    setVoiceStatus("請使用 Netlify HTTPS 網址開啟 TravelTalk；直接開啟下載的 HTML 可能無法使用麥克風。", true);
+    return;
+  }
+  if(!SR){
+    setVoiceStatus("此瀏覽器不支援語音辨識，請改用文字輸入。", true);
+    return;
+  }
+  // 同一時間只允許一個辨識器，並綁定目前頁面／情境，避免舊結果寫入新對話。
+  if(recognition){ try{ recognition.abort(); }catch(e){} recognition = null; }
+  const thisToken = ++micSessionToken;
+  let gotFinalResult = false;
+  let localRecognition;
+  try{
+    localRecognition = new SR();
+    recognition = localRecognition;
+    localRecognition.lang = "en-US";
+    localRecognition.interimResults = true;
+    localRecognition.maxAlternatives = 1;
+    localRecognition.continuous = false;
+    localRecognition.onstart = ()=>{
+      if(thisToken !== micSessionToken || recognition !== localRecognition) return;
+      recognitionStarting = false; recognizing = true;
+      micBtn.classList.add("rec"); micBtn.textContent = "⏹";
+      setVoiceStatus("正在聆聽英文…說完後請稍候，或按 ⏹ 停止。", false);
+    };
+    localRecognition.onresult = (event)=>{
+      if(thisToken !== micSessionToken || recognition !== localRecognition || !input.isConnected) return;
+      let interim = "", finalText = "";
+      for(let i=event.resultIndex; i<event.results.length; i++){
+        const result = event.results[i];
+        if(result.isFinal) finalText += result[0].transcript;
+        else interim += result[0].transcript;
+      }
+      if(finalText.trim()){
+        const transcript = finalText.trim();
+        input.value = transcript;
+        lastInputSource = "voice";
+        gotFinalResult = true;
+        setVoiceStatus("辨識完成：請確認英文文字，再按「送出」。語音辨識結果不會自動送出或額外計分。", false);
+      }else if(interim.trim()){
+        setVoiceStatus("辨識中：" + interim.trim(), false);
+      }
+    };
+    localRecognition.onerror = (event)=>{
+      if(thisToken !== micSessionToken || recognition !== localRecognition) return;
+      if(event.error !== "aborted") setVoiceStatus(micErrorMessage(event), true);
+      else if(!gotFinalResult) setVoiceStatus("錄音已取消，可以再次嘗試。", false);
+      resetMicButton();
+    };
+    localRecognition.onend = ()=>{
+      if(thisToken !== micSessionToken || recognition !== localRecognition) return;
+      recognition = null;
+      resetMicButton();
+      if(gotFinalResult){
+        // 保留辨識來源，直到使用者手動編輯或送出；不自動提交。
+      }else{
+        const status = document.getElementById("voiceStatus");
+        if(status && !status.textContent) setVoiceStatus("沒有取得辨識結果，請再試一次或改用文字輸入。", true);
+      }
+    };
+    recognitionStarting = true;
+    micBtn.disabled = true;
+    setVoiceStatus("正在啟動語音辨識…若瀏覽器詢問麥克風權限，請選擇允許。", false);
+    localRecognition.start();
+    // start() 成功發起後立即解除 disabled；避免部分瀏覽器 onstart 前狀態卡住。
+    micBtn.disabled = false;
+  }catch(error){
+    if(thisToken === micSessionToken){
+      recognition = null;
+      resetMicButton();
+      setVoiceStatus(micErrorMessage(error), true);
+    }
+  }
+}
+
+window.addEventListener("pagehide", ()=>{
+  try{ if(recognition) recognition.abort(); }catch(e){}
+  try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}
+});
+
+/* ---------- 免費本地即時回答分析：不呼叫 AI、不消耗額度 ---------- */
+function escapeAnalysisHtml(value){
+  return String(value == null ? "" : value).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "'":"&#39;"}[c]));
+}
+function analyzeLocalAnswer(inputId="ansInput", resultId="answerAnalysis"){
+  const input = document.getElementById(inputId);
+  const panel = document.getElementById(resultId);
+  if(!input || !panel) return;
+  const answer = input.value.trim();
+  if(!answer){
+    panel.innerHTML = `<div class="hint-box" style="margin-top:8px">請先輸入英文，或按 🎤 錄音轉成文字，再點「免費分析我的回答」。</div>`;
+    return;
+  }
+  const safeAnswer = escapeAnalysisHtml(answer);
+  const normalized = normalizeText(answer);
+  const key = (today.dynamic && today.dynamic.correctionKey) || today.correctionKey || "";
+  const templates = CORRECTION_TEMPLATE[key] || [];
+  const hit = templates.find(t => (t.detect || []).some(d => normalized.includes(normalizeText(d))));
+  const tips = [];
+  let corrected = answer;
+  let score = 75;
+  let verdict = "已完成本地文字檢查";
+  let detail = "沒有命中目前內建的常見錯誤規則；這不代表每個文法細節都完全正確。";
+
+  if(hit){
+    corrected = hit.corrected || hit.natural || answer;
+    detail = hit.grammar || "這個句型可以再自然一點。";
+    score = 62;
+    verdict = "發現一個可改善的常見句型";
+    if(hit.natural && hit.natural !== corrected) tips.push(`更自然的說法：${hit.natural}`);
+  } else if(/\b(i|you|we|they)\s+no\s+\w+/i.test(answer)){
+    corrected = answer.replace(/\b(i|you|we|they)\s+no\s+(\w+)/i, (_,subj,verb)=>`${subj} don't ${verb}`);
+    detail = "英文否定句通常需要 don't / doesn't / isn't 等結構，不能直接把 no 放在一般動詞前。";
+    score = 58; verdict = "可能有否定句文法問題";
+  } else if(/\bwant\s+(?!to\b)([a-z]+)\b/i.test(answer) && !/\bwant\s+(food|water|a|the|some|one|this|that|it)\b/i.test(answer)){
+    detail = "如果 want 後面接另一個動作，通常要用 want to + 動詞原形，例如 I want to check in. 若 want 後面接名詞，則不一定需要 to。";
+    tips.push("試著確認 want 後面接的是『動作』還是『物品／名詞』。");
+    score = 68; verdict = "請檢查 want 的句型";
+  }
+
+  let relevant = null;
+  if(today.dynamic && typeof isRecognizedForScenario === "function"){
+    try{ relevant = isRecognizedForScenario(answer); }catch(e){ relevant = null; }
+  }
+  if(relevant === true){
+    score = Math.min(100, score + 15);
+    tips.push("情境判斷：這句話看起來符合目前對話需求。短句只要清楚切題，就可以是好答案。");
+  } else if(relevant === false){
+    score = Math.max(45, score - 8);
+    tips.push("情境判斷：內建規則暫時無法確認這句是否切題，可以加入關鍵資訊，或參考提示句。");
+  }
+  if(!tips.length && !hit) tips.push("練習建議：確認主詞與動詞搭配，並留意 a/the、複數及 please 等用法；不要為了拿高分刻意把句子拉長。");
+  const scoreColor = score >= 80 ? "var(--good)" : score >= 65 ? "var(--accent)" : "var(--bad)";
+  panel.innerHTML = `<div class="score-card" style="margin-top:8px;text-align:left">
+    <div style="font-weight:700">🧠 免費本地分析（不使用 AI）</div>
+    <div class="score-num" style="color:${scoreColor};font-size:26px;margin:5px 0">${score}/100</div>
+    <div class="score-fb"><b>你的回答：</b>${safeAnswer}</div>
+    <div class="score-fb" style="margin-top:6px"><b>分析結果：</b>${escapeAnalysisHtml(verdict)}</div>
+    ${corrected !== answer ? `<div class="score-fb" style="margin-top:6px"><b>建議修正：</b>${escapeAnalysisHtml(corrected)}</div>` : ""}
+    <div class="score-fb" style="margin-top:6px"><b>說明：</b>${escapeAnalysisHtml(detail)}</div>
+    <ul style="margin:6px 0 0 18px;padding:0">${tips.map(t=>`<li>${escapeAnalysisHtml(t)}</li>`).join("")}</ul>
+    <div class="note" style="margin-top:8px">這是依內建規則與情境關鍵字產生的參考分數，不是 AI 語意評分，也不是聲學發音或口音評分。語音辨識若聽錯，分析結果也可能不準。</div>
+  </div>`;
+}
+
+/* ---------- 完整學習報告（使用者主動按「結束對話並評分」才會觸發） ---------- */
+function recordPracticeOnce(score){
+  if(reportRecorded) return;
+  reportRecorded = true;
+  recordPractice(score, today.title);
+}
+
+function buildScoringPrompt(sentences){
+  return `你是一位專業的英文口說教練，請針對學生在「${today.title}」情境對話中依序說過的這些英文句子，產生一份完整的繁體中文學習報告。
+
+學生說過的句子（依序）：
+${sentences.map((s,i) => `${i+1}. ${s}`).join("\n")}
+
+請只回傳一個 JSON 物件，不要加其他文字、不要用 markdown code block，格式為：
+{
+  "totalScore": 0到100的整數總分,
+  "fluency": "一句話評語（流暢度）",
+  "grammar": "一句話評語（文法）",
+  "vocabulary": "一句話評語（用字）",
+  "relevance": "一句話評語（回答切題程度）",
+  "sentences": [{"original":"學生原句","corrected":"修正後的正確英文（若已完美則與original相同）","note":"繁體中文說明錯在哪裡；若完美則給予肯定並附一個更進階的道地替換建議"}],
+  "nextSteps": ["根據這次對話內容產生的具體改善建議（繁體中文，1到3則）"]
+}
+sentences 陣列請針對「每一句」都輸出一筆。`;
+}
+
+function renderAiReport(parsed){
+  const card = document.getElementById("scoreCard");
+  if(!card) return; // 使用者已離開評分畫面（例如切換了情境），不再寫入
+  const sentHtml = (parsed.sentences || []).map(it => `
+    <div class="hist-item" style="flex-direction:column;align-items:flex-start;gap:4px">
+      <div><b>原句：</b>「${it.original || ""}」</div>
+      ${it.corrected && it.corrected !== it.original ? `<div><b>修正：</b>${it.corrected}</div>` : ""}
+      <div style="color:var(--sub)">${it.note || ""}</div>
+    </div>`).join("");
+  const stepsHtml = (parsed.nextSteps || []).map(s => `<li>${s}</li>`).join("");
+  card.innerHTML = `
+    <div class="loading" style="margin-bottom:4px">📝 AI 完整學習報告</div>
+    <div class="score-num">${parsed.totalScore ?? "-"}/100</div>
+    <div class="score-fb">
+      <b>流暢度：</b>${parsed.fluency || ""}<br>
+      <b>文法：</b>${parsed.grammar || ""}<br>
+      <b>用字：</b>${parsed.vocabulary || ""}<br>
+      <b>切題程度：</b>${parsed.relevance || ""}
+    </div>
+    <div style="margin-top:10px">${sentHtml}</div>
+    <div class="score-fb" style="margin-top:10px"><b>下次練習建議：</b><ul style="margin:6px 0 0 18px;padding:0">${stepsHtml}</ul></div>
+    <button class="btn btn-ghost" id="restartBtn2" style="margin-top:12px;width:100%">🔄 再練一輪</button>
+  `;
+  document.getElementById("restartBtn2").onclick = initDynamic;
+  recordPracticeOnce(parsed.totalScore);
+}
+
+// 判斷一句話是否「對目前情境而言是合理、切題的回答」——不是用字數判斷，而是看能不能被目前情境的
+// 意圖辨識邏輯認出來（例如 "Steak, please." 在餐廳情境能被認出是點主餐，就算合理，不需要長句）
+// 判斷這句話是不是「反問對方」而不是真正在回答——避免句子裡剛好出現關鍵字（如 "staying"）
+// 就被誤判成有效回答，例如 "Are you staying in...?" 本身是疑問句，不是陳述句
+function looksLikeQuestionNotAnswer(sentence){
+  const t = normalizeText(sentence);
+  return /^(are|is|do|does|can|could|would|will|did|have|has)\s+you\b/.test(t);
+}
+
+function isRecognizedForScenario(sentence){
+  if(looksLikeQuestionNotAnswer(sentence)) return false;
+  if(today.dynamic && today.dynamic.stagedEngine && today.dynamic.identifyIntent){
+    return today.dynamic.identifyIntent(sentence).intent !== "UNKNOWN";
+  }
+  const rules = today.dynamic && today.dynamic.followUpReplies;
+  if(rules && !Array.isArray(rules)){
+    return !!bestIntentMatch(rules, sentence);
+  }
+  // 沒有情境專屬規則可用時，退而求其次：至少有兩個字的句子視為合理表達
+  return sentence.trim().split(/\s+/).filter(Boolean).length >= 2;
+}
+
+// AI 無法使用時的備援：純本地 JavaScript 評估，明確標示「本地基礎評估」，不假裝是真正的 AI 判斷。
+// 評分依「是否切題、是否命中已知錯誤模式」決定，不是單純看字數多寡——短句只要切題一樣給高分。
+function renderLocalReport(sentences){
+  const card = document.getElementById("scoreCard");
+  if(!card) return;
+  const templates = (today.dynamic.correctionKey && CORRECTION_TEMPLATE[today.dynamic.correctionKey]) || [];
+
+  const analyzed = sentences.map(s => {
+    const low = s.toLowerCase();
+    const hit = templates.find(t => t.detect.some(d => low.includes(d.toLowerCase())));
+    if(hit) return {original:s, corrected:hit.corrected, note:hit.grammar, good:false, matched:true};
+
+    if(looksLikeQuestionNotAnswer(s)){
+      return {original:s, corrected:s, note:"這句話像是在反問對方，而不是在回答問題；試著直接陳述你的答案，而不是用疑問句。", good:false, matched:false};
+    }
+    if(isRecognizedForScenario(s)){
+      return {original:s, corrected:s, note:"表達切題又自然，這在真實對話中是完全合理、自然的說法！", good:true, matched:false};
+    }
+    return {original:s, corrected:s, note:"這句話系統無法確定意圖，可以試著參考下方提示句的說法，或用更明確的字詞表達。", good:false, matched:false};
+  });
+
+  // 分數：以「切題比例」為主，命中已知錯誤模式的句子小扣分；不再用句子數量或長度直接加分
+  const total = sentences.length || 1;
+  const goodCount = analyzed.filter(a => a.good).length;
+  const mistakeCount = analyzed.filter(a => a.matched).length;
+  const raw = 65 + (goodCount / total) * 32 - mistakeCount * 3;
+  const totalScore = Math.max(55, Math.min(98, Math.round(raw)));
+
+  const sentHtml = analyzed.map(it => `
+    <div class="hist-item" style="flex-direction:column;align-items:flex-start;gap:4px">
+      <div><b>原句：</b>「${it.original}」${it.good ? " ✅" : ""}</div>
+      ${it.corrected !== it.original ? `<div><b>建議修正：</b>${it.corrected}</div>` : ""}
+      <div style="color:var(--sub)">${it.note}</div>
+    </div>`).join("");
+  card.innerHTML = `
+    <div class="loading" style="margin-bottom:4px">📝 本地基礎評估（非 AI 判斷）</div>
+    <div class="score-fb" style="margin-bottom:8px">目前無法連線 AI，以下為根據你這輪對話內容產生的本地初步評估，僅供參考。</div>
+    <div class="score-num">${totalScore}/100（粗估）</div>
+    <div style="margin-top:10px">${sentHtml}</div>
+    <div class="score-fb" style="margin-top:10px"><b>下次練習建議：</b>短句只要切題就是自然的表達，不需要刻意拉長；多留意上面列出的文法重點即可。</div>
+    <button class="btn btn-ghost" id="retryAiBtn" style="margin-top:12px;width:100%">🔁 改用 AI 重新評分</button>
+    <button class="btn btn-ghost" id="restartBtn2" style="margin-top:8px;width:100%">🔄 再練一輪</button>
+  `;
+  document.getElementById("restartBtn2").onclick = initDynamic;
+  document.getElementById("retryAiBtn").onclick = runScoring;
+  recordPracticeOnce(totalScore);
+}
+
+function renderRetryPrompt(){
+  const card = document.getElementById("scoreCard");
+  if(!card) return;
+  card.innerHTML = `
+    <div class="score-fb">這次暫時無法產生完整學習報告，但你的對話紀錄已保留。你可以重新嘗試評分。</div>
+    <button class="btn btn-accent" id="retryScoreBtn" style="margin-top:12px;width:100%">🔁 重新評分</button>
+    <button class="btn btn-ghost" id="backToChatBtn" style="margin-top:8px;width:100%">↩ 回到對話</button>
+  `;
+  document.getElementById("retryScoreBtn").onclick = runScoring;
+  document.getElementById("backToChatBtn").onclick = ()=>{ dynPhase = 'chat'; renderDynamicChat(); };
+}
+
+async function runScoring(){
+  const myToken = sessionToken;
+  const card = document.getElementById("scoreCard");
+  if(!card) return;
+  card.innerHTML = `<div class="loading">AI 正在產生學習報告，請稍候...</div>`;
+  const userSentences = log.map(l => l.userAnswer).filter(Boolean);
+  if(!aiEnabled){ renderLocalReport(userSentences); return; } // 本地練習模式：不呼叫 AI
+  try{
+    const sample = await withTimeout(claude.use("sample"), 8000);
+    if(myToken !== sessionToken) return; // 評分期間使用者已切換情境／重新開始，放棄這次結果
+    if(!sample){ reportAiFailure(); renderLocalReport(userSentences); return; }
+    const res = await withTimeout(sample(buildScoringPrompt(userSentences), {modelTier:"quick"}), 20000);
+    if(myToken !== sessionToken) return;
+    const raw = (res.text || "").trim().replace(/^```json\s*|```$/g, "");
+    let parsed;
+    try{ parsed = JSON.parse(raw); }catch(e){ parsed = null; }
+    if(!parsed || typeof parsed.totalScore === "undefined"){ reportAiFailure(); renderLocalReport(userSentences); return; }
+    reportAiSuccess();
+    renderAiReport(parsed);
+  }catch(err){
+    if(myToken !== sessionToken) return;
+    reportAiFailure();
+    // AI 呼叫失敗：不要卡在「重新評分」的死巷，直接給可用的本地報告，確保一定看得到文法建議
+    renderLocalReport(userSentences);
+  }
+}
+
+async function getAiScore(){
+  const card = document.getElementById("scoreCard");
+  card.innerHTML = `<div class="loading">AI 評分中...</div>`;
+  try{
+    const sample = await claude.use("sample");
+    if(!sample){
+      card.innerHTML = `<div class="loading">目前無法使用 AI 評分功能（未授權），請稍後再試。</div>`;
+      return;
+    }
+    const transcript = log.map((l,i)=>`情境句 ${i+1}: ${l.npc}\n使用者回答: ${l.userAnswer}`).join("\n\n");
+    const prompt = `你是英文口說教練。以下是使用者在「${today.title}」情境中的對話練習紀錄（每題有情境句與使用者的英文回答）：\n\n${transcript}\n\n請用繁體中文評分，格式如下，不要加其他內容：\n分數：X/10\n優點：（一句話）\n可以改進：（一兩個具體建議，例如用字、文法、更道地的說法）`;
+    const res = await sample(prompt, {modelTier:"quick"});
+    const text = res.text || "";
+    const scoreMatch = text.match(/分數[:：]\s*(\d+)/);
+    const scoreNum = scoreMatch ? scoreMatch[1] : "?";
+    if(scoreNum !== "?") recordPractice(scoreNum, today.title);
+    card.innerHTML = `<div class="score-num">${scoreNum}/10</div><div class="score-fb">${text.replace(/分數[:：]\s*\d+\/10\n?/,"")}</div>
+      <button class="btn btn-ghost" id="restartBtn2" style="margin-top:12px;width:100%">🔄 再練一輪</button>`;
+    document.getElementById("restartBtn2").onclick = ()=>{ if(today.dynamic){ initDynamic(); } else { step=0; log=[]; renderChat(); } };
+  }catch(err){
+    card.innerHTML = `<div class="loading">評分時發生錯誤，請稍後再試。</div>`;
+  }
+}
+
+/* ---------- 旅遊跟讀四步驟教材（依 correctionKey 對應情境；目前完成第一回合：機場） ---------- */
+const SHADOWING_CONTENT = {
+  airport: {
+    title: "機場報到與託運行李",
+    script: "Hi there! Could I see your passport and e-ticket, please? Do you have any bags to check in today? Great, please place it on the scale. That'll be twenty-three kilograms, just under the limit. Would you like a window or an aisle seat? Perfect, here's your boarding pass. Your gate is B12, and boarding starts at ten forty. Have a great flight!",
+    keyPatterns: [
+      {en:"Could I see your passport and e-ticket, please?", zh:"可以看一下您的護照和電子機票嗎？"},
+      {en:"Do you have any bags to check in today?", zh:"今天有行李要託運嗎？"},
+      {en:"Would you like a window or an aisle seat?", zh:"您想要靠窗還是走道的位置？"}
+    ],
+    connectedSpeech: [
+      {phrase:"Could_I", note:"唸起來像 \"could-eye\"，d 弱化幾乎聽不到"},
+      {phrase:"Do_you", note:"唸起來像 \"d'you\"，do 和 you 黏在一起"},
+      {phrase:"check_in", note:"k 和 i 連音，in 弱化成輕音"},
+      {phrase:"that'll_be", note:"that will 的縮寫再連音，唸成一個音節群"}
+    ],
+    toneNote: "報到櫃檯人員語氣親切俐落，Yes/No 問句尾音要上揚（例如 \"today?\"），陳述句尾音自然下降，整體節奏偏快、不拖泥帶水。",
+    markedText: "Hi there! / **Could**_I see your **passport** and **e-ticket**, please? / **Do**_you have any **bags** to **check**_in today? / **Great**, / please place it on the **scale**. / That'll_be **twenty-three** **kilograms**, / just **under** the **limit**. / Would you like a **window** or **aisle** seat? / **Perfect**, / here's your **boarding** **pass**. / Your **gate** is **B** **12**, / and **boarding** starts_at **ten** **forty**. / Have a **great** **flight**!",
+    blindTips: [
+      "先完整聽一次整段錄音，不要看文字。",
+      "第二次播放時，延遲大約 0.5 秒開始跟著念，重點是跟上節奏和語調，不是每個字都聽清楚才開口。",
+      "把連音詞組（如 check_in、that'll_be）當成一個單位練習，不要拆開一個字一個字念。",
+      "重複跟讀 3-5 次，感覺自己的語速和停頓開始接近原音檔時，再進到下一句。"
+    ],
+    rolePlay: [
+      {en:"Would you like to upgrade your seat?", zh:"您要升等座位嗎？", reply:"No thanks, this is fine."},
+      {en:"Do you need any assistance with your luggage?", zh:"需要行李協助嗎？", reply:"No, I've got it, thanks."},
+      {en:"Please proceed to security after this.", zh:"請接著前往安檢。", reply:"Sure, thank you."}
+    ],
+    commonMistakes: [
+      "把 \"check in\" 唸成兩個重音相等、分開的字，容易漏掉連音；應該唸成一個流暢的音節群 \"check_in\"，in 要弱化。",
+      "Yes/No 疑問句習慣用中文的平調或下降語調，容易讓外國人誤以為語氣不耐煩；英文的 Yes/No 問句尾音應該要上揚。"
+    ]
+  }
+};
+
+// 解析 **粗體(重音)**／word_word(連音底線)／ /(意群換行) 三種標記，轉成可顯示的HTML
+function renderMarkedText(str){
+  let html = str;
+  // 先處理意群換行（這時還是純文字，不會誤判到之後才產生的HTML結尾標籤裡的斜線）
+  html = html.replace(/\s*\/\s*/g, '<br>');
+  // 連音：允許詞組內含有 ** 粗體標記，整段加底線呈現
+  html = html.replace(/((?:\*{0,2}[A-Za-z']+\*{0,2})(?:_(?:\*{0,2}[A-Za-z']+\*{0,2}))+)/g,
+    (m) => `<span class="connect">${m.replace(/_/g, ' ')}</span>`);
+  // 最後才處理重音粗體
+  html = html.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  return html;
+}
+
+/* ---------- 跟讀測驗模式 ---------- */
+const shadowPane = document.getElementById("shadowPane");
+let shadowIdx = 0;
+let richShadowIdx = 0;
+let mediaRecorder=null, audioChunks=[], shadowRecognizing=false, shadowRecog=null;
+
+// 若目前情境有完整的四步驟教材，優先呈現豐富版；否則維持原本單句跟讀練習
+function renderShadow(){
+  const key = today.dynamic && today.dynamic.correctionKey;
+  if(key && SHADOWING_CONTENT[key]){
+    renderRichShadow(key);
+    return;
+  }
+  if(!today.turns || today.turns.length === 0){
+    shadowPane.innerHTML = `<div class="empty-state">這個情境目前沒有可跟讀的句子。</div>`;
+    return;
+  }
+  if(shadowIdx >= today.turns.length || shadowIdx < 0) shadowIdx = 0;
+  const t = today.turns[shadowIdx];
+  shadowPane.innerHTML = `
+    ${renderShadowAccentControl()}
+    <div class="shadow-card">
+      <div class="shadow-line">${t.npc} <button class="btn-ghost btn" style="padding:4px 8px;font-size:11px" id="shSpk">🔊</button></div>
+      <div class="shadow-zh">${t.zh}</div>
+      <button class="btn btn-mic" id="shRecBtn" style="width:100%">🎙 開始跟讀錄音</button>
+      <div id="shResult"></div>
+    </div>
+    <div class="toolrow">
+      <button class="btn btn-ghost" id="shPrev">← 上一句</button>
+      <button class="btn btn-ghost" id="shNext">下一句 →</button>
+    </div>
+    <div class="note">今日情境共 ${today.turns.length} 句可練習跟讀</div>
+  `;
+  bindShadowAccentControl();
+  document.getElementById("shSpk").onclick = ()=>speak(t.npc, undefined, selectedShadowAccent);
+  document.getElementById("shRecBtn").onclick = ()=>toggleShadowRec(t.npc);
+  document.getElementById("shPrev").onclick = ()=>{ shadowIdx=(shadowIdx-1+today.turns.length)%today.turns.length; renderShadow(); };
+  document.getElementById("shNext").onclick = ()=>{ shadowIdx=(shadowIdx+1)%today.turns.length; renderShadow(); };
+}
+
+function renderRichShadow(key){
+  const c = SHADOWING_CONTENT[key];
+  if(richShadowIdx >= c.keyPatterns.length || richShadowIdx < 0) richShadowIdx = 0;
+  const target = c.keyPatterns[richShadowIdx];
+
+  shadowPane.innerHTML = `
+    ${renderShadowAccentControl()}
+    <div class="step-card">
+      <div class="step-title">① 情境短劇與解碼</div>
+      <div style="font-size:15px;line-height:1.7">${c.script} <button class="btn-ghost btn" style="padding:4px 8px;font-size:11px" id="richSpkFull">🔊</button></div>
+      <div style="margin-top:10px"><b>關鍵句型</b></div>
+      ${c.keyPatterns.map(p=>`<div style="margin-top:4px">• ${p.en}<div class="zh" style="margin:0">${p.zh}</div></div>`).join("")}
+      <div style="margin-top:10px"><b>連音與弱化音</b></div>
+      ${c.connectedSpeech.map(cs=>`<div style="margin-top:4px">• <span class="connect">${cs.phrase.replace(/_/g,' ')}</span> — ${cs.note}</div>`).join("")}
+      <div style="margin-top:10px"><b>語氣提示</b></div>
+      <div style="margin-top:4px;color:var(--sub)">${c.toneNote}</div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-title">② 視覺標記跟讀</div>
+      <div class="marked-text">${renderMarkedText(c.markedText)}</div>
+      <div class="note" style="margin-top:8px">**粗體**＝重音字　<span class="connect">底線</span>＝連音　換行＝意群停頓</div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-title">③ 無文本盲跟讀與節奏建立</div>
+      ${c.blindTips.map(t=>`<div style="margin-top:4px">• ${t}</div>`).join("")}
+      <div class="shadow-card" style="margin-top:12px">
+        <div class="shadow-line">${target.en} <button class="btn-ghost btn" style="padding:4px 8px;font-size:11px" id="richSpk">🔊</button></div>
+        <div class="shadow-zh">${target.zh}</div>
+        <button class="btn btn-mic" id="richRecBtn" style="width:100%">🎙 開始跟讀錄音</button>
+        <div id="richShResult"></div>
+      </div>
+      <div class="toolrow">
+        <button class="btn btn-ghost" id="richPrev">← 上一句</button>
+        <button class="btn btn-ghost" id="richNext">下一句 →</button>
+      </div>
+      <div class="note">句型 ${richShadowIdx+1}/${c.keyPatterns.length}</div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-title">④ 情境延伸與角色扮演</div>
+      <div><b>對方最常接著說的句型</b></div>
+      ${c.rolePlay.map(r=>`<div style="margin-top:6px">• ${r.en}<div class="zh" style="margin:0">${r.zh}</div><div style="color:var(--sub);font-size:13px;margin-top:2px">→ 你可以回：${r.reply}</div></div>`).join("")}
+      <div style="margin-top:10px"><b>華語母語者常見錯誤</b></div>
+      ${c.commonMistakes.map(m=>`<div style="margin-top:4px">• ${m}</div>`).join("")}
+    </div>
+  `;
+
+  bindShadowAccentControl();
+  document.getElementById("richSpkFull").onclick = ()=>speak(c.script, undefined, selectedShadowAccent);
+  document.getElementById("richSpk").onclick = ()=>speak(target.en, undefined, selectedShadowAccent);
+  document.getElementById("richRecBtn").onclick = ()=>toggleShadowRec(target.en, "richShResult", "richRecBtn");
+  document.getElementById("richPrev").onclick = ()=>{ richShadowIdx=(richShadowIdx-1+c.keyPatterns.length)%c.keyPatterns.length; renderRichShadow(key); };
+  document.getElementById("richNext").onclick = ()=>{ richShadowIdx=(richShadowIdx+1)%c.keyPatterns.length; renderRichShadow(key); };
+}
+
+function wordScore(target, said){
+  const norm = s => s.toLowerCase().replace(/[^a-z\s']/g,"").split(/\s+/).filter(Boolean);
+  const tw = norm(target), sw = norm(said);
+  if(tw.length===0) return 0;
+  let hit=0;
+  const pool=[...sw];
+  tw.forEach(w=>{ const i=pool.indexOf(w); if(i>-1){ hit++; pool.splice(i,1);} });
+  return Math.round(100*hit/tw.length);
+}
+
+async function toggleShadowRec(targetText, resultElId, btnElId){
+  const btn = document.getElementById(btnElId || "shRecBtn");
+  const resultEl = document.getElementById(resultElId || "shResult");
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if(shadowRecognizing){
+    if(shadowRecog) shadowRecog.stop();
+    if(mediaRecorder && mediaRecorder.state!=="inactive") mediaRecorder.stop();
+    return;
+  }
+
+  let stream;
+  if(!window.isSecureContext || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    resultEl.innerHTML = `<div class="transcript">⚠️ ${getMicrophoneHelp({name:"SecurityError"})}</div>`;
+    return;
+  }
+  try{ stream = await navigator.mediaDevices.getUserMedia({audio:true}); }
+  catch(e){ resultEl.innerHTML = `<div class="transcript">⚠️ ${getMicrophoneHelp(e)}</div>`; return; }
+
+  audioChunks = [];
+  mediaRecorder = new MediaRecorder(stream);
+  mediaRecorder.ondataavailable = e=>audioChunks.push(e.data);
+  mediaRecorder.onstop = ()=>{
+    const blob = new Blob(audioChunks, {type:"audio/webm"});
+    const url = URL.createObjectURL(blob);
+    const audioTag = `<audio controls src="${url}"></audio>`;
+    const old = resultEl.innerHTML.replace(/<audio.*?<\/audio>/,"");
+    resultEl.innerHTML = old + audioTag;
+    stream.getTracks().forEach(tr=>tr.stop());
+  };
+  mediaRecorder.start();
+
+  if(SR){
+    shadowRecog = new SR();
+    shadowRecog.lang="en-US"; shadowRecog.interimResults=false;
+    shadowRecog.onresult = (e)=>{
+      const result = e.results[0][0];
+      const said = result.transcript || "";
+      const score = wordScore(targetText, said);
+      const cls = score>=80?"good":score>=50?"mid":"bad";
+      const confidence = Number.isFinite(result.confidence) ? Math.round(result.confidence * 100) : null;
+      const clarityText = confidence === null
+        ? "此瀏覽器沒有提供辨識信心度。"
+        : confidence >= 85 ? "辨識系統很有把握聽懂這段語音；仍不等於口音或發音準確率。"
+        : confidence >= 65 ? "辨識系統大致聽懂；可再放慢速度、清楚說出句尾。這不是正式口音評分。"
+        : "辨識系統不太確定聽到的內容；請靠近麥克風、降低背景噪音並分段練習。這不是正式口音評分。";
+      resultEl.innerHTML = `<div class="match ${cls}">${score}% 句子文字相符度</div>
+        ${confidence === null ? "" : `<div class="note" style="margin-top:6px">🎙 語音辨識信心度參考：${confidence}%</div>`}
+        <div class="transcript">你說的：「${String(said).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}」</div>
+        <div class="note" style="margin-top:4px">${clarityText} 純前端瀏覽器無法可靠評判美式／英式口音或逐音素準確度。</div>`;
+    };
+    shadowRecog.onend = ()=>{
+      shadowRecognizing=false; btn.classList.remove("rec"); btn.textContent="🎙 開始跟讀錄音";
+      if(mediaRecorder && mediaRecorder.state!=="inactive") mediaRecorder.stop();
+    };
+    shadowRecog.start();
+  }
+
+  shadowRecognizing=true; btn.classList.add("rec"); btn.textContent="⏹ 停止錄音";
+}
+
+
+function getMicrophoneHelp(error){
+  const name = error && error.name ? error.name : "";
+  const isSecure = window.isSecureContext;
+  const hasApi = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+  if (!hasApi || !isSecure) {
+    return "目前開啟方式不支援麥克風。手機直接開啟下載的 HTML（file://）常會遇到這個限制。請把檔案放到 HTTPS 網站再用 Chrome 開啟；不要只在檔案預覽器中開啟。";
+  }
+  if (name === "NotAllowedError" || name === "PermissionDeniedError") {
+    return "麥克風權限被拒絕。請到手機「設定 → 應用程式 → Chrome → 權限 → 麥克風」允許使用，再到 Chrome 網址列左側的網站設定確認麥克風為允許，重新整理後再試。";
+  }
+  if (name === "NotFoundError" || name === "DevicesNotFoundError") {
+    return "找不到可用的麥克風。請確認手機有可用麥克風，並關閉可能占用麥克風的通話或錄音 App。";
+  }
+  if (name === "NotReadableError" || name === "TrackStartError") {
+    return "麥克風可能正被其他 App 使用，或裝置暫時無法讀取。請關閉通話／錄音 App，重新開啟頁面再試。";
+  }
+  if (name === "SecurityError") {
+    return "瀏覽器因安全限制阻擋麥克風。請使用 HTTPS 網址並以 Chrome 開啟。";
+  }
+  return "無法啟用麥克風（" + (name || "未知錯誤") + "）。請使用 HTTPS 網址、允許 Chrome 使用麥克風，並關閉其他正在使用麥克風的 App。";
+}
+
+/* ---------- 跟讀訓練：獨立於情境對話與跟讀測驗，不共用任何狀態/進度/計分 ----------
+   目前提供 12 個峇里島旅遊主題的逐句跟讀、慢速播放、三次連播、隱藏英文、語音辨識文字比對與獨立紀錄。 */
+const SHADOW_TRAINING_THEMES = {
+  airport_entry: {
+    title: "機場入境、護照及海關",
+    sentences: [
+      {en:"Here is my passport and declaration form.", zh:"這是我的護照和申報表。", scenario:"海關窗口", keyPhrase:"declaration form（申報表）", tip:"declaration 重音在第三音節 -cla-", difficulty:"初級"},
+      {en:"I'm here on vacation for about a week.", zh:"我是來度假的，大概一個星期。", scenario:"海關問話", keyPhrase:"on vacation（度假中）", tip:"vacation 重音在第二音節 -ca-", difficulty:"初級"},
+      {en:"I have nothing to declare.", zh:"我沒有東西要申報。", scenario:"海關申報", keyPhrase:"nothing to declare（沒有要申報的）", tip:"declare 的 de 唸輕音", difficulty:"初級"},
+      {en:"I'll be staying at a hotel in Seminyak.", zh:"我會住在水明漾的一間飯店。", scenario:"詢問住宿", keyPhrase:"staying at（住在）", tip:"staying 的 ay 要拉長一點", difficulty:"中級"},
+      {en:"Could you tell me where the baggage claim is?", zh:"可以告訴我行李提領處在哪嗎？", scenario:"詢問行李", keyPhrase:"baggage claim（行李提領處）", tip:"claim 的 ai 要唸清楚", difficulty:"中級"},
+      {en:"Sorry, could you repeat that more slowly?", zh:"不好意思，可以再說慢一點嗎？", scenario:"聽不懂時", keyPhrase:"more slowly（更慢一點）", tip:"slowly 重音在第一音節", difficulty:"中級"},
+      {en:"I didn't expect to be asked for a return ticket — I'm actually staying longer than planned.", zh:"我沒想到會被要求出示回程機票——其實我待的時間比預計久。", scenario:"意外追問", keyPhrase:"return ticket（回程機票）", tip:"整句語速偏快，注意連音", difficulty:"實戰"},
+      {en:"Is there an issue with my visa? I can show you my hotel confirmation too.", zh:"我的簽證有問題嗎？我也可以出示飯店確認信。", scenario:"被質疑時", keyPhrase:"visa（簽證）／confirmation（確認）", tip:"visa 的 v 要咬下唇發音", difficulty:"實戰"}
+    ]
+  },
+  hotel_checkin: {
+    title: "飯店入住、行李寄放與 SPA",
+    sentences: [
+      {en:"I have a reservation under my name.", zh:"我有用我的名字訂房。", scenario:"櫃檯入住", keyPhrase:"reservation（預訂）", tip:"reservation 重音在第三音節 -va-", difficulty:"初級"},
+      {en:"Could I check in early, please?", zh:"可以提早入住嗎？", scenario:"提早入住", keyPhrase:"check in early（提早入住）", tip:"early 的 r 要捲舌", difficulty:"初級"},
+      {en:"Could you store my luggage until my room is ready?", zh:"可以先幫我寄放行李，等房間好了再給我嗎？", scenario:"寄放行李", keyPhrase:"store my luggage（寄放行李）", tip:"luggage 重音在第一音節", difficulty:"中級"},
+      {en:"What time does breakfast start, and where is it served?", zh:"早餐幾點開始？在哪裡供應？", scenario:"早餐資訊", keyPhrase:"served（供應）", tip:"served 的 ed 唸 /d/", difficulty:"中級"},
+      {en:"Is breakfast included in the room rate?", zh:"早餐有包含在房價裡嗎？", scenario:"確認費用", keyPhrase:"included（包含）", tip:"included 重音在第二音節", difficulty:"中級"},
+      {en:"My room isn't ready yet — could you recommend somewhere nearby to wait?", zh:"我的房間還沒好——可以推薦附近哪裡可以等嗎？", scenario:"房間未好", keyPhrase:"recommend（推薦）", tip:"recommend 重音在最後音節", difficulty:"實戰"},
+      {en:"I was told breakfast was included, but I'm being charged — could you check again?", zh:"我被告知早餐是有包含的，但現在被收費了——可以再確認一次嗎？", scenario:"費用爭議", keyPhrase:"being charged（被收費）", tip:"charged 的 ch 要用力", difficulty:"實戰"},
+      {en:"Could you hold my luggage even after I check out this afternoon?", zh:"即使我今天下午退房，也可以幫我保管行李嗎？", scenario:"退房後寄放", keyPhrase:"even after（即使在...之後）", tip:"even 的 e 拉長", difficulty:"實戰"},
+      {en:"Could you use lighter pressure, please?", zh:"可以按輕一點嗎？", scenario:"SPA 按摩力道", keyPhrase:"lighter pressure（較輕力道）", tip:"pressure 重音在第一音節", difficulty:"初級"},
+      {en:"Medium pressure is perfect, thank you. Could you focus more on my shoulders?", zh:"中等力道剛剛好，謝謝。可以多按摩我的肩膀嗎？", scenario:"SPA 按摩需求", keyPhrase:"medium pressure（中等力道）／focus on（集中在）", tip:"shoulders 注意 th 音", difficulty:"中級"}
+    ]
+  },
+  restaurant_order: {
+    title: "餐廳點餐、詢問價格及飲食需求",
+    sentences: [
+      {en:"Could I see the menu, please?", zh:"可以給我看一下菜單嗎？", scenario:"入座點餐", keyPhrase:"menu（菜單）", tip:"menu 重音在第一音節", difficulty:"初級"},
+      {en:"What do you recommend?", zh:"你推薦什麼？", scenario:"詢問推薦", keyPhrase:"recommend（推薦）", tip:"recommend 重音在最後", difficulty:"初級"},
+      {en:"How much is this dish?", zh:"這道菜多少錢？", scenario:"詢問價格", keyPhrase:"how much（多少錢）", tip:"much 的 ch 要清楚", difficulty:"初級"},
+      {en:"I'm allergic to peanuts — does this contain any?", zh:"我對花生過敏——這裡面有花生嗎？", scenario:"飲食過敏", keyPhrase:"allergic to（對...過敏）", tip:"allergic 重音在第二音節", difficulty:"中級"},
+      {en:"Could you make it less spicy, please?", zh:"可以幫我做不要那麼辣嗎？", scenario:"調整辣度", keyPhrase:"less spicy（不要太辣）", tip:"spicy 的 i 唸長音", difficulty:"中級"},
+      {en:"Is this made with bottled water?", zh:"這是用瓶裝水做的嗎？", scenario:"飲水安全", keyPhrase:"bottled water（瓶裝水）", tip:"bottled 的 tt 唸輕快的 /t/", difficulty:"中級"},
+      {en:"I ordered this without ice, but it still has ice in it — could you remake it?", zh:"我點的時候說不要冰，但裡面還是有冰——可以重做嗎？", scenario:"點餐出錯", keyPhrase:"remake it（重做）", tip:"remake 重音在第二音節", difficulty:"實戰"},
+      {en:"The bill seems higher than the menu price — could you explain this charge?", zh:"帳單好像比菜單標價還高——可以說明這筆費用嗎？", scenario:"帳單疑問", keyPhrase:"explain this charge（說明這筆費用）", tip:"explain 重音在第二音節", difficulty:"實戰"}
+    ]
+  },
+  kuta_surf: {
+    title: "Kuta 衝浪課程與安全",
+    sentences: [
+      {en:"Is this lesson suitable for beginners?", zh:"這堂課適合初學者嗎？", scenario:"報名課程", keyPhrase:"suitable for beginners（適合初學者）", tip:"suitable 重音在第一音節", difficulty:"初級"},
+      {en:"Do we need to book the lesson in advance?", zh:"我們需要提前預約課程嗎？", scenario:"確認預約", keyPhrase:"in advance（提前）", tip:"advance 重音在第二音節", difficulty:"初級"},
+      {en:"Is the surfboard included in the price?", zh:"費用有包含衝浪板嗎？", scenario:"確認費用", keyPhrase:"included in the price（包含在價格內）", tip:"included 的重音在第二音節", difficulty:"初級"},
+      {en:"Could I have a rash guard in my size?", zh:"可以給我合身尺寸的防磨衣嗎？", scenario:"租借裝備", keyPhrase:"rash guard（防磨衣）", tip:"guard 的 ar 唸清楚", difficulty:"中級"},
+      {en:"Could you explain the safety rules before we start?", zh:"開始前可以說明安全規則嗎？", scenario:"安全說明", keyPhrase:"safety rules（安全規則）", tip:"safety 重音在第一音節", difficulty:"中級"},
+      {en:"What should I do if I get caught in a strong current?", zh:"如果我被強流帶走，應該怎麼做？", scenario:"海上安全", keyPhrase:"strong current（強流）", tip:"current 重音在第一音節", difficulty:"中級"},
+      {en:"The waves look too strong for me. Could we wait for safer conditions?", zh:"浪對我來說太大了，可以等海況安全一點嗎？", scenario:"海況不佳", keyPhrase:"safer conditions（更安全的條件）", tip:"conditions 注意字尾音節", difficulty:"實戰"},
+      {en:"I feel unwell and need to stop the lesson. Could you help me get back to shore?", zh:"我不舒服，需要停止課程。可以幫我回到岸上嗎？", scenario:"身體不適", keyPhrase:"get back to shore（回到岸上）", tip:"unwell 的重音在第二音節", difficulty:"實戰"}
+    ]
+  },
+  waterbom: {
+    title: "Waterbom 水上樂園",
+    sentences: [
+      {en:"Where can we buy tickets?", zh:"我們在哪裡可以買票？", scenario:"購票入園", keyPhrase:"buy tickets（買票）", tip:"tickets 的 ts 要唸清楚", difficulty:"初級"},
+      {en:"Where can we store our valuables?", zh:"我們可以把貴重物品寄放在哪裡？", scenario:"寄放物品", keyPhrase:"valuables（貴重物品）", tip:"valuables 重音在第一音節", difficulty:"初級"},
+      {en:"How much does a locker cost?", zh:"一個置物櫃多少錢？", scenario:"租置物櫃", keyPhrase:"locker（置物櫃）", tip:"locker 的 r 要清楚", difficulty:"初級"},
+      {en:"Is this ride suitable for beginners?", zh:"這項設施適合初學者嗎？", scenario:"設施限制", keyPhrase:"suitable for（適合）", tip:"suitable 重音在第一音節", difficulty:"中級"},
+      {en:"Are there any height or weight restrictions?", zh:"有身高或體重限制嗎？", scenario:"確認限制", keyPhrase:"restrictions（限制）", tip:"restrictions 重音在第二音節", difficulty:"中級"},
+      {en:"Where is the nearest place to get drinking water?", zh:"最近的飲用水取用處在哪裡？", scenario:"尋找飲用水", keyPhrase:"drinking water（飲用水）", tip:"nearest 的 ear 唸清楚", difficulty:"中級"},
+      {en:"I think I left my bag near the pool. Where is the lost and found?", zh:"我好像把包包忘在泳池附近了。失物招領在哪裡？", scenario:"遺失物品", keyPhrase:"lost and found（失物招領）", tip:"lost and found 注意連音", difficulty:"實戰"},
+      {en:"My friend is injured. Could you call a first-aid staff member, please?", zh:"我的朋友受傷了，可以請急救人員過來嗎？", scenario:"受傷求助", keyPhrase:"first-aid staff（急救人員）", tip:"injured 重音在第一音節", difficulty:"實戰"}
+    ]
+  },
+  driver_traffic: {
+    title: "包車接送、塞車與超時費用",
+    sentences: [
+      {en:"What time will you pick us up tomorrow?", zh:"你明天幾點來接我們？", scenario:"確認接送", keyPhrase:"pick us up（來接我們）", tip:"pick us up 注意連音", difficulty:"初級"},
+      {en:"Where should we meet you?", zh:"我們應該在哪裡跟你碰面？", scenario:"確認集合點", keyPhrase:"where should we meet（在哪裡碰面）", tip:"should 的 d 輕快帶過", difficulty:"初級"},
+      {en:"How many hours are included in the car service?", zh:"包車服務包含幾個小時？", scenario:"確認時數", keyPhrase:"car service（包車服務）", tip:"included 的重音在第二音節", difficulty:"初級"},
+      {en:"How much is the extra charge per hour?", zh:"每超時一小時要加多少錢？", scenario:"詢問超時費", keyPhrase:"extra charge（額外費用）", tip:"extra 重音在第一音節", difficulty:"中級"},
+      {en:"We're stuck in traffic. Is there another route?", zh:"我們塞在車陣裡了，有其他路線嗎？", scenario:"嚴重塞車", keyPhrase:"stuck in traffic（塞車）", tip:"traffic 重音在第一音節", difficulty:"中級"},
+      {en:"We have a reservation at five thirty. Do you think we'll arrive on time?", zh:"我們五點半有預約，你覺得能準時抵達嗎？", scenario:"擔心遲到", keyPhrase:"arrive on time（準時抵達）", tip:"five thirty 注意數字清晰度", difficulty:"中級"},
+      {en:"Could you let the restaurant know that we're running late?", zh:"可以幫我們通知餐廳會晚到嗎？", scenario:"通知餐廳", keyPhrase:"running late（會遲到）", tip:"restaurant 重音在第一音節", difficulty:"實戰"},
+      {en:"Could we add one more stop? Please tell us the extra cost before we decide.", zh:"我們可以再加一個停靠點嗎？決定前請先告訴我們額外費用。", scenario:"增加景點", keyPhrase:"one more stop（再停一站）", tip:"before we decide 注意語句分段", difficulty:"實戰"}
+    ]
+  },
+  ubud_silver_terraces: {
+    title: "烏布銀飾課、梯田與包車",
+    sentences: [
+      {en:"Is the silver included in the workshop price?", zh:"銀料有包含在課程費用裡嗎？", scenario:"銀飾課費用", keyPhrase:"included in the price（包含在費用內）", tip:"workshop 重音在第一音節", difficulty:"初級"},
+      {en:"How many grams of silver are included?", zh:"包含幾克銀料？", scenario:"確認銀料", keyPhrase:"grams of silver（幾克銀料）", tip:"grams 的 s 要清楚", difficulty:"初級"},
+      {en:"How much is the extra silver per gram?", zh:"額外銀料每克多少錢？", scenario:"詢問加購", keyPhrase:"per gram（每克）", tip:"extra 重音在第一音節", difficulty:"初級"},
+      {en:"Could I make a small pendant, please?", zh:"我可以做一個小吊墜嗎？", scenario:"選擇作品", keyPhrase:"pendant（吊墜）", tip:"pendant 重音在第一音節", difficulty:"中級"},
+      {en:"How long will the workshop take?", zh:"課程大約需要多久？", scenario:"確認時間", keyPhrase:"how long（多久）", tip:"workshop 的 r 要清楚", difficulty:"初級"},
+      {en:"Could you take us to the rice terraces after the workshop?", zh:"課程結束後可以載我們去梯田嗎？", scenario:"安排下一站", keyPhrase:"after the workshop（課程結束後）", tip:"terraces 重音在第一音節", difficulty:"中級"},
+      {en:"Could we spend a little more time here for photos?", zh:"我們可以在這裡多留一點時間拍照嗎？", scenario:"景點停留", keyPhrase:"spend more time（多留一點時間）", tip:"photos 的 ph 發 /f/ 音", difficulty:"中級"},
+      {en:"We'd like to avoid the busiest time. What time do you recommend leaving?", zh:"我們想避開最塞的時段，你建議幾點出發？", scenario:"避開車潮", keyPhrase:"busiest time（最繁忙時段）", tip:"recommend 重音在最後音節", difficulty:"實戰"}
+    ]
+  },
+  bali_swing: {
+    title: "Bali Swing 與活動安全",
+    sentences: [
+      {en:"Is the swing ticket included in our package?", zh:"套票有包含鞦韆體驗嗎？", scenario:"確認票券", keyPhrase:"included in our package（包含在套票內）", tip:"package 重音在第一音節", difficulty:"初級"},
+      {en:"Do we need to book a time slot?", zh:"我們需要預約時段嗎？", scenario:"確認時段", keyPhrase:"time slot（時段）", tip:"slot 唸短音", difficulty:"初級"},
+      {en:"Is there a weight limit for this swing?", zh:"這個鞦韆有體重限制嗎？", scenario:"確認限制", keyPhrase:"weight limit（體重限制）", tip:"weight 的 gh 不發音", difficulty:"初級"},
+      {en:"Could you explain the safety instructions first?", zh:"可以先說明安全指示嗎？", scenario:"安全說明", keyPhrase:"safety instructions（安全指示）", tip:"instructions 重音在第二音節", difficulty:"中級"},
+      {en:"Could you help us take a photo together?", zh:"可以幫我們一起拍張照嗎？", scenario:"拍照", keyPhrase:"take a photo（拍照）", tip:"photo 的 ph 發 /f/ 音", difficulty:"初級"},
+      {en:"Could you send the photos to my phone?", zh:"可以把照片傳到我的手機嗎？", scenario:"取得照片", keyPhrase:"send the photos（傳送照片）", tip:"photos 注意複數尾音", difficulty:"中級"},
+      {en:"I'm not comfortable with this height. Is there a lower option?", zh:"這個高度讓我不太安心，有比較低的選項嗎？", scenario:"不適應高度", keyPhrase:"not comfortable（不太自在）", tip:"comfortable 常縮短唸法", difficulty:"實戰"},
+      {en:"Could we get a refund if the activity is cancelled due to weather?", zh:"如果活動因天氣取消，可以退款嗎？", scenario:"天候取消", keyPhrase:"due to weather（因天氣因素）", tip:"cancelled 注意第一音節重音", difficulty:"實戰"}
+    ]
+  },
+  marine_dolphins: {
+    title: "Marine Park 海豚互動",
+    sentences: [
+      {en:"What is included in this ticket?", zh:"這張票包含哪些內容？", scenario:"確認票券", keyPhrase:"included in this ticket（包含在票券內）", tip:"included 重音在第二音節", difficulty:"初級"},
+      {en:"What time should we arrive for the dolphin experience?", zh:"海豚體驗需要幾點抵達？", scenario:"報到時間", keyPhrase:"should we arrive（應該幾點到）", tip:"experience 重音在第二音節", difficulty:"初級"},
+      {en:"Do we need to bring swimwear and a towel?", zh:"我們需要帶泳衣和毛巾嗎？", scenario:"準備用品", keyPhrase:"swimwear and a towel（泳衣和毛巾）", tip:"towel 注意雙音節", difficulty:"初級"},
+      {en:"Are lockers available near the activity area?", zh:"活動區附近有置物櫃嗎？", scenario:"寄放物品", keyPhrase:"lockers available（有置物櫃可用）", tip:"available 重音在第二音節", difficulty:"中級"},
+      {en:"Are there any age or health restrictions?", zh:"有年齡或健康方面的限制嗎？", scenario:"確認參加條件", keyPhrase:"health restrictions（健康限制）", tip:"restrictions 重音在第二音節", difficulty:"中級"},
+      {en:"Could you explain the rules before the interaction starts?", zh:"互動開始前可以說明規則嗎？", scenario:"活動規則", keyPhrase:"before the interaction（互動之前）", tip:"interaction 重音在第三音節", difficulty:"中級"},
+      {en:"Can we take photos during the experience, or is that not allowed?", zh:"體驗時可以拍照嗎？還是禁止拍照？", scenario:"拍照規定", keyPhrase:"not allowed（不被允許）", tip:"allowed 重音在第二音節", difficulty:"實戰"},
+      {en:"Our booking confirmation says a different time. Could you please check it?", zh:"我們的預約確認信上寫的時間不同，可以幫忙確認嗎？", scenario:"預約時間有誤", keyPhrase:"booking confirmation（預約確認）", tip:"confirmation 重音在第三音節", difficulty:"實戰"}
+    ]
+  },
+  clip_n_climb: {
+    title: "Clip 'n Climb 攀岩",
+    sentences: [
+      {en:"Do we need to book in advance?", zh:"我們需要提前預約嗎？", scenario:"預約入場", keyPhrase:"book in advance（提前預約）", tip:"advance 重音在第二音節", difficulty:"初級"},
+      {en:"How long is each climbing session?", zh:"每次攀爬體驗多久？", scenario:"確認時長", keyPhrase:"climbing session（攀爬時段）", tip:"session 重音在第一音節", difficulty:"初級"},
+      {en:"Is the safety equipment included in the price?", zh:"安全裝備有包含在費用裡嗎？", scenario:"確認裝備", keyPhrase:"safety equipment（安全裝備）", tip:"equipment 重音在第二音節", difficulty:"初級"},
+      {en:"Could you show us how to use the harness?", zh:"可以示範如何使用安全吊帶嗎？", scenario:"裝備教學", keyPhrase:"use the harness（使用安全吊帶）", tip:"harness 重音在第一音節", difficulty:"中級"},
+      {en:"Are there any age, height, or weight restrictions?", zh:"有年齡、身高或體重限制嗎？", scenario:"確認限制", keyPhrase:"weight restrictions（體重限制）", tip:"restrictions 重音在第二音節", difficulty:"中級"},
+      {en:"Could you explain the rules in simple English?", zh:"可以用簡單英文說明規則嗎？", scenario:"聽不懂規則", keyPhrase:"simple English（簡單英文）", tip:"simple 重音在第一音節", difficulty:"中級"},
+      {en:"I'm feeling dizzy. Could I take a break?", zh:"我有點頭暈，可以休息一下嗎？", scenario:"身體不適", keyPhrase:"take a break（休息一下）", tip:"dizzy 重音在第一音節", difficulty:"實戰"},
+      {en:"We booked for two people, but our confirmation shows only one. Could you check?", zh:"我們訂了兩個人，但確認信只顯示一位，可以幫忙查一下嗎？", scenario:"訂位人數錯誤", keyPhrase:"for two people（兩位）", tip:"confirmation 注意音節節奏", difficulty:"實戰"}
+    ]
+  },
+  the_cave: {
+    title: "The Cave 地下晚餐與預約",
+    sentences: [
+      {en:"We have a dinner reservation under the name Chen.", zh:"我們有用 Chen 這個名字預約晚餐。", scenario:"報到", keyPhrase:"under the name（以...名字預訂）", tip:"reservation 重音在第三音節附近", difficulty:"初級"},
+      {en:"Could you confirm our reservation time, please?", zh:"可以確認我們的預約時間嗎？", scenario:"確認時間", keyPhrase:"confirm our reservation（確認預約）", tip:"confirm 重音在第二音節", difficulty:"初級"},
+      {en:"What is the dress code for dinner?", zh:"晚餐有服裝規定嗎？", scenario:"服裝規定", keyPhrase:"dress code（服裝規定）", tip:"dress code 清楚分開唸", difficulty:"初級"},
+      {en:"Is transportation to the venue included?", zh:"有包含前往餐廳的交通接送嗎？", scenario:"交通接送", keyPhrase:"transportation included（包含交通）", tip:"transportation 重音在第三音節", difficulty:"中級"},
+      {en:"We may arrive a little late because of traffic. Could you let the staff know?", zh:"我們可能因為塞車晚到一點，可以通知工作人員嗎？", scenario:"塞車遲到", keyPhrase:"because of traffic（因為塞車）", tip:"traffic 重音在第一音節", difficulty:"中級"},
+      {en:"Could you let us know about any additional charges before we order?", zh:"點餐前可以先告知我們是否有額外費用嗎？", scenario:"確認額外費用", keyPhrase:"additional charges（額外費用）", tip:"additional 重音在第二音節", difficulty:"中級"},
+      {en:"One of us has a food allergy. Could you tell us which dishes are safe?", zh:"我們其中一人有食物過敏，可以告訴我們哪些菜安全嗎？", scenario:"食物過敏", keyPhrase:"food allergy（食物過敏）", tip:"allergy 重音在第一音節", difficulty:"實戰"},
+      {en:"We're running late. Is it still possible to keep our reservation?", zh:"我們快遲到了，還可以保留預約嗎？", scenario:"可能錯過預約", keyPhrase:"keep our reservation（保留預約）", tip:"possible 重音在第一音節", difficulty:"實戰"}
+    ]
+  },
+  bali_safari: {
+    title: "Bali Safari 動物園與餵食活動",
+    sentences: [
+      {en:"Is animal feeding included in the admission ticket?", zh:"動物餵食有包含在入園門票裡嗎？", scenario:"確認票券", keyPhrase:"admission ticket（入園門票）", tip:"admission 重音在第二音節", difficulty:"初級"},
+      {en:"Where can we buy tickets for the feeding activity?", zh:"我們在哪裡可以買餵食活動的票？", scenario:"購買餵食票", keyPhrase:"feeding activity（餵食活動）", tip:"activity 重音在第二音節", difficulty:"初級"},
+      {en:"Can we buy the feeding ticket after entering the park?", zh:"進園後還可以買餵食活動的票嗎？", scenario:"確認購票地點", keyPhrase:"after entering the park（入園之後）", tip:"entering 注意音節連接", difficulty:"初級"},
+      {en:"What time should we arrive for the feeding activity?", zh:"餵食活動需要幾點到？", scenario:"活動報到", keyPhrase:"what time should we arrive（幾點抵達）", tip:"feeding 的 ee 唸長音", difficulty:"中級"},
+      {en:"Is the activity subject to availability on the day?", zh:"活動當天是否視名額情況而定？", scenario:"確認名額", keyPhrase:"subject to availability（視供應情況而定）", tip:"availability 重音在第四音節附近", difficulty:"中級"},
+      {en:"Could you tell us where the activity takes place?", zh:"可以告訴我們活動在哪裡舉行嗎？", scenario:"尋找活動地點", keyPhrase:"takes place（舉行）", tip:"activity 重音在第二音節", difficulty:"中級"},
+      {en:"We have a booking, but we cannot find the meeting point. Could you help us?", zh:"我們有預約，但找不到集合地點，可以幫忙嗎？", scenario:"找不到集合點", keyPhrase:"meeting point（集合地點）", tip:"meeting point 清楚分段唸", difficulty:"實戰"},
+      {en:"The activity time has changed. Could you help us check our options?", zh:"活動時間改變了，可以幫我們確認有哪些選擇嗎？", scenario:"活動時間變動", keyPhrase:"check our options（確認選項）", tip:"options 重音在第一音節", difficulty:"實戰"}
+    ]
+  }
+};
+
+let trainThemeKey = "airport_entry";
+let trainIdx = 0;
+let trainShowEnglish = true;
+let trainPracticeMode = "shadow"; // shadow=跟讀、memory=記憶口說、response=情境應答
+let responseTurnIdx = 0;
+
+// 每個主題都有三輪連續任務。這是離線引導式角色扮演，不是假裝具備 AI 語意理解。
+const RESPONSE_DIALOGUES = {
+  airport_entry: [
+    {scenario:"海關：說明旅行目的", zh:"海關問你這次來峇里島的目的。請回答你是來度假。", en:"I'm here on vacation.", difficulty:"初級"},
+    {scenario:"海關：說明停留時間", zh:"海關接著問你會待多久。請回答大約一個星期。", en:"I'll be staying for about a week.", difficulty:"初級"},
+    {scenario:"機場：詢問行李提領處", zh:"通關後你找不到行李提領處，請向工作人員詢問。", en:"Could you tell me where the baggage claim is?", difficulty:"中級"}
+  ],
+  hotel_checkin: [
+    {scenario:"飯店：辦理入住", zh:"你到飯店櫃檯，告訴工作人員你有訂房。", en:"I have a reservation under my name.", difficulty:"初級"},
+    {scenario:"飯店：房間尚未準備好", zh:"櫃檯說房間還沒好。請詢問能否先寄放行李。", en:"Could you store my luggage until my room is ready?", difficulty:"中級"},
+    {scenario:"SPA：調整按摩力道", zh:"按摩師按得太用力，請禮貌地要求輕一點。", en:"Could you use lighter pressure, please?", difficulty:"初級"}
+  ],
+  restaurant_order: [
+    {scenario:"餐廳：索取菜單", zh:"服務生帶你入座，請禮貌地索取菜單。", en:"Could I see the menu, please?", difficulty:"初級"},
+    {scenario:"餐廳：詢問推薦", zh:"你看不懂菜單，請問服務生推薦什麼。", en:"What do you recommend?", difficulty:"初級"},
+    {scenario:"餐廳：調整辣度", zh:"你不太能吃辣，請要求餐點不要那麼辣。", en:"Could you make it less spicy, please?", difficulty:"中級"}
+  ],
+  kuta_surf: [
+    {scenario:"衝浪：詢問課程", zh:"你想在庫塔學衝浪，詢問是否有初學者課程。", en:"Do you have a surfing lesson for beginners?", difficulty:"初級"},
+    {scenario:"衝浪：詢問裝備", zh:"接著詢問衝浪板和防磨衣是否包含在費用裡。", en:"Are the surfboard and rash guard included?", difficulty:"中級"},
+    {scenario:"衝浪：確認安全", zh:"你是第一次衝浪，請詢問教練是否會教安全規則。", en:"Will the instructor explain the safety rules?", difficulty:"中級"}
+  ],
+  waterbom: [
+    {scenario:"水上樂園：詢問置物櫃", zh:"入園後你想寄放物品，請詢問置物櫃在哪裡。", en:"Where can I find the lockers?", difficulty:"初級"},
+    {scenario:"水上樂園：確認租借費用", zh:"請接著詢問置物櫃是否需要另外付費。", en:"Is there an extra charge for the locker?", difficulty:"中級"},
+    {scenario:"水上樂園：詢問設施限制", zh:"你想玩滑水道，請詢問是否有身高限制。", en:"Is there a height requirement for this slide?", difficulty:"中級"}
+  ],
+  driver_traffic: [
+    {scenario:"包車：確認服務時間", zh:"見到司機後，請確認包車服務包含幾個小時。", en:"How many hours are included in the car service?", difficulty:"初級"},
+    {scenario:"包車：增加停留時間", zh:"景點比預期有趣，你想多停留一小時，請詢問費用。", en:"How much is the extra charge for one more hour?", difficulty:"中級"},
+    {scenario:"包車：調整行程", zh:"你想先去下一個景點，請禮貌地告訴司機。", en:"Could we go to the next stop first, please?", difficulty:"中級"}
+  ],
+  ubud_silver_terraces: [
+    {scenario:"銀飾課：預約課程", zh:"你想和另一半一起做銀飾，請詢問是否有兩人名額。", en:"Do you have space for two people?", difficulty:"初級"},
+    {scenario:"銀飾課：詢問作品", zh:"請詢問課程是否可以製作小吊墜。", en:"Can we make a small pendant?", difficulty:"初級"},
+    {scenario:"烏布：詢問交通時間", zh:"你準備前往梯田，請詢問開車大約需要多久。", en:"How long does it take to drive there?", difficulty:"初級"}
+  ],
+  bali_swing: [
+    {scenario:"Bali Swing：確認票券", zh:"你抵達售票處，請詢問門票是否包含拍照。", en:"Does the ticket include photos?", difficulty:"初級"},
+    {scenario:"Bali Swing：詢問安全裝備", zh:"請詢問工作人員是否會提供安全帶。", en:"Will you provide a safety harness?", difficulty:"中級"},
+    {scenario:"Bali Swing：詢問排隊時間", zh:"現場人很多，請詢問大概要等多久。", en:"How long is the waiting time?", difficulty:"初級"}
+  ],
+  marine_dolphins: [
+    {scenario:"海豚活動：確認預約", zh:"你到活動櫃檯，請告訴工作人員你有預約。", en:"We have a booking for the dolphin experience.", difficulty:"初級"},
+    {scenario:"海豚活動：詢問集合地點", zh:"你找不到集合點，請詢問活動在哪裡集合。", en:"Where is the meeting point?", difficulty:"初級"},
+    {scenario:"海豚活動：確認規定", zh:"請詢問參加活動前是否有需要遵守的規則。", en:"Are there any rules we need to follow?", difficulty:"中級"}
+  ],
+  clip_n_climb: [
+    {scenario:"攀岩：詢問入場", zh:"你想體驗室內攀岩，請詢問是否可以直接入場。", en:"Can we walk in, or do we need a booking?", difficulty:"中級"},
+    {scenario:"攀岩：確認體驗時間", zh:"請詢問一次體驗大約會進行多久。", en:"How long does one session last?", difficulty:"初級"},
+    {scenario:"攀岩：租借裝備", zh:"請詢問攀岩鞋是否包含在票價裡。", en:"Are climbing shoes included in the ticket price?", difficulty:"中級"}
+  ],
+  the_cave: [
+    {scenario:"The Cave：確認晚餐預約", zh:"你到餐廳後，請告訴接待人員你有晚餐預約。", en:"We have a dinner reservation for two.", difficulty:"初級"},
+    {scenario:"The Cave：詢問菜單", zh:"請詢問是否有固定套餐或品嚐菜單。", en:"Do you offer a set menu or a tasting menu?", difficulty:"中級"},
+    {scenario:"The Cave：詢問飲食需求", zh:"你有飲食需求，請詢問能否事先告知廚房。", en:"Could I let the kitchen know about my dietary needs?", difficulty:"實戰"}
+  ],
+  bali_safari: [
+    {scenario:"Bali Safari：詢問動物餵食", zh:"你想參加動物餵食，請詢問今天是否還有名額。", en:"Is animal feeding available today?", difficulty:"初級"},
+    {scenario:"Bali Safari：詢問購票地點", zh:"請詢問動物餵食票要在入口買，還是園區內購買。", en:"Where can I buy the animal feeding ticket?", difficulty:"中級"},
+    {scenario:"Bali Safari：確認活動時間", zh:"請詢問動物餵食活動幾點開始。", en:"What time does the animal feeding activity start?", difficulty:"初級"}
+  ]
+};
+
+/* ---------- 第二階段：語音辨識、記憶口說比對、獨立練習紀錄 ----------
+   這裡的「相符度」是語音辨識文字跟目標句的字詞比對結果，不是發音準確率——
+   辨識本身可能有誤差，畫面上會明確這樣標示，不會假裝是精準的發音評分。
+   錄音/辨識狀態與既有的跟讀測驗（toggleShadowRec）完全分開，避免互相污染。 */
+let trainMediaRecorder=null, trainAudioChunks=[], trainRecognizing=false, trainRecog=null;
+
+const TRAIN_RECORD_KEY = "travel_train_record_v1";
+function loadTrainRecord(){
+  try{ const raw = localStorage.getItem(TRAIN_RECORD_KEY); return raw ? JSON.parse(raw) : {}; }catch(e){ return {}; }
+}
+function saveTrainRecord(rec){ try{ localStorage.setItem(TRAIN_RECORD_KEY, JSON.stringify(rec)); }catch(e){} }
+function trainRecordKey(themeKey, idx, mode=trainPracticeMode){
+  // 保留舊版跟讀紀錄的 key，記憶口說與情境應答各自獨立保存。
+  return mode === "shadow" ? themeKey + ":" + idx : mode + ":" + themeKey + ":" + idx;
+}
+function recordTrainAttempt(themeKey, idx, score, mode=trainPracticeMode){
+  const rec = loadTrainRecord();
+  const key = trainRecordKey(themeKey, idx, mode);
+  rec[key] = {score, attempts: (rec[key] ? rec[key].attempts : 0) + 1, lastAttempt: Date.now()};
+  saveTrainRecord(rec);
+}
+function responseWordScore(target, said){
+  // 本地寬鬆關鍵字比對，容許部分常見同義詞；不是語意理解或發音評分。
+  const norm = s => s.toLowerCase().replace(/[^a-z\s']/g, " ").split(/\s+/).filter(Boolean);
+  const stop = new Set(["a","an","the","is","are","am","do","does","did","we","i","you","our","my","me","us","it","this","that","to","of","for","in","on","at","and","or","could","can","would","please","what","where","how","many","much","there","any","be","have","has","had"]);
+  const groups = [
+    ["show","provide","give","present"], ["ticket","tickets","admission","pass"],
+    ["buy","purchase","get"], ["book","booking","reserve","reservation"],
+    ["arrive","reach","get"], ["help","assist"], ["cost","price","charge"],
+    ["included","include","cover","covered"], ["cancelled","canceled","cancel"],
+    ["change","changed","different","update"], ["tell","let","inform","notify"],
+    ["slowly","slower"], ["nearby","close"], ["small","little"]
+  ];
+  const canonical = w => { for(const g of groups){ if(g.includes(w)) return g[0]; } return w; };
+  const tw = [...new Set(norm(target).filter(w=>!stop.has(w)).map(canonical))];
+  const sw = new Set(norm(said).filter(w=>!stop.has(w)).map(canonical));
+  if(!tw.length) return wordScore(target, said);
+  const hit = tw.filter(w=>sw.has(w)).length;
+  return Math.round(100*hit/tw.length);
+}
+
+async function toggleTrainRec(targetText, themeKey, idx, mode=trainPracticeMode){
+  const btn = document.getElementById("trainRecBtn");
+  const resultEl = document.getElementById("trainRecResult");
+  const startBtnLabel = mode === "shadow" ? "🎙 開始跟讀錄音" : "🎙 開始口說作答";
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if(trainRecognizing){
+    if(trainRecog) trainRecog.stop();
+    if(trainMediaRecorder && trainMediaRecorder.state !== "inactive") trainMediaRecorder.stop();
+    return;
+  }
+
+  if(!SR){
+    resultEl.innerHTML = `<div class="transcript">⚠️ 這個瀏覽器不支援語音辨識，請改用「聽＋跟讀」的方式練習，一樣有效。</div>`;
+    return;
+  }
+
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    resultEl.innerHTML = `<div class="transcript">⚠️ 目前環境無法開啟麥克風。請使用支援麥克風的瀏覽器與安全連線（HTTPS）；仍可使用英文播放和跟讀。</div>`;
+    return;
+  }
+  if(typeof MediaRecorder === "undefined"){
+    resultEl.innerHTML = `<div class="transcript">⚠️ 目前瀏覽器不支援錄音回放；若支援語音辨識，仍可進行文字比對。</div>`;
+    // 不直接退出：後續語音辨識仍可嘗試使用。
+  }
+
+  let stream;
+  try{ stream = await navigator.mediaDevices.getUserMedia({audio:true}); }
+  catch(e){ resultEl.innerHTML = `<div class="transcript">⚠️ ${getMicrophoneHelp(e)} 其他練習功能仍可使用。</div>`; return; }
+
+  trainAudioChunks = [];
+  if(typeof MediaRecorder !== "undefined"){
+    trainMediaRecorder = new MediaRecorder(stream);
+    trainMediaRecorder.ondataavailable = e => trainAudioChunks.push(e.data);
+    trainMediaRecorder.onstop = ()=>{
+      if(trainAudioChunks.length && resultEl.isConnected){
+        const blob = new Blob(trainAudioChunks, {type: trainAudioChunks[0]?.type || "audio/webm"});
+        const url = URL.createObjectURL(blob);
+        const audioTag = `<audio controls src="${url}" style="margin-top:6px"></audio>`;
+        const old = resultEl.innerHTML.replace(/<audio.*?<\/audio>/, "");
+        resultEl.innerHTML = old + audioTag;
+      }
+      stream.getTracks().forEach(tr => tr.stop());
+    };
+    trainMediaRecorder.start();
+  }
+  trainRecog = new SR();
+  trainRecog.lang = "en-US";
+  trainRecog.interimResults = false;
+  trainRecog.onresult = (e)=>{
+    const result = e.results[0][0];
+    const said = result.transcript || "";
+    const matchScore = mode === "response" ? responseWordScore(targetText, said) : wordScore(targetText, said);
+    const confidence = Number.isFinite(result.confidence) ? Math.round(result.confidence * 100) : null;
+    // 僅作練習參考：辨識信心度會受麥克風、噪音、口音及瀏覽器影響，不能視為真正的發音／口音分數。
+    const practiceScore = confidence === null ? matchScore : Math.round(matchScore * 0.75 + confidence * 0.25);
+    const cls = practiceScore >= 80 ? "good" : practiceScore >= 50 ? "mid" : "bad";
+    const scoreLabel = mode === "response" ? "關鍵字相符度（本地估算）" : "句子文字相符度";
+    const clarityText = confidence === null
+      ? "此瀏覽器未提供語音辨識信心度，因此只顯示文字比對結果。"
+      : confidence >= 85 ? "辨識系統很有把握聽懂這段語音。可把它當作清晰度線索，但不是口音／發音準確率。"
+      : confidence >= 65 ? "辨識系統大致聽懂。試著放慢一點、清楚說出字尾，並減少背景噪音。這不是正式口音評分。"
+      : "辨識系統不太確定聽到的內容。請靠近麥克風、降低背景噪音，並把長句分段練習。這不是正式口音評分。";
+    resultEl.innerHTML = `
+      <div class="match ${cls}">${practiceScore}% 練習參考分（非正式口音評分）</div>
+      <div class="note" style="margin-top:5px">${matchScore}% ${scoreLabel}</div>
+      ${confidence === null ? "" : `<div class="note" style="margin-top:4px">🎙 語音辨識信心度參考：${confidence}%</div>`}
+      <div class="transcript">你說的：「${String(said).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}」</div>
+      <div class="note" style="margin-top:4px">${clarityText} 純前端瀏覽器無法可靠判斷美式／英式口音，也無法逐音素評分；正式發音評估需要專用語音評分服務。</div>
+      <button class="btn btn-ghost" id="trainRevealAnswerBtn" style="margin-top:8px;width:100%">👁 看參考答案</button>
+      <div id="trainAnswerReveal" class="transcript" style="display:none;margin-top:8px"></div>
+    `;
+    const revealBtn = document.getElementById("trainRevealAnswerBtn");
+    if(revealBtn) revealBtn.onclick = ()=>{ const answerEl=document.getElementById("trainAnswerReveal"); if(answerEl){ answerEl.textContent=targetText; answerEl.style.display="block"; revealBtn.textContent="參考答案已顯示"; revealBtn.disabled=true; } };
+    recordTrainAttempt(themeKey, idx, matchScore, mode);
+    if(mode === "response"){
+      const next = document.createElement("div");
+      next.className = "note";
+      next.style.marginTop = "8px";
+      next.textContent = "回答已記錄。你可以先查看參考答案，再按「下一輪對話」繼續。";
+      resultEl.appendChild(next);
+    }
+  };
+  trainRecog.onerror = (e)=>{
+    if(e.error !== "no-speech" && resultEl.isConnected){
+      resultEl.insertAdjacentHTML("beforeend", `<div class="transcript">⚠️ 語音辨識發生問題（${String(e.error || "unknown").replace(/[<>"'&]/g, "")}），請再試一次或改用播放跟讀。</div>`);
+    }
+  };
+  trainRecog.onend = ()=>{
+    trainRecognizing = false; btn.classList.remove("rec"); btn.textContent = startBtnLabel;
+    if(trainMediaRecorder && trainMediaRecorder.state !== "inactive") trainMediaRecorder.stop();
+    else stream.getTracks().forEach(tr => tr.stop());
+  };
+  try{
+    trainRecog.start();
+    trainRecognizing = true; btn.classList.add("rec"); btn.textContent = "⏹ 停止錄音";
+  }catch(e){
+    trainRecognizing = false; btn.classList.remove("rec"); btn.textContent = startBtnLabel;
+    if(trainMediaRecorder && trainMediaRecorder.state !== "inactive") trainMediaRecorder.stop();
+    else stream.getTracks().forEach(tr => tr.stop());
+    resultEl.innerHTML = `<div class="transcript">⚠️ 無法啟動語音辨識，請稍後再試。</div>`;
+  }
+}
+
+function renderTrain(){
+  const theme = SHADOW_TRAINING_THEMES[trainThemeKey];
+  if(!theme) { trainThemeKey = Object.keys(SHADOW_TRAINING_THEMES)[0]; return renderTrain(); }
+  if(trainIdx >= theme.sentences.length || trainIdx < 0) trainIdx = 0;
+  const s = theme.sentences[trainIdx];
+  const responseTasks = RESPONSE_DIALOGUES[trainThemeKey] || [];
+  if(responseTurnIdx >= responseTasks.length) responseTurnIdx = 0;
+  const active = trainPracticeMode === "response" && responseTasks.length ? responseTasks[responseTurnIdx] : s;
+  const themeOptions = Object.keys(SHADOW_TRAINING_THEMES).map(k =>
+    `<option value="${k}" ${k===trainThemeKey ? "selected" : ""}>${SHADOW_TRAINING_THEMES[k].title}</option>`
+  ).join("");
+  const modeOptions = [
+    {value:"shadow", label:"跟讀訓練：看句子、聽發音"},
+    {value:"memory", label:"記憶口說：看中文，不看英文"},
+    {value:"response", label:"情境應答：依情境自己回答"}
+  ].map(o=>`<option value="${o.value}" ${o.value===trainPracticeMode ? "selected" : ""}>${o.label}</option>`).join("");
+
+  const record = loadTrainRecord();
+  const activeIdx = trainPracticeMode === "response" ? responseTurnIdx : trainIdx;
+  const recKey = trainRecordKey(trainThemeKey, activeIdx, trainPracticeMode);
+  const prevAttempt = record[recKey];
+  const activeCount = trainPracticeMode === "response" ? responseTasks.length : theme.sentences.length;
+  const themeAttempted = Array.from({length:activeCount}, (_, i) => i).filter(i => record[trainRecordKey(trainThemeKey, i, trainPracticeMode)]).length;
+  const reviewItems = [];
+  if(trainPracticeMode !== "response") Object.keys(SHADOW_TRAINING_THEMES).forEach(tk=>{
+    SHADOW_TRAINING_THEMES[tk].sentences.forEach((sent, i)=>{
+      const r = record[trainRecordKey(tk, i, trainPracticeMode)];
+      if(r && r.score < 70) reviewItems.push({tk, i, en: sent.en, score: r.score});
+    });
+  });
+
+  const promptTitle = trainPracticeMode === "memory" ? "記憶口說任務" : trainPracticeMode === "response" ? "情境應答任務" : "跟讀句子";
+  const promptText = trainPracticeMode === "shadow" ? (trainShowEnglish ? s.en : "●●●●●●●●●●") : active.zh;
+  const promptHint = trainPracticeMode === "shadow"
+    ? (trainShowEnglish ? "先聽原句，再跟著說；也可以隱藏英文練習。" : "英文已隱藏，試著回想整句，再錄音比對。")
+    : trainPracticeMode === "memory"
+      ? "只看中文提示，先自己用英文說出整句；錄音前不會顯示英文答案。"
+      : "想像你正身處這個場景，直接用英文完成任務；可用不同說法，系統以關鍵字作寬鬆估算。";
+
+  document.getElementById("trainPane").innerHTML = `
+    <div class="banner" style="margin-bottom:12px">
+      <div class="tag">獨立練習｜不影響每日對話與跟讀測驗</div>
+      <label for="trainModeSelect" class="note" style="display:block;text-align:left;margin:8px 0 4px">練習方式</label>
+      <select id="trainModeSelect" class="train-select">${modeOptions}</select>
+      <label for="trainThemeSelect" class="note" style="display:block;text-align:left;margin:10px 0 4px">旅遊情境（下拉選單）</label>
+      <select id="trainThemeSelect" class="train-select">${themeOptions}</select>
+      <div class="t" style="font-size:15px;margin-top:10px">${theme.title}</div>
+    </div>
+    <div class="step-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+        <span style="font-size:12px;color:var(--accent);font-weight:700">${promptTitle}｜${active.difficulty || s.difficulty}</span>
+        <span class="note" style="margin:0;white-space:nowrap">${trainIdx+1}/${theme.sentences.length}</span>
+      </div>
+      ${trainPracticeMode === "response" ? `<div class="step-title" style="margin-top:12px">情境 ${responseTurnIdx+1}/${responseTasks.length || 3}：${active.scenario}</div>` : `<div class="step-title" style="margin-top:12px">${s.scenario}</div>`}
+      <div style="margin-top:8px;font-size:${trainPracticeMode === "shadow" ? "18px" : "17px"};font-weight:700;line-height:1.5">${promptText}</div>
+      ${trainPracticeMode === "shadow" && trainShowEnglish ? `<div class="zh" style="margin-top:5px">${s.zh}</div>` : ""}
+      <div class="note" style="margin-top:8px">${promptHint}</div>
+      ${trainPracticeMode === "shadow" ? `<div class="note">關鍵片語：${s.keyPhrase}</div><div class="note">發音提醒：${s.tip}</div>` : ""}
+      ${prevAttempt ? `<div class="note" style="margin-top:8px">✅ 此模式已練習 ${prevAttempt.attempts} 次，最近一次相符度 ${prevAttempt.score}%</div>` : ""}
+    </div>
+    ${trainPracticeMode === "shadow" ? `
+      <div class="toolrow">
+        <button class="btn btn-ghost" id="trainPlayBtn">🔊 正常速度</button>
+        <button class="btn btn-ghost" id="trainSlowBtn">🐢 慢速播放</button>
+        <button class="btn btn-ghost" id="trainRepeatBtn">🔁 連播 3 次</button>
+      </div>
+      <div class="toolrow"><button class="btn btn-ghost" id="trainToggleBtn" style="width:100%">${trainShowEnglish ? "🙈 隱藏英文（自己試著說說看）" : "👁 顯示英文"}</button></div>
+    ` : `
+      <div class="toolrow"><button class="btn btn-ghost" id="trainPlayPromptBtn" style="width:100%">🔊 播放中文任務（不播放英文答案）</button></div>
+      <div class="toolrow"><button class="btn btn-ghost" id="trainRevealBtn" style="width:100%">👁 看參考答案（先回答再看）</button></div>
+      <div id="trainStaticAnswer" class="step-card" style="display:none;margin-top:8px"><div class="step-title">參考答案</div><div style="font-weight:700;line-height:1.5">${active.en}</div><div class="zh">${active.zh}</div></div>
+    `}
+    <div class="shadow-card" style="margin-top:10px">
+      <button class="btn btn-mic" id="trainRecBtn" style="width:100%">🎙 ${trainPracticeMode === "shadow" ? "開始跟讀錄音" : "開始口說作答"}</button>
+      <div class="note" style="margin-top:6px">評分說明：會顯示句子相符度與瀏覽器提供的語音辨識信心度，合成練習參考分。這不是專業口音評分，也不會判斷你像不像美式或英式口音。</div>
+      <div id="trainRecResult"></div>
+    </div>
+    <div class="toolrow">
+      <button class="btn btn-ghost" id="trainPrevBtn">← ${trainPracticeMode === "response" ? "上一輪" : "上一句"}</button>
+      <button class="btn btn-ghost" id="trainNextBtn">${trainPracticeMode === "response" ? "下一輪對話 →" : "下一句 →"}</button>
+    </div>
+    <div class="note" style="text-align:center;margin-top:4px">本情境共 ${activeCount} ${trainPracticeMode === "response" ? "輪" : "句"}，這個模式已練習 ${themeAttempted} ${trainPracticeMode === "response" ? "輪" : "句"}</div>
+    ${reviewItems.length ? `
+    <div class="step-card" style="margin-top:12px">
+      <div class="step-title">📌 建議複習（最近一次相符度低於70%）</div>
+      ${reviewItems.slice(0,8).map(r=>`<div style="margin-top:6px;cursor:pointer" data-review-tk="${r.tk}" data-review-i="${r.i}">• ${r.en}　<span style="color:var(--bad)">(${r.score}%)</span></div>`).join("")}
+    </div>` : ""}
+    ${trainPracticeMode === "response" ? `<div class="note">離線引導式角色扮演：每個旅遊情境有 3 輪連續任務。使用本地關鍵字與常見同義詞估算，不會呼叫 AI；這不是完整語意理解。參考答案只有你按下按鈕後才會顯示。</div>` : ""}
+  `;
+
+  document.getElementById("trainModeSelect").onchange = e=>{ trainPracticeMode=e.target.value; trainIdx=0; responseTurnIdx=0; trainShowEnglish=trainPracticeMode==="shadow"; renderTrain(); };
+  document.getElementById("trainThemeSelect").onchange = e=>{ trainThemeKey=e.target.value; trainIdx=0; responseTurnIdx=0; trainShowEnglish=trainPracticeMode==="shadow"; renderTrain(); };
+  document.querySelectorAll("[data-review-tk]").forEach(el=>{
+    el.onclick = ()=>{ trainThemeKey=el.dataset.reviewTk; trainIdx=parseInt(el.dataset.reviewI,10); trainShowEnglish=trainPracticeMode==="shadow"; renderTrain(); };
+  });
+  const playPromptBtn=document.getElementById("trainPlayPromptBtn");
+  if(playPromptBtn) playPromptBtn.onclick=()=>speak(s.zh, 0.9, "zh-TW");
+  const revealBtn=document.getElementById("trainRevealBtn");
+  if(revealBtn) revealBtn.onclick=()=>{ const answer=document.getElementById("trainStaticAnswer"); if(answer) answer.style.display=answer.style.display==="none"?"block":"none"; };
+  const playBtn=document.getElementById("trainPlayBtn"); if(playBtn) playBtn.onclick=()=>speak(s.en, 1);
+  const slowBtn=document.getElementById("trainSlowBtn"); if(slowBtn) slowBtn.onclick=()=>speak(s.en, 0.7);
+  const repeatBtn=document.getElementById("trainRepeatBtn"); if(repeatBtn) repeatBtn.onclick=()=>speakRepeated(s.en, 0.85, 3);
+  const toggleBtn=document.getElementById("trainToggleBtn"); if(toggleBtn) toggleBtn.onclick=()=>{ trainShowEnglish=!trainShowEnglish; renderTrain(); };
+  document.getElementById("trainRecBtn").onclick = ()=> toggleTrainRec(trainPracticeMode === "response" ? active.en : s.en, trainThemeKey, trainPracticeMode === "response" ? responseTurnIdx : trainIdx, trainPracticeMode);
+  document.getElementById("trainPrevBtn").onclick = ()=>{
+    if(trainPracticeMode === "response" && responseTasks.length){ responseTurnIdx=(responseTurnIdx-1+responseTasks.length)%responseTasks.length; }
+    else { trainIdx=(trainIdx-1+theme.sentences.length)%theme.sentences.length; }
+    renderTrain();
+  };
+  document.getElementById("trainNextBtn").onclick = ()=>{
+    if(trainPracticeMode === "response" && responseTasks.length){ responseTurnIdx=(responseTurnIdx+1)%responseTasks.length; }
+    else { trainIdx=(trainIdx+1)%theme.sentences.length; }
+    renderTrain();
+  };
+}
+
+/* ---------- Tabs ---------- */
+document.querySelectorAll(".tab").forEach(tb=>{
+  tb.addEventListener("click", ()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    tb.classList.add("active");
+    const m = tb.dataset.mode;
+    document.getElementById("chatPane").style.display = m==="chat" ? "block":"none";
+    document.getElementById("shadowPane").style.display = m==="shadow" ? "block":"none";
+    document.getElementById("trainPane").style.display = m==="train" ? "block":"none";
+    document.getElementById("statsPane").style.display = m==="stats" ? "block":"none";
+    if(m==="shadow") renderShadow();
+    if(m==="train") renderTrain();
+    if(m==="stats") renderStats();
+  });
+});
+
+renderPicker();
+showStartGate();
+</script>
+</body>
+</html>
